@@ -73,5 +73,8 @@ module.exports = {
         'react': {
             'version': 'detect',
         }
-    }
+    },
+    'exclude': [
+        '.eslintrc.js',
+    ]
 };
