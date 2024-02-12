@@ -23,7 +23,7 @@ module.exports = {
             ],
             'parserOptions': {
                 'sourceType': 'script'
-            }
+            },
         }
     ],
     'parser': '@typescript-eslint/parser',
@@ -74,7 +74,4 @@ module.exports = {
             'version': 'detect',
         }
     },
-    'exclude': [
-        '.eslintrc.js',
-    ]
 };
