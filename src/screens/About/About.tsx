@@ -1,7 +1,7 @@
-import { View, Text, Button } from "react-native";
-import { styles } from "./About.styles";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParamList } from "@/navigation/AppNavigator";
+import { View, Text, Button } from 'react-native';
+import { styles } from './About.styles';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '@/navigation/AppNavigator';
 
 type AboutScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'About'>;
 

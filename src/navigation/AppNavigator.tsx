@@ -1,12 +1,12 @@
-import { About, Home } from "@/screens";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { About, Home } from '@/screens';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 export type RootStackParamList = {
   Home: undefined;
   About: undefined;
 };
 
-const Tab = createBottomTabNavigator()
+const Tab = createBottomTabNavigator();
 
 export function AppNavigator() {
   return (
