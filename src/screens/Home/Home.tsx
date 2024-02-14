@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native';
+import { View, Text, FlatList, ScrollView, SectionList, SafeAreaView } from 'react-native';
 import { styles } from './Home.styles';
 import { Card } from '@/components';
 
@@ -8,16 +8,28 @@ export function Home() {
       title: 'Top up',
       desc: 'Top up any number',
     },
+    {
+      title: 'Top up',
+      desc: 'Top up any number',
+    },
   ];
 
   const renderCards = () => {
-    return cards.map((card) => <Card key={card.title} title={card.title} desc={card.desc} />);
+    return cards.map((card, index) => (
+      <View key={index}>
+        <View>
+          <Card title={card.title} desc={card.desc} customeStyle={styles.cardStyle} />
+        </View>
+      </View>
+    ));
   };
 
   return (
-    <View style={styles.container}>
-      <Text>Home</Text>
-      {renderCards()}
-    </View>
+    <ScrollView style={styles.container}>
+      <View style={styles.bigCardRender}>
+        <Text>Home</Text>
+        {renderCards()}
+      </View>
+    </ScrollView>
   );
 }

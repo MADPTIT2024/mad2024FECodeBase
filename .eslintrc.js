@@ -24,6 +24,12 @@ module.exports = {
             'parserOptions': {
                 'sourceType': 'script'
             },
+        },
+        {
+            'files': ['*.js'],
+            'parserOptions': {
+                'project': []
+            }
         }
     ],
     'parser': '@typescript-eslint/parser',
@@ -67,7 +73,7 @@ module.exports = {
         'react/prop-types': 'off',
         'react/react-in-jsx-scope': 'off',
         '@typescript-eslint/no-unused-vars': 'off',
-        'prettier/prettier': 'error',
+        'prettier/prettier': 'warn',
     },
     'settings': {
         'react': {
