@@ -10,5 +10,5 @@ export function RootNavigator() {
     <NavigationContainer theme={theme[scheme]}>
       <AppNavigator />
     </NavigationContainer>
-  )
+  );
 }
