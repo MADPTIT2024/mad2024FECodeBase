@@ -21,20 +21,20 @@ export function AppNavigator() {
 
           if (route.name === "Home") {
             iconSource = focused
-              ? require("../assets/Home_icon_active.png")
-              : require("../assets/Home_icon.png");
+              ? require("../assets/navigation/Home_icon_active.png")
+              : require("../assets/navigation/Home_icon.png");
           } else if (route.name === "Discover") {
             iconSource = focused
-              ? require("../assets/Discover_active.png")
-              : require("../assets/Discover.png");
+              ? require("../assets/navigation/Discover_active.png")
+              : require("../assets/navigation/Discover.png");
           } else if (route.name === "Calendar") {
             iconSource = focused
-              ? require("../assets/Calendar_active.png")
-              : require("../assets/Calendar.png");
+              ? require("../assets/navigation/Calendar_active.png")
+              : require("../assets/navigation/Calendar.png");
           } else if (route.name === "Personal") {
             iconSource = focused
-              ? require("../assets/Personal_active.png")
-              : require("../assets/Personal.png");
+              ? require("../assets/navigation/Personal_active.png")
+              : require("../assets/navigation/Personal.png");
           }
 
           return (
