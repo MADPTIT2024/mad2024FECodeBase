@@ -61,6 +61,7 @@ export function AppNavigator() {
         },
         tabBarActiveTintColor: 'white', // Color of the active tab icon
       })}
+      //
     >
       <Tab.Screen
         name="Home"
