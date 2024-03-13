@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { RootNavigator } from "./navigation";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
