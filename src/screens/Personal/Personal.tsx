@@ -1,41 +1,30 @@
 import { styles } from "./Personal.styles";
 import React, { useRef } from "react";
 import { ScrollView, Animated, View, Text, StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+// @ts-ignore
+import FontAwesomeIcon5 from "react-native-vector-icons/FontAwesome5";
 
 export function Personal() {
-  const myData = [
-    "Item 1",
-    "Item 2",
-    "Item 3",
-    "Item 4",
-    "Item 5",
-    "Item 6",
-    "Item 7",
-    "Item 8",
-    "Item 9",
-    "Item 10",
-    "Item 11",
-    "Item 12",
-    "Item 13",
-    "Item 14",
-    "Item 15",
-    "Item 16",
-    "Item 17",
-    "Item 18",
-  ];
+  const myData = ["My Profile", "My favorite"];
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>React Native</Text>
+        <Text style={styles.headerText}>Personal</Text>
       </View>
-      <ScrollView>
-        {myData.map((item, index) => (
-          <Text style={styles.textStyle} key={index}>
-            {item}
-          </Text>
-        ))}
+
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
+        <View style={styles.content}>
+          <FontAwesomeIcon5 name="user-circle" size={80} color="grey" />
+          <Text style={styles.scrViewText}>Welcome, my friend!</Text>
+          <View style={styles.textContent}>
+            {myData.map((item, index) => (
+              <Text style={styles.textStyle} key={index}>
+                {item}
+              </Text>
+            ))}
+          </View>
+        </View>
       </ScrollView>
     </View>
   );

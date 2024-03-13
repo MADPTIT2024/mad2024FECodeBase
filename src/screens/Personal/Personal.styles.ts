@@ -12,6 +12,22 @@ export const styles = StyleSheet.create({
     height: 60,
   },
 
+  headerText: {
+    color: "#212121",
+    fontSize: 18,
+  },
+
+  scrollViewContent: {
+    flexGrow: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  content: {
+    alignItems: "center",
+  },
+  textContent: {
+    marginTop: 20, // Để tạo khoảng cách giữa icon và văn bản
+  },
   textStyle: {
     textAlign: "center",
     color: "#000",
@@ -19,8 +35,7 @@ export const styles = StyleSheet.create({
     padding: 20,
   },
 
-  headerText: {
-    color: "#fff",
-    fontSize: 18,
+  scrViewText: {
+    paddingTop: 20,
   },
 });
