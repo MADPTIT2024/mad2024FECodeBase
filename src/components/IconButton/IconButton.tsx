@@ -1,8 +1,8 @@
-import { StyleProp, TouchableOpacity, ViewStyle } from "react-native";
-import React from "react";
-import { Ionicons } from "@expo/vector-icons";
-import Spacing from "../constants/Spacing";
-import Colors from "../constants/Colors";
+import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
+import React from 'react';
+import { Ionicons } from '@expo/vector-icons';
+import Spacing from '../../constants/Spacing';
+import Colors from '../../constants/Colors';
 
 interface Props {
   style?: StyleProp<ViewStyle>;
@@ -28,8 +28,8 @@ const IconButton: React.FC<Props> = ({
           width: 40,
           borderWidth: 1,
           borderColor: Colors.border,
-          alignItems: "center",
-          justifyContent: "center",
+          alignItems: 'center',
+          justifyContent: 'center',
           borderRadius: Spacing.borderRadius.base,
         },
         style,

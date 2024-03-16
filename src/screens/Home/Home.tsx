@@ -6,23 +6,23 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-} from "react-native";
-import Screen from "@/components/Screen";
-import Spacing from "@/constants/Spacing";
-import { user, workoutPlans, workouts } from "@/data";
-import AppText from "@/components/AppText";
-import Font from "@/constants/Font";
-import IconButton from "@/components/IconButton";
-import Colors from "@/constants/Colors";
-import { Ionicons } from "@expo/vector-icons";
-import FontSize from "@/constants/FontSize";
-import CategoryList from "@/components/CategoryList";
-import SectionHeader from "@/components/SectionHeader";
-import Workout from "@/components/Workout";
-import Rating from "react-native-easy-rating";
+} from 'react-native';
+import Screen from '@/components/Screen/Screen';
+import Spacing from '@/constants/Spacing';
+import { user, workoutPlans, workouts } from '@/data';
+import AppText from '@/components/AppText/AppText';
+import Font from '@/constants/Font';
+import IconButton from '@/components/IconButton/IconButton';
+import Colors from '@/constants/Colors';
+import { Ionicons } from '@expo/vector-icons';
+import FontSize from '@/constants/FontSize';
+import CategoryList from '@/components/CategoryList/CategoryList';
+import SectionHeader from '@/components/SectionHeader/SectionHeader';
+import Workout from '@/components/Workout/Workout';
+import Rating from 'react-native-easy-rating';
 import { useNavigation } from '@react-navigation/native';
 
-export function Home () {
+export function Home() {
   const navigation = useNavigation();
 
   return (
@@ -34,15 +34,15 @@ export function Home () {
       >
         <View
           style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
           }}
         >
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
+              flexDirection: 'row',
+              alignItems: 'center',
             }}
           >
             <Image
@@ -61,15 +61,15 @@ export function Home () {
               <AppText>Hello, Welcome</AppText>
               <AppText
                 style={{
-                  fontFamily: Font["poppins-semiBold"],
-                  textTransform: "capitalize",
+                  fontFamily: Font['poppins-semiBold'],
+                  textTransform: 'capitalize',
                 }}
               >
                 {user.name}
               </AppText>
             </View>
           </View>
-          <IconButton name='notifications' />
+          <IconButton name="notifications" />
         </View>
 
         {/* <View
@@ -102,26 +102,28 @@ export function Home () {
           />
         </View> */}
 
-        <SectionHeader title='Categories' />
-        
+        <SectionHeader title="Categories" />
+
         <CategoryList />
-        <SectionHeader title='Featured Workouts' />
+        <SectionHeader title="Featured Workouts" />
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          decelerationRate='fast'
+          decelerationRate="fast"
           pagingEnabled
           snapToInterval={270 + Spacing.margin.lg}
         >
           {workouts.map((workout) => (
             <Workout
-            onPress={() => navigation.navigate("PlanOverview", { workout: workout })}
-            workout={workout}
+              onPress={() =>
+                navigation.navigate('PlanOverview', { workout: workout })
+              }
+              workout={workout}
               key={workout.id}
             />
           ))}
         </ScrollView>
-        <SectionHeader title='Trending Plans' />
+        <SectionHeader title="Trending Plans" />
         {workouts.map((plan) => (
           <TouchableOpacity
             style={{
@@ -129,10 +131,11 @@ export function Home () {
               marginBottom: Spacing.margin.base,
               backgroundColor: Colors.primary,
               borderRadius: Spacing.borderRadius.base,
-              flexDirection: "row",
-              
+              flexDirection: 'row',
             }}
-            onPress={() => navigation.navigate("PlanOverview", { workout: plan })}
+            onPress={() =>
+              navigation.navigate('PlanOverview', { workout: plan })
+            }
             key={plan.id}
           >
             <Image
@@ -146,24 +149,24 @@ export function Home () {
             <View
               style={{
                 marginLeft: Spacing.margin.base,
-                justifyContent: "space-between",
+                justifyContent: 'space-between',
               }}
             >
               <AppText
                 style={{
-                  fontFamily: Font["poppins-semiBold"],
+                  fontFamily: Font['poppins-semiBold'],
                 }}
               >
                 {plan.name}
               </AppText>
               <View
                 style={{
-                  flexDirection: "row",
-                  alignItems: "center",
+                  flexDirection: 'row',
+                  alignItems: 'center',
                 }}
               >
                 <Ionicons
-                  name='calendar-outline'
+                  name="calendar-outline"
                   size={16}
                   color={Colors.text}
                 />
@@ -177,8 +180,8 @@ export function Home () {
               </View>
               <View
                 style={{
-                  flexDirection: "row",
-                  alignItems: "center",
+                  flexDirection: 'row',
+                  alignItems: 'center',
                 }}
               >
                 <Rating

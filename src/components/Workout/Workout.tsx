@@ -1,11 +1,11 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
-import { Ionicons } from "@expo/vector-icons";
-import Font from "../constants/Font";
-import Spacing from "../constants/Spacing";
-import AppText from "./AppText";
-import Colors from "../constants/Colors";
-import { Workout as WorkoutType } from "../data";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React from 'react';
+import { Ionicons } from '@expo/vector-icons';
+import Font from '../../constants/Font';
+import Spacing from '../../constants/Spacing';
+import AppText from '../AppText/AppText';
+import Colors from '../../constants/Colors';
+import { Workout as WorkoutType } from '../../data';
 
 interface Props {
   workout: WorkoutType;
@@ -20,7 +20,7 @@ const Workout: React.FC<Props> = ({ workout, onPress }) => {
         backgroundColor: Colors.primary,
         marginRight: Spacing.margin.lg,
         borderRadius: Spacing.borderRadius.base,
-        overflow: "hidden",
+        overflow: 'hidden',
       }}
     >
       <Image
@@ -38,25 +38,25 @@ const Workout: React.FC<Props> = ({ workout, onPress }) => {
         <View
           style={{
             marginBottom: Spacing.margin.base,
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
           }}
         >
           <AppText
             style={{
-              fontFamily: Font["poppins-semiBold"],
+              fontFamily: Font['poppins-semiBold'],
             }}
           >
             {workout.name}
           </AppText>
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
+              flexDirection: 'row',
+              alignItems: 'center',
             }}
           >
-            <Ionicons name='star' color={Colors.yellow} size={24} />
+            <Ionicons name="star" color={Colors.yellow} size={24} />
             <AppText style={{ marginLeft: Spacing.margin.sm }}>
               {workout.rating}
             </AppText>

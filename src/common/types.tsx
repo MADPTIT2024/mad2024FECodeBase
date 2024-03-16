@@ -3,8 +3,8 @@
  * https://reactnavigation.org/docs/typescript/
  */
 
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { Plan, Workout } from "./src/data";
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { Plan, Workout } from '../data';
 
 declare global {
   namespace ReactNavigation {
@@ -14,9 +14,9 @@ declare global {
 
 export type RootStackParamList = {
   Home: undefined;
-  PlanOverview: { workout: Workout }
+  PlanOverview: { workout: Workout };
   OnBoarding: undefined;
-  PlanOverview_Plan:{plan: Plan}
+  PlanOverview_Plan: { plan: Plan };
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

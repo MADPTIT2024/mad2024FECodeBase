@@ -1,8 +1,8 @@
 import { StyleProp, Text, TextProps, TextStyle } from "react-native";
 import React, { ReactNode } from "react";
-import Colors from "../constants/Colors";
-import FontSize from "../constants/FontSize";
-import Font from "../constants/Font";
+import Colors from "../../constants/Colors";
+import FontSize from "../../constants/FontSize";
+import Font from "../../constants/Font";
 
 type Props = {
   children: ReactNode;

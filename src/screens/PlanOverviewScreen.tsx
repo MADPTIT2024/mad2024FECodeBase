@@ -8,23 +8,23 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from "react-native";
-import React from "react";
-import AppText from "../components/AppText";
-import IconButton from "../components/IconButton";
-import Spacing from "../constants/Spacing";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList}from "../../types"
-import { BlurView } from "expo-blur";
-import Font from "../constants/Font";
-import Colors from "../constants/Colors";
-import FontSize from "../constants/FontSize";
-import { Ionicons } from "@expo/vector-icons";
-import { LinearGradient } from "expo-linear-gradient";
-import Button from "../components/Button";
-import Screen from "../components/Screen";
+} from 'react-native';
+import React from 'react';
+import AppText from '../components/AppText/AppText';
+import IconButton from '../components/IconButton/IconButton';
+import Spacing from '../constants/Spacing';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../common/types';
+import { BlurView } from 'expo-blur';
+import Font from '../constants/Font';
+import Colors from '../constants/Colors';
+import FontSize from '../constants/FontSize';
+import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
+import Button from '../components/Button/Button';
+import Screen from '../components/Screen/Screen';
 
-type Props = NativeStackScreenProps<RootStackParamList, "PlanOverview">;
+type Props = NativeStackScreenProps<RootStackParamList, 'PlanOverview'>;
 
 const PlanOverviewScreen: React.FC<Props> = ({
   route,
@@ -40,18 +40,18 @@ const PlanOverviewScreen: React.FC<Props> = ({
       >
         <View
           style={{
-            alignItems: "center",
+            alignItems: 'center',
             paddingVertical: Spacing.padding.base,
-            justifyContent: "center",
+            justifyContent: 'center',
           }}
         >
           <IconButton
             onPress={() => goBack()}
             style={{
-              position: "absolute",
+              position: 'absolute',
               left: 0,
             }}
-            name='chevron-back'
+            name="chevron-back"
           />
           <AppText>Plan Overview</AppText>
         </View>
@@ -61,19 +61,19 @@ const PlanOverviewScreen: React.FC<Props> = ({
             height: 250,
             marginVertical: Spacing.margin.lg,
             borderRadius: Spacing.borderRadius.base,
-            overflow: "hidden",
-            justifyContent: "space-between",
+            overflow: 'hidden',
+            justifyContent: 'space-between',
             paddingVertical: Spacing.padding.base,
           }}
         >
           <View
             style={{
               paddingHorizontal: Spacing.padding.base,
-              alignItems: "flex-end",
+              alignItems: 'flex-end',
             }}
           >
             <IconButton
-              name='bookmark-outline'
+              name="bookmark-outline"
               style={{
                 backgroundColor: Colors.primary,
                 borderWidth: 0,
@@ -83,28 +83,28 @@ const PlanOverviewScreen: React.FC<Props> = ({
           <View
             style={{
               borderRadius: Spacing.borderRadius.base,
-              overflow: "hidden",
+              overflow: 'hidden',
               marginHorizontal: Spacing.margin.lg,
             }}
           >
             <BlurView
-              tint='dark'
-              intensity={Platform.OS === "android" ? 100 : 80}
+              tint="dark"
+              intensity={Platform.OS === 'android' ? 100 : 80}
               style={{
                 padding: Spacing.padding.base,
-                flexDirection: "row",
-                justifyContent: "space-between",
+                flexDirection: 'row',
+                justifyContent: 'space-between',
               }}
             >
               <View
                 style={{
-                  flexDirection: "row",
-                  alignItems: "center",
+                  flexDirection: 'row',
+                  alignItems: 'center',
                 }}
               >
                 <AppText
                   style={{
-                    fontFamily: Font["poppins-semiBold"],
+                    fontFamily: Font['poppins-semiBold'],
                     color: Colors.accent,
                     marginRight: Spacing.margin.base,
                   }}
@@ -121,13 +121,13 @@ const PlanOverviewScreen: React.FC<Props> = ({
               </View>
               <View
                 style={{
-                  flexDirection: "row",
-                  alignItems: "center",
+                  flexDirection: 'row',
+                  alignItems: 'center',
                 }}
               >
                 <AppText
                   style={{
-                    fontFamily: Font["poppins-semiBold"],
+                    fontFamily: Font['poppins-semiBold'],
                     color: Colors.accent,
                     marginRight: Spacing.margin.base,
                   }}
@@ -144,13 +144,13 @@ const PlanOverviewScreen: React.FC<Props> = ({
               </View>
               <View
                 style={{
-                  flexDirection: "row",
-                  alignItems: "center",
+                  flexDirection: 'row',
+                  alignItems: 'center',
                 }}
               >
                 <AppText
                   style={{
-                    fontFamily: Font["poppins-semiBold"],
+                    fontFamily: Font['poppins-semiBold'],
                     color: Colors.accent,
                     marginRight: Spacing.margin.base,
                   }}
@@ -170,26 +170,26 @@ const PlanOverviewScreen: React.FC<Props> = ({
         </ImageBackground>
         <View
           style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
           }}
         >
           <AppText
             style={{
               fontSize: FontSize.lg,
-              fontFamily: Font["poppins-semiBold"],
+              fontFamily: Font['poppins-semiBold'],
             }}
           >
             {workout.name}
           </AppText>
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
+              flexDirection: 'row',
+              alignItems: 'center',
             }}
           >
-            <Ionicons name='star' size={20} color={Colors.yellow} />
+            <Ionicons name="star" size={20} color={Colors.yellow} />
             <AppText
               style={{
                 marginLeft: Spacing.margin.sm,
@@ -209,7 +209,7 @@ const PlanOverviewScreen: React.FC<Props> = ({
         <AppText
           style={{
             marginTop: Spacing.margin.base,
-            fontFamily: Font["poppins-semiBold"],
+            fontFamily: Font['poppins-semiBold'],
           }}
         >
           Description
@@ -218,7 +218,7 @@ const PlanOverviewScreen: React.FC<Props> = ({
           numberOfLines={3}
           style={{
             marginTop: Spacing.margin.sm,
-            fontFamily: Font["poppins-regular"],
+            fontFamily: Font['poppins-regular'],
           }}
         >
           {workout.description}
@@ -226,7 +226,7 @@ const PlanOverviewScreen: React.FC<Props> = ({
         <AppText
           style={{
             marginVertical: Spacing.margin.base,
-            fontFamily: Font["poppins-semiBold"],
+            fontFamily: Font['poppins-semiBold'],
           }}
         >
           Exercises ({workout.exercises.length})
@@ -239,7 +239,7 @@ const PlanOverviewScreen: React.FC<Props> = ({
               borderRadius: Spacing.borderRadius.base,
               marginBottom: Spacing.margin.lg,
               padding: Spacing.padding.base,
-              flexDirection: "row",
+              flexDirection: 'row',
             }}
             key={exercise.id}
           >
@@ -254,26 +254,26 @@ const PlanOverviewScreen: React.FC<Props> = ({
             <View
               style={{
                 marginLeft: Spacing.margin.base,
-                justifyContent: "space-between",
+                justifyContent: 'space-between',
               }}
             >
               <AppText
                 style={{
-                  fontFamily: Font["poppins-semiBold"],
+                  fontFamily: Font['poppins-semiBold'],
                 }}
               >
                 {exercise.name}
               </AppText>
               <View
                 style={{
-                  flexDirection: "row",
-                  alignItems: "center",
+                  flexDirection: 'row',
+                  alignItems: 'center',
                 }}
               >
-                <Ionicons name='time-outline' size={16} color={Colors.text} />
+                <Ionicons name="time-outline" size={16} color={Colors.text} />
                 <AppText
                   style={{
-                    fontFamily: Font["poppins-regular"],
+                    fontFamily: Font['poppins-regular'],
                     marginLeft: Spacing.margin.sm,
                   }}
                 >
@@ -282,14 +282,14 @@ const PlanOverviewScreen: React.FC<Props> = ({
               </View>
               <View
                 style={{
-                  flexDirection: "row",
-                  alignItems: "center",
+                  flexDirection: 'row',
+                  alignItems: 'center',
                 }}
               >
-                <Ionicons name='play' size={16} color={Colors.accent} />
+                <Ionicons name="play" size={16} color={Colors.accent} />
                 <AppText
                   style={{
-                    fontFamily: Font["poppins-regular"],
+                    fontFamily: Font['poppins-regular'],
                     marginLeft: Spacing.margin.sm,
                   }}
                 >
@@ -302,14 +302,14 @@ const PlanOverviewScreen: React.FC<Props> = ({
       </ScrollView>
       <LinearGradient
         style={{
-          position: "absolute",
-          width: "100%",
+          position: 'absolute',
+          width: '100%',
           paddingBottom: Spacing.padding.xxl,
           paddingTop: Spacing.padding.sm,
           bottom: -60,
           paddingHorizontal: Spacing.padding.base,
         }}
-        colors={[`rgba(0,0,0,0)`, "black"]}
+        colors={[`rgba(0,0,0,0)`, 'black']}
       >
         <Button>Start Workout</Button>
       </LinearGradient>
