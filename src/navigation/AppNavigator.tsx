@@ -45,7 +45,7 @@ export function AppNavigator() {
         tabBarIcon: ({ focused, color, size }) => {
           let iconSource;
 
-          if (route.name === 'StackScreen') {
+          if (route.name === 'Training') {
             iconSource = focused ? (
               <HomeActive color="white" fill="blue" size={20} />
             ) : (
