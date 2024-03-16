@@ -1,6 +1,7 @@
 import { Home, Calendar, Discover, Personal } from "@/screens";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Image } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
+
 
 import { HomeIcon as HomeUnactive } from "react-native-heroicons/outline";
 import { HomeIcon as HomeActive } from "react-native-heroicons/solid";
@@ -13,9 +14,22 @@ import { UserCircleIcon as PersonalActive } from "react-native-heroicons/solid";
 
 import { BookOpenIcon as DiscoverUnactive } from "react-native-heroicons/outline";
 import { BookOpenIcon as DiscoverActive } from "react-native-heroicons/solid";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../../types";
+import PlanOverviewScreen from "@/screens/PlanOverviewScreen";
 
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
+
+function StackScreen(){
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+      <Stack.Screen name="PlanOverview" component={PlanOverviewScreen} options={{ headerShown: false }} />
+    </Stack.Navigator>
+  );
+}
 
 export function AppNavigator() {
   return (
@@ -61,13 +75,14 @@ export function AppNavigator() {
         },
         tabBarActiveTintColor: 'white', // Color of the active tab icon
       })}
-      //
+    //
     >
       <Tab.Screen
         name="Home"
-        component={Home}
+        component={StackScreen}
         options={{ headerShown: false }}
       />
+
       <Tab.Screen
         name="Discover"
         component={Discover}
@@ -84,5 +99,7 @@ export function AppNavigator() {
         options={{ headerShown: false }}
       />
     </Tab.Navigator>
+
   );
+  
 }

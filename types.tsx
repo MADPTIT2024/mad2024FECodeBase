@@ -4,7 +4,7 @@
  */
 
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { Workout } from "./src/data";
+import { Plan, Workout } from "./src/data";
 
 declare global {
   namespace ReactNavigation {
@@ -14,8 +14,9 @@ declare global {
 
 export type RootStackParamList = {
   Home: undefined;
-  PlanOverview: { workout: Workout };
+  PlanOverview: { workout: Workout }
   OnBoarding: undefined;
+  PlanOverview_Plan:{plan: Plan}
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

@@ -122,7 +122,7 @@ export function Home () {
           ))}
         </ScrollView>
         <SectionHeader title='Trending Plans' />
-        {workoutPlans.map((plan) => (
+        {workouts.map((plan) => (
           <TouchableOpacity
             style={{
               padding: Spacing.padding.sm,
@@ -130,7 +130,9 @@ export function Home () {
               backgroundColor: Colors.primary,
               borderRadius: Spacing.borderRadius.base,
               flexDirection: "row",
+              
             }}
+            onPress={() => navigation.navigate("PlanOverview", { workout: plan })}
             key={plan.id}
           >
             <Image
@@ -165,13 +167,13 @@ export function Home () {
                   size={16}
                   color={Colors.text}
                 />
-                <AppText
+                {/* <AppText
                   style={{
                     marginLeft: Spacing.margin.base,
                   }}
                 >
                   {plan.duration} | {plan.location}
-                </AppText>
+                </AppText> */}
               </View>
               <View
                 style={{

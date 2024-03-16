@@ -186,7 +186,7 @@ export const workouts: Workout[] = [
   },
 ];
 
-interface Plan {
+export interface Plan {
   id: number;
   name: string;
   duration: string;
