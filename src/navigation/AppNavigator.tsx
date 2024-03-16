@@ -91,7 +91,7 @@ export function AppNavigator() {
       //
     >
       <Tab.Screen
-        name="StackScreen"
+        name="Training"
         component={StackScreen}
         options={{ headerShown: false }}
       />
