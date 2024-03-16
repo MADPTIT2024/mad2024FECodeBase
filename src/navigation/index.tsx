@@ -1,13 +1,22 @@
-import { AppNavigator } from '@/navigation/AppNavigator';
-import { theme } from '@/theme';
-import { NavigationContainer } from '@react-navigation/native';
-import { ColorSchemeName, useColorScheme } from 'react-native';
+import { AppNavigator } from "@/navigation/AppNavigator";
+import { NavigationContainer } from "@react-navigation/native";
+import { ColorSchemeName, useColorScheme } from "react-native";
+import { DefaultTheme } from "@react-navigation/native";
+import Colors from "@/constants/Colors";
 
 export function RootNavigator() {
-  const scheme: NonNullable<ColorSchemeName> = useColorScheme() || 'light';
+  let scheme: NonNullable<ColorSchemeName> = useColorScheme() || "light";
 
+  const theme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      background: Colors.background,
+    },
+  };
+  
   return (
-    <NavigationContainer theme={theme[scheme]}>
+    <NavigationContainer theme={theme}>
       <AppNavigator />
     </NavigationContainer>
   );
