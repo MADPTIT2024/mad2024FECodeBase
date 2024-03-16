@@ -1,22 +1,20 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+
+const windowWidth = Dimensions.get("window").width;
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: windowWidth, // Chiếm toàn bộ chiều ngang của màn hình
   },
-
   header: {
     justifyContent: "center",
-    left: 0,
-    right: 0,
     height: 60,
   },
-
   headerText: {
     color: "#212121",
     fontSize: 18,
   },
-
   scrollViewContent: {
     flexGrow: 1,
     justifyContent: "center",
@@ -25,17 +23,54 @@ export const styles = StyleSheet.create({
   content: {
     alignItems: "center",
   },
+  scrViewText: {
+    fontSize: 20,
+    paddingTop: 20,
+  },
+  toolbarContainer: {
+    flexDirection: "column",
+    alignItems: "stretch", // Thay đổi từ 'center' thành 'stretch'
+    marginTop: 20,
+    width: windowWidth, // Chiếm toàn bộ chiều ngang của màn hình
+  },
+  toolbarItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    height: 50,
+    backgroundColor: "grey",
+    paddingHorizontal: 10,
+    width: "100%", // Chiếm toàn bộ chiều ngang của màn hình
+  },
+  toolbarItemContent: {
+    flexDirection: "row",
+    alignItems: "center",
+    flex: 1,
+  },
+  toolbarArrow: {
+    color: "black",
+  },
+  divider: {
+    height: 1,
+    backgroundColor: "white",
+  },
+  toolbarText: {
+    marginLeft: 5,
+    color: "black",
+  },
   textContent: {
-    marginTop: 20, // Để tạo khoảng cách giữa icon và văn bản
+    marginTop: 20,
   },
   textStyle: {
-    textAlign: "center",
-    color: "#000",
     fontSize: 16,
-    padding: 20,
+    marginBottom: 10,
   },
 
-  scrViewText: {
-    paddingTop: 20,
+  textContainer: {
+    left: windowWidth - (4 / 3) * windowWidth,
+    marginTop: 30,
+  },
+  textSettings: {
+    fontSize: 16,
   },
 });
