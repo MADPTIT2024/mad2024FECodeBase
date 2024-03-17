@@ -42,7 +42,7 @@ export function Discover() {
   // End Group
 
   // Start Category
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
   const handleCategorySelect = (category: Category) => {
     setSelectedCategory(category.name);
