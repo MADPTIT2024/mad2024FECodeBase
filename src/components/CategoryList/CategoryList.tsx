@@ -18,6 +18,7 @@ const CategoryList: React.FC = () => {
     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
       {[{ id: 0, name: 'All' }, ...categories].map((category) => (
         <TouchableOpacity
+        //
           onPress={() => setActive(category.id)}
           style={{
             paddingHorizontal: Spacing.padding.base,
