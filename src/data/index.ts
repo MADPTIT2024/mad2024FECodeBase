@@ -17,28 +17,28 @@ export interface Category {
 export const categories: Category[] = [
   {
     id: 1,
-    name: "Đầu",
+    name: "Body",
   },
   {
     id: 2,
-    name: "Vai",
+    name: "Leg",
   },
   {
     id: 3,
-    name: "Ngực",
+    name: "Hand",
   },
-  {
-    id: 4,
-    name: "Bụng",
-  },
-  {
-    id: 5,
-    name: "Tay",
-  },
-  {
-    id: 6,
-    name: "Đùi",
-  },
+  // {
+  //   id: 4,
+  //   name: "Bụng",
+  // },
+  // {
+  //   id: 5,
+  //   name: "Tay",
+  // },
+  // {
+  //   id: 6,
+  //   name: "Đùi",
+  // },
 ];
 
 interface Exercise {
@@ -84,6 +84,7 @@ export interface Workout {
   minutes: number;
   calories: number;
   description: string;
+  type: string;
 }
 
 // list of workouts
@@ -99,6 +100,7 @@ export const workouts: Workout[] = [
     calories: 350,
     description:
       "Proident cupidatat laboris deserunt aute irure commodo do nisi cillum ullamco sint dolore magna. Cillum ad fugiat velit tempor nostrud. Non pariatur irure ea dolor nulla exercitation. Amet quis adipisicing ullamco do in et ullamco mollit excepteur ipsum tempor.",
+      type: "Leg",
   },
   {
     id: 2,
@@ -111,6 +113,7 @@ export const workouts: Workout[] = [
     calories: 350,
     description:
       "Amet pariatur non ullamco non tempor nostrud in occaecat amet enim qui. Est deserunt ut eiusmod ipsum. Consectetur ex aute dolore magna voluptate Lorem pariatur aliqua elit ex consequat non ex.",
+      type: "Body",
   },
   {
     id: 3,
@@ -123,10 +126,11 @@ export const workouts: Workout[] = [
     calories: 350,
     description:
       "Anim aliquip et labore est voluptate. Mollit mollit Lorem anim quis veniam laborum irure esse. Quis pariatur enim id magna non et occaecat Lorem ad deserunt reprehenderit magna esse. Consequat aliqua aliquip proident et fugiat dolor eu dolor Lorem elit duis exercitation pariatur. Enim tempor veniam eiusmod deserunt est excepteur laborum id id pariatur non ipsum. Tempor id irure ipsum anim minim commodo dolor veniam. Eiusmod reprehenderit aliquip officia elit sit ex.",
+      type: "Leg",
   },
   {
     id: 4,
-    name: "Leg muscle strength",
+    name: "Body muscle strength",
     coach: "Lương",
     image: require("@/assets/images/workouts/photo-1546483875-ad9014c88eba.jpeg"),
     exercises,
@@ -135,10 +139,11 @@ export const workouts: Workout[] = [
     calories: 350,
     description:
       "Cupidatat ad deserunt elit mollit deserunt dolor aliquip velit eu. Consequat culpa aute labore aliqua excepteur proident sint eiusmod sunt ea anim magna ea. Eiusmod minim nostrud anim sunt fugiat aliqua nisi quis adipisicing consectetur. Velit elit amet labore ullamco ea enim nulla.",
+      type: "Body",
   },
   {
     id: 5,
-    name: "Leg muscle strength",
+    name: "Hand muscle strength",
     coach: "Phương",
     image: require("@/assets/images/workouts/photo-1541534741688-6078c6bfb5c5.jpeg"),
     exercises,
@@ -147,10 +152,11 @@ export const workouts: Workout[] = [
     calories: 350,
     description:
       "Reprehenderit ut nisi irure duis irure velit laborum irure aliqua. Eiusmod dolor culpa mollit occaecat minim Lorem ex occaecat voluptate. Nisi esse velit veniam laborum sunt. Incididunt velit quis do id reprehenderit deserunt. Sint magna excepteur aute elit non ut in ex et nostrud.",
+      type: "Hand",
   },
   {
     id: 6,
-    name: "Leg muscle strength",
+    name: "Hand muscle strength",
     coach: "Nam",
     image: require("@/assets/images/workouts/spencer-davis-0ShTs8iPY28-unsplash.jpeg"),
     exercises,
@@ -159,10 +165,11 @@ export const workouts: Workout[] = [
     calories: 350,
     description:
       "Nulla consequat ullamco proident labore exercitation enim consectetur. Cillum ex veniam mollit id exercitation. Quis in labore labore elit reprehenderit elit eiusmod.",
+      type: "Hand",
   },
   {
     id: 7,
-    name: "Leg muscle strength",
+    name: "Body muscle strength",
     coach: "Lương",
     image: require("@/assets/images/workouts/victor-freitas-KkYWWpurqbE-unsplash.jpeg"),
     exercises,
@@ -171,6 +178,7 @@ export const workouts: Workout[] = [
     calories: 350,
     description:
       "Minim eu exercitation laboris tempor voluptate est voluptate cillum. Ad tempor eu minim esse enim. Ex reprehenderit exercitation deserunt reprehenderit minim irure consectetur et.",
+      type: "Body",
   },
   {
     id: 8,
@@ -183,6 +191,7 @@ export const workouts: Workout[] = [
     calories: 350,
     description:
       "Ullamco commodo nostrud esse excepteur labore enim elit excepteur. Et non minim enim fugiat culpa sit sint irure irure amet reprehenderit enim non velit. Consectetur incididunt velit velit voluptate velit. Sint ex magna in aliquip. Dolore sunt deserunt cillum nostrud.",
+      type: "Leg",
   },
 ];
 

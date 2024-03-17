@@ -21,7 +21,14 @@ const SectionHeader: React.FC<Props> = ({ title }) => {
     >
       <AppText>{title}</AppText>
       <TouchableOpacity>
-        
+        <AppText
+          style={{
+            fontSize: FontSize.sm,
+            color: Colors.accent,
+          }}
+        >
+          See all
+        </AppText>
       </TouchableOpacity>
     </View>
   );

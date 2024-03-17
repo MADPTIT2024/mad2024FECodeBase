@@ -102,9 +102,9 @@ export function Home() {
           />
         </View> */}
 
-        <SectionHeader title="Categories" />
+        {/* <SectionHeader title="Categories" />
 
-        <CategoryList />
+        <CategoryList /> */}
         <SectionHeader title="Featured Workouts" />
         <ScrollView
           horizontal

@@ -20,12 +20,29 @@ import PlanOverviewScreen from '@/screens/PlanOverviewScreen';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-function StackScreen() {
+function StackScreenHome() {
   return (
     <Stack.Navigator>
       <Stack.Screen
         name="Home"
         component={Home}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="PlanOverview"
+        component={PlanOverviewScreen}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function StackScreenDiscover() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Discover"
+        component={Discover}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -51,7 +68,7 @@ export function AppNavigator() {
             ) : (
               <HomeUnactive color="white" size={20} />
             );
-          } else if (route.name === 'Discover') {
+          } else if (route.name === 'Discovery') {
             iconSource = focused ? (
               <DiscoverActive color="white" fill="blue" size={20} />
             ) : (
@@ -92,13 +109,13 @@ export function AppNavigator() {
     >
       <Tab.Screen
         name="Training"
-        component={StackScreen}
+        component={StackScreenHome}
         options={{ headerShown: false }}
       />
 
       <Tab.Screen
-        name="Discover"
-        component={Discover}
+        name="Discovery"
+        component={StackScreenDiscover}
         options={{ headerShown: false }}
       />
       <Tab.Screen
