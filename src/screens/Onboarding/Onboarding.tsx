@@ -42,7 +42,7 @@ const OnBoardingScreen: React.FC<Props> = ({ navigation: { navigate } }) => {
           style={{
             fontSize: FontSize.xxl,
             color: Colors.text,
-            fontFamily: Font['poppins-semiBold'],
+            fontFamily: Font['Poppins_SemiBold'],
             textAlign: 'center',
           }}
         >
@@ -52,7 +52,7 @@ const OnBoardingScreen: React.FC<Props> = ({ navigation: { navigate } }) => {
           style={{
             fontSize: FontSize.base,
             color: Colors.text,
-            fontFamily: Font['poppins-regular'],
+            fontFamily: Font['Poppins_Regular'],
             textAlign: 'center',
             marginTop: Spacing.margin.base,
             marginBottom: Spacing.margin.xxl,

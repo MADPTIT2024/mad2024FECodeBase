@@ -39,7 +39,7 @@ const Button: React.FC<Props> = ({ style, children, textStyle, onPress }) => {
         style={[
           {
             fontSize: FontSize.base,
-            fontFamily: Font['poppins-regular'],
+            fontFamily: Font['Poppins_Regular'],
           },
           textStyle,
         ]}

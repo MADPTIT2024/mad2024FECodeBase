@@ -104,7 +104,7 @@ const PlanOverviewScreen: React.FC<Props> = ({
               >
                 <AppText
                   style={{
-                    fontFamily: Font['poppins-semiBold'],
+                    fontFamily: Font['Poppins_SemiBold'],
                     color: Colors.accent,
                     marginRight: Spacing.margin.base,
                   }}
@@ -127,7 +127,7 @@ const PlanOverviewScreen: React.FC<Props> = ({
               >
                 <AppText
                   style={{
-                    fontFamily: Font['poppins-semiBold'],
+                    fontFamily: Font['Poppins_SemiBold'],
                     color: Colors.accent,
                     marginRight: Spacing.margin.base,
                   }}
@@ -150,7 +150,7 @@ const PlanOverviewScreen: React.FC<Props> = ({
               >
                 <AppText
                   style={{
-                    fontFamily: Font['poppins-semiBold'],
+                    fontFamily: Font['Poppins_SemiBold'],
                     color: Colors.accent,
                     marginRight: Spacing.margin.base,
                   }}
@@ -178,7 +178,7 @@ const PlanOverviewScreen: React.FC<Props> = ({
           <AppText
             style={{
               fontSize: FontSize.lg,
-              fontFamily: Font['poppins-semiBold'],
+              fontFamily: Font['Poppins_SemiBold'],
             }}
           >
             {workout.name}
@@ -209,7 +209,7 @@ const PlanOverviewScreen: React.FC<Props> = ({
         <AppText
           style={{
             marginTop: Spacing.margin.base,
-            fontFamily: Font['poppins-semiBold'],
+            fontFamily: Font['Poppins_SemiBold'],
           }}
         >
           Description
@@ -218,7 +218,7 @@ const PlanOverviewScreen: React.FC<Props> = ({
           numberOfLines={3}
           style={{
             marginTop: Spacing.margin.sm,
-            fontFamily: Font['poppins-regular'],
+            fontFamily: Font['Poppins_Regular'],
           }}
         >
           {workout.description}
@@ -226,7 +226,7 @@ const PlanOverviewScreen: React.FC<Props> = ({
         <AppText
           style={{
             marginVertical: Spacing.margin.base,
-            fontFamily: Font['poppins-semiBold'],
+            fontFamily: Font['Poppins_SemiBold'],
           }}
         >
           Exercises ({workout.exercises.length})
@@ -259,7 +259,7 @@ const PlanOverviewScreen: React.FC<Props> = ({
             >
               <AppText
                 style={{
-                  fontFamily: Font['poppins-semiBold'],
+                  fontFamily: Font['Poppins_SemiBold'],
                 }}
               >
                 {exercise.name}
@@ -273,7 +273,7 @@ const PlanOverviewScreen: React.FC<Props> = ({
                 <Ionicons name="time-outline" size={16} color={Colors.text} />
                 <AppText
                   style={{
-                    fontFamily: Font['poppins-regular'],
+                    fontFamily: Font['Poppins_Regular'],
                     marginLeft: Spacing.margin.sm,
                   }}
                 >
@@ -289,7 +289,7 @@ const PlanOverviewScreen: React.FC<Props> = ({
                 <Ionicons name="play" size={16} color={Colors.accent} />
                 <AppText
                   style={{
-                    fontFamily: Font['poppins-regular'],
+                    fontFamily: Font['Poppins_Regular'],
                     marginLeft: Spacing.margin.sm,
                   }}
                 >

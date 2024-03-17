@@ -61,7 +61,7 @@ export function Home() {
               <AppText>Hello, Welcome</AppText>
               <AppText
                 style={{
-                  fontFamily: Font['poppins-semiBold'],
+                  fontFamily: Font['Poppins_SemiBold'],
                   textTransform: 'capitalize',
                 }}
               >
@@ -154,7 +154,7 @@ export function Home() {
             >
               <AppText
                 style={{
-                  fontFamily: Font['poppins-semiBold'],
+                  fontFamily: Font['Poppins_SemiBold'],
                 }}
               >
                 {plan.name}

@@ -45,7 +45,7 @@ const Workout: React.FC<Props> = ({ workout, onPress }) => {
         >
           <AppText
             style={{
-              fontFamily: Font['poppins-semiBold'],
+              fontFamily: Font['Poppins_SemiBold'],
             }}
           >
             {workout.name}

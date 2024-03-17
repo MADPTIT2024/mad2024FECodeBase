@@ -10,7 +10,7 @@ import {
   Poppins_600SemiBold,
   Poppins_700Bold,
 } from '@expo-google-fonts/poppins';
-import { AppLoading } from './screens/AppLoading/AppLoading';
+import { AppLoading } from '@/screens/AppLoading/AppLoading';
 
 const styles = StyleSheet.create({
   container: {

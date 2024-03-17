@@ -10,14 +10,12 @@ type Props = {
 } & TextProps;
 
 const AppText: React.FC<Props> = ({ children, style, ...OtherProps }) => {
-  console.log(style);
-
   return (
     <Text
       style={[
         {
           color: Colors.text,
-          fontFamily: Font['poppins-regular'],
+          fontFamily: Font['Poppins_Regular'],
           fontSize: FontSize.base,
         },
         style,
