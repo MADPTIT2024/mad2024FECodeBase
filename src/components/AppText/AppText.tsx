@@ -10,6 +10,8 @@ type Props = {
 } & TextProps;
 
 const AppText: React.FC<Props> = ({ children, style, ...OtherProps }) => {
+  console.log(style);
+
   return (
     <Text
       style={[

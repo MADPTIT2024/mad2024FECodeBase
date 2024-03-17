@@ -1,5 +1,5 @@
 export default {
-  "poppins-regular": "poppins-regular",
-  "poppins-bold": "poppins-bold",
-  "poppins-semiBold": "poppins-semiBold",
+  "poppins-regular": "Poppins_Regular",
+  "poppins-bold": "Poppins_Bold",
+  "poppins-semiBold": "Poppins_SemiBold",
 };
