@@ -14,7 +14,7 @@ import { UserCircleIcon as PersonalActive } from 'react-native-heroicons/solid';
 import { BookOpenIcon as DiscoverUnactive } from 'react-native-heroicons/outline';
 import { BookOpenIcon as DiscoverActive } from 'react-native-heroicons/solid';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../common/types';
+import { RootStackParamList } from '@/common/types';
 import PlanOverviewScreen from '@/screens/PlanOverviewScreen';
 
 const Tab = createBottomTabNavigator();

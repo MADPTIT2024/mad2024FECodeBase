@@ -1,8 +1,8 @@
 import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import Spacing from '../../constants/Spacing';
-import Colors from '../../constants/Colors';
+import Colors from '@/constants/Colors';
+import Spacing from '@/constants/Spacing';
 
 interface Props {
   style?: StyleProp<ViewStyle>;

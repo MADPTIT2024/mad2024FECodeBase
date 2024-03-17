@@ -8,10 +8,10 @@ import {
   ViewStyle,
 } from 'react-native';
 import React, { ReactNode } from 'react';
-import Font from '../../constants/Font';
-import FontSize from '../../constants/FontSize';
-import Spacing from '../../constants/Spacing';
-import Colors from '../../constants/Colors';
+import Font from '@/constants/Font';
+import FontSize from '@/constants/FontSize';
+import Spacing from '@/constants/Spacing';
+import Colors from '@/constants/Colors';
 
 interface Props {
   style?: StyleProp<ViewStyle>;

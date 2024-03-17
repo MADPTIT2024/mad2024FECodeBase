@@ -6,11 +6,11 @@ import {
   View,
 } from 'react-native';
 import React, { useState } from 'react';
-import FontSize from '../../constants/FontSize';
-import Spacing from '../../constants/Spacing';
-import { categories } from '../../data';
-import AppText from '../AppText/AppText';
-import Colors from '../../constants/Colors';
+import FontSize from '@/constants/FontSize';
+import Spacing from '@/constants/Spacing';
+import { categories } from '@/data';
+import AppText from '@/components/AppText/AppText';
+import Colors from '@/constants/Colors';
 
 const CategoryList: React.FC = () => {
   const [active, setActive] = useState<number>(0);

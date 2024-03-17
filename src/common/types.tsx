@@ -4,7 +4,7 @@
  */
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Plan, Workout } from '../data';
+import { Plan, Workout } from '@/data';
 
 declare global {
   namespace ReactNavigation {

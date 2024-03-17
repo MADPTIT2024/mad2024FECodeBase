@@ -10,19 +10,19 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import AppText from '../components/AppText/AppText';
-import IconButton from '../components/IconButton/IconButton';
-import Spacing from '../constants/Spacing';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../common/types';
 import { BlurView } from 'expo-blur';
-import Font from '../constants/Font';
-import Colors from '../constants/Colors';
-import FontSize from '../constants/FontSize';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import Button from '../components/Button/Button';
-import Screen from '../components/Screen/Screen';
+import Button from '@/components/Button/Button';
+import Screen from '@/components/Screen/Screen';
+import Font from '@/constants/Font';
+import { RootStackParamList } from '@/common/types';
+import Colors from '@/constants/Colors';
+import FontSize from '@/constants/FontSize';
+import AppText from '@/components/AppText/AppText';
+import IconButton from '@/components/IconButton/IconButton';
+import Spacing from '@/constants/Spacing';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'PlanOverview'>;
 

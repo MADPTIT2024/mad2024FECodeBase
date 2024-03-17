@@ -1,8 +1,8 @@
-import { StyleProp, Text, TextProps, TextStyle } from "react-native";
-import React, { ReactNode } from "react";
-import Colors from "../../constants/Colors";
-import FontSize from "../../constants/FontSize";
-import Font from "../../constants/Font";
+import { StyleProp, Text, TextProps, TextStyle } from 'react-native';
+import React, { ReactNode } from 'react';
+import Colors from '@/constants/Colors';
+import FontSize from '@/constants/FontSize';
+import Font from '@/constants/Font';
 
 type Props = {
   children: ReactNode;
@@ -15,7 +15,7 @@ const AppText: React.FC<Props> = ({ children, style, ...OtherProps }) => {
       style={[
         {
           color: Colors.text,
-          fontFamily: Font["poppins-regular"],
+          fontFamily: Font['poppins-regular'],
           fontSize: FontSize.base,
         },
         style,

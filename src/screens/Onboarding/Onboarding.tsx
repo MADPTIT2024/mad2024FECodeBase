@@ -25,7 +25,7 @@ const OnBoardingScreen: React.FC<Props> = ({ navigation: { navigate } }) => {
 
   return (
     <ImageBackground
-      source={require('../assets/images/onboarding.jpeg')}
+      source={require('@/assets/images/onboarding.jpeg')}
       style={{
         flex: 1,
         justifyContent: 'flex-end',

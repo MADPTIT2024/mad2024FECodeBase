@@ -1,11 +1,11 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import Font from '../../constants/Font';
-import Spacing from '../../constants/Spacing';
-import AppText from '../AppText/AppText';
-import Colors from '../../constants/Colors';
-import { Workout as WorkoutType } from '../../data';
+import Font from '@/constants/Font';
+import Spacing from '@/constants/Spacing';
+import AppText from '@/components/AppText/AppText';
+import Colors from '@/constants/Colors';
+import { Workout as WorkoutType } from '@/data';
 
 interface Props {
   workout: WorkoutType;
