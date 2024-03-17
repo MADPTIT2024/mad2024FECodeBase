@@ -105,6 +105,9 @@ export function Home() {
         {/* <SectionHeader title="Categories" />
 
         <CategoryList /> */}
+
+
+
         <SectionHeader title="Featured Workouts" />
         <ScrollView
           horizontal
