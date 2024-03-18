@@ -3,11 +3,8 @@ import { styles } from './CalendarScreen.styles';
 import Colors from '@/constants/Colors';
 import { useState } from 'react';
 
-const screenWidth = Dimensions.get('screen').width;
-
 export function CalendarScreen() {
   const [activeTab, setActiveTab] = useState(0);
-  const [tabChoose, setTabChoose] = useState('');
 
   const TABS = [
     {
@@ -22,12 +19,23 @@ export function CalendarScreen() {
 
   const handleTabPress = (index: number) => {
     setActiveTab(index);
-    setTabChoose(TABS[index].title);
+  };
 
-    if (tabChoose === 'Calendar') {
-      console.log('Calendar');
+  // Calendar Tab
+  const CalendarTab = () => {
+    return <Text style={{ color: Colors.text }}>Calendar</Text>;
+  };
+
+  // Data Graph Tab
+  const DataTab = () => {
+    return <Text style={{ color: Colors.text }}>Data</Text>;
+  };
+
+  const renderSelectedTab = () => {
+    if (activeTab === 0) {
+      return <CalendarTab />;
     } else {
-      console.log('Data');
+      return <DataTab />;
     }
   };
 
@@ -46,6 +54,7 @@ export function CalendarScreen() {
           </TouchableOpacity>
         ))}
       </View>
+      <View style={styles.tabContent}>{renderSelectedTab()}</View>
     </View>
   );
 }
