@@ -258,3 +258,47 @@ export const workoutPlans: Plan[] = [
       "In velit culpa dolor in amet amet pariatur consectetur enim ea. Minim in labore nostrud labore officia labore velit proident labore aliquip ipsum ipsum ullamco aliquip. Magna anim reprehenderit nisi irure pariatur non. Ipsum minim ad ipsum cillum consequat. Ipsum aliquip ad nulla laborum reprehenderit esse commodo non.",
   },
 ];
+
+export interface History{
+  id: number;
+  name: string;
+  image: ImageSourcePropType;
+  date: string;
+  duration: string;
+  caloriesBurn: number;
+}
+
+export const histories: History[] = [
+  {
+    id: 1,
+    name: "Leg muscle strength",
+    image: require("@/assets/images/workouts/photo-1434682966726-19ad3a76e143.jpeg"),
+    date: "2021-06-01",
+    duration: "1 hour",
+    caloriesBurn: 350,
+  },
+  {
+    id: 2,
+    name: "Body Pump",
+    image: require("@/assets/images/workouts/photo-1541534741688-6078c6bfb5c.jpeg"),
+    date: "2021-06-01",
+    duration: "1 hour",
+    caloriesBurn: 350,
+  },
+  {
+    id: 3,
+    name: "Leg muscle strength",
+    image: require("@/assets/images/workouts/photo-1546483875-ad9014c88eba.jpeg"),
+    date: "2021-06-01",
+    duration: "1 hour",
+    caloriesBurn: 350,
+  },
+  {
+    id: 4,
+    name: "Body Pump",
+    image: require("@/assets/images/workouts/photo-1434682966726-19ad3a76e143.jpeg"),
+    date: "2021-06-01",
+    duration: "1 hour",
+    caloriesBurn: 350,
+  },
+];

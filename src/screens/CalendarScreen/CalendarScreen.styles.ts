@@ -29,8 +29,8 @@ export const styles = StyleSheet.create({
   tabContent: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
-    height: screenHeight - 20,
+    height: "100%",
+    marginVertical: 20,
   },
   calendarStyle: {
     width: screenWidth * 0.9,
@@ -43,6 +43,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     width: screenWidth * 0.9,
     marginVertical: 10,
-    color: Colors.primary,
+    backgroundColor: Colors.primary,
   },
 });

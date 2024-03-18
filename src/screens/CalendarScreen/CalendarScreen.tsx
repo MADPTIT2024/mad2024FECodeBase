@@ -1,10 +1,17 @@
-import { View, Text, TouchableOpacity, Dimensions } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Dimensions,
+  ScrollView,
+} from 'react-native';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
 import { styles } from './CalendarScreen.styles';
 import Colors from '@/constants/Colors';
 import { useState } from 'react';
 import FontSize from '@/constants/FontSize';
 import HistoryCard from '@/components/HistoryCard/HistoryCard';
+import { histories } from '@/data';
 
 export function CalendarScreen() {
   const [activeTab, setActiveTab] = useState(0);
@@ -47,7 +54,6 @@ export function CalendarScreen() {
             selectedDayTextColor: Colors.text,
             todayTextColor: Colors.accent,
             dayTextColor: Colors.text,
-            textDisabledColor: Colors.text,
             dotColor: Colors.primary,
             selectedDotColor: Colors.text,
             arrowColor: Colors.text,
@@ -65,21 +71,15 @@ export function CalendarScreen() {
           <Text
             style={{
               color: Colors.text,
-              fontSize: FontSize.lg,
+              fontSize: FontSize.xl,
               fontWeight: 'bold',
             }}
           >
             History
           </Text>
-          <HistoryCard
-            history={{
-              date: '2021-06-01',
-              workout: 'Workout 1',
-              duration: '1 hour',
-              rating: 5,
-            }}
-            onPress={() => {}}
-          />
+          {histories.map((history, index) => (
+            <HistoryCard key={index} history={history} />
+          ))}
         </View>
       </View>
     );
@@ -100,20 +100,24 @@ export function CalendarScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.headerNav}>
-        {TABS.map((tab, index) => (
-          <TouchableOpacity
-            key={index}
-            style={[styles.button, { backgroundColor: tab.color }]}
-            onPress={() => handleTabPress(index)}
-          >
-            <View style={styles.buttonText}>
-              <Text style={styles.text}>{tab.title}</Text>
-            </View>
-          </TouchableOpacity>
-        ))}
+      <View>
+        <View style={styles.headerNav}>
+          {TABS.map((tab, index) => (
+            <TouchableOpacity
+              key={index}
+              style={[styles.button, { backgroundColor: tab.color }]}
+              onPress={() => handleTabPress(index)}
+            >
+              <View style={styles.buttonText}>
+                <Text style={styles.text}>{tab.title}</Text>
+              </View>
+            </TouchableOpacity>
+          ))}
+        </View>
       </View>
-      <View style={styles.tabContent}>{renderSelectedTab()}</View>
+      <ScrollView>
+        <View style={styles.tabContent}>{renderSelectedTab()}</View>
+      </ScrollView>
     </View>
   );
 }
