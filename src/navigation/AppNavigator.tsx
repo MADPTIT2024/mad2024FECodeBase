@@ -74,7 +74,7 @@ function StackScreenPersonal() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Personal"
+        name="Personality"
         component={Personal}
         options={{ headerShown: false }}
       />

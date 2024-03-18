@@ -15,7 +15,7 @@ export function Personal() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>Personal</Text>
+        <Text style={styles.headerText}></Text>
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
