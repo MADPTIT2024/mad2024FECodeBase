@@ -1,24 +1,26 @@
-import { View, Text, TouchableOpacity } from "react-native";
-import { styles } from "./General_Setting.styles";
+import { View, Text, TouchableOpacity } from 'react-native';
+import { styles } from './GeneralSetting.styles';
+import { useNavigation } from '@react-navigation/native';
 
-export function General_Setting() {
-  const handleGeneralSettings = () => {
-    // Xử lý khi ấn vào General Settings
-    // navigation.navigate('.');
-    console.log("Go to General Settings screen");
-  };
+export function GeneralSetting() {
+  const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text>&lt;</Text>
-        <Text>Discover</Text>
-        <Text></Text>
+        <Text
+          style={styles.headerArrow}
+          onPress={() => navigation.navigate('Personal')}
+        >
+          &lt;
+        </Text>
+        <Text style={styles.headerText}>General Settings</Text>
+        <Text> </Text>
       </View>
 
       <TouchableOpacity
         style={styles.toolbarItem}
-        onPress={handleGeneralSettings}
+        onPress={() => navigation.navigate('Reminder')}
       >
         <View style={styles.toolbarItemContent}>
           <Text style={styles.toolbarText}>Reminder</Text>
@@ -28,7 +30,7 @@ export function General_Setting() {
 
       <TouchableOpacity
         style={styles.toolbarItem}
-        onPress={handleGeneralSettings}
+        onPress={() => navigation.navigate('Personal')}
       >
         <View style={styles.toolbarItemContent}>
           <Text style={styles.toolbarText}>Restone purchase</Text>
@@ -38,7 +40,7 @@ export function General_Setting() {
 
       <TouchableOpacity
         style={styles.toolbarItem}
-        onPress={handleGeneralSettings}
+        onPress={() => navigation.navigate('Personal')}
       >
         <View style={styles.toolbarItemContent}>
           <Text style={styles.toolbarText}>Privacy policy</Text>

@@ -17,7 +17,15 @@ export type RootStackParamList = {
   PlanOverview: { workout: Workout };
   OnBoarding: undefined;
   PlanOverview_Plan: { plan: Plan };
-  Discover:undefined;
+  Discover: undefined;
+  Personal: undefined;
+  WorkoutSetting: undefined;
+  GeneralSetting: undefined;
+  Music: undefined;
+  Reminder: undefined;
+  Profile: undefined;
+  Favorites: undefined;
+  Language: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

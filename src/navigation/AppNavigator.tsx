@@ -1,4 +1,12 @@
-import { Home, Calendar, Discover, Personal } from '@/screens';
+import {
+  Home,
+  Calendar,
+  Discover,
+  Personal,
+  WorkoutSetting,
+  GeneralSetting,
+  Music,
+} from '@/screens';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -16,6 +24,10 @@ import { BookOpenIcon as DiscoverActive } from 'react-native-heroicons/solid';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@/common/types';
 import PlanOverviewScreen from '@/screens/PlanOverviewScreen';
+import Reminder from '@/screens/Reminder';
+import Profile from '@/screens/Profile';
+import Favorites from '@/screens/Favorites';
+import Language from '@/screens/Language';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -48,6 +60,53 @@ function StackScreenDiscover() {
       <Stack.Screen
         name="PlanOverview"
         component={PlanOverviewScreen}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function StackScreenPersonal() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Personal"
+        component={Personal}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="WorkoutSetting"
+        component={WorkoutSetting}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Music"
+        component={Music}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="GeneralSetting"
+        component={GeneralSetting}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Reminder"
+        component={Reminder}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Favorites"
+        component={Favorites}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Language"
+        component={Language}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
@@ -125,7 +184,7 @@ export function AppNavigator() {
       />
       <Tab.Screen
         name="Personal"
-        component={Personal}
+        component={StackScreenPersonal}
         options={{ headerShown: false }}
       />
     </Tab.Navigator>

@@ -1,5 +1,5 @@
-import { styles } from "./WorkoutSetting.styles";
-import React, { useState, useRef } from "react";
+import { styles } from './WorkoutSetting.styles';
+import React, { useState, useRef } from 'react';
 import {
   View,
   Text,
@@ -9,23 +9,25 @@ import {
   ScrollView,
   Dimensions,
   TouchableOpacity,
-} from "react-native";
-import Slider from "@react-native-community/slider";
+} from 'react-native';
+import Slider from '@react-native-community/slider';
 // @ts-ignore
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-// import CustomSwitch from "react-native-custom-switch";
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { useNavigation } from '@react-navigation/native';
 
-const { width } = Dimensions.get("window");
+const { width } = Dimensions.get('window');
 const ITEM_WIDTH = width * 0.8;
 const ITEM_HEIGHT = width * 0.7;
 
 const data = [
-  { id: 1, image: require("../../assets/workout1.webp") },
-  { id: 2, image: require("../../assets/workout1.webp") },
-  { id: 3, image: require("../../assets/workout1.webp") },
+  { id: 1, image: require('../../assets/workout1.webp') },
+  { id: 2, image: require('../../assets/workout1.webp') },
+  { id: 3, image: require('../../assets/workout1.webp') },
 ];
 
 export function WorkoutSetting() {
+  const navigation = useNavigation();
+
   const [volumeMusic, setVolumeMusic] = useState(0.5);
   const [volumeVoice, setVolumeVoice] = useState(0.5);
   const [volumeSound, setVolumeSound] = useState(0.5);
@@ -57,7 +59,7 @@ export function WorkoutSetting() {
                       item.id * ITEM_WIDTH,
                     ],
                     outputRange: [0.8, 1],
-                    extrapolate: "clamp",
+                    extrapolate: 'clamp',
                   }),
                 },
               ],
@@ -77,7 +79,12 @@ export function WorkoutSetting() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerArrow}>&lt;</Text>
+        <Text
+          style={styles.headerArrow}
+          onPress={() => navigation.navigate('Personal')}
+        >
+          &lt;
+        </Text>
       </View>
       <Animated.ScrollView
         contentContainerStyle={styles.scrollViewContent}
@@ -90,24 +97,25 @@ export function WorkoutSetting() {
           <View style={styles.imageContainer}>
             <Image
               style={styles.imageCoach}
-              source={require("../../assets/workout1.webp")}
+              source={require('../../assets/workout1.webp')}
             />
             <Text style={styles.imageArrow}>&gt;</Text>
           </View>
         </View>
+        <TouchableOpacity onPress={() => navigation.navigate('Music')}>
+          <View style={styles.imageContent}>
+            <Text style={styles.textCoach}>Music</Text>
 
-        <View style={styles.imageContent}>
-          <Text style={styles.textCoach}>Music</Text>
-
-          <View style={styles.imageContainer}>
-            <Image
-              style={styles.imageCoach}
-              source={require("../../assets/workout1.webp")}
-            />
-            <Text style={styles.imageText}>Peaceful Time</Text>
-            <Text style={styles.imageArrow}>&gt;</Text>
+            <View style={styles.imageContainer}>
+              <Image
+                style={styles.imageCoach}
+                source={require('../../assets/workout1.webp')}
+              />
+              <Text style={styles.imageText}>Peaceful Time</Text>
+              <Text style={styles.imageArrow}>&gt;</Text>
+            </View>
           </View>
-        </View>
+        </TouchableOpacity>
 
         <View style={styles.volumeContainer}>
           <FontAwesome5 name="volume-off" size={16} color="gray" />
@@ -129,8 +137,8 @@ export function WorkoutSetting() {
 
           <View>
             <Switch
-              trackColor={{ false: "#767577", true: "#0066FF" }}
-              thumbColor={isEnabled ? "#0066FF" : "#f4f3f4"}
+              trackColor={{ false: '#767577', true: '#0066FF' }}
+              thumbColor={isEnabled ? '#0066FF' : '#f4f3f4'}
               ios_backgroundColor="#3e3e3e"
               onValueChange={toggleSwitch}
               value={isEnabled}
@@ -177,8 +185,8 @@ export function WorkoutSetting() {
 
           <View>
             <Switch
-              trackColor={{ false: "#767577", true: "#0066FF" }}
-              thumbColor={isEnabled1 ? "#0066FF" : "#f4f3f4"}
+              trackColor={{ false: '#767577', true: '#0066FF' }}
+              thumbColor={isEnabled1 ? '#0066FF' : '#f4f3f4'}
               ios_backgroundColor="#3e3e3e"
               onValueChange={toggleSwitch1}
               value={isEnabled1}
@@ -200,6 +208,11 @@ export function WorkoutSetting() {
           />
           <FontAwesome5 name="volume-up" size={16} color="gray" />
         </View>
+        <Text>Reminder</Text>
+        <Text>Reminder</Text>
+        <Text>Reminder</Text>
+        <Text>Reminder</Text>
+        <Text>Reminder</Text>
       </Animated.ScrollView>
     </View>
   );

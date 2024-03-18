@@ -1,6 +1,6 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet, Dimensions } from 'react-native';
 
-const windowWidth = Dimensions.get("window").width;
+const windowWidth = Dimensions.get('window').width;
 const ITEM_WIDTH = windowWidth * 0.8;
 
 export const styles = StyleSheet.create({
@@ -16,6 +16,7 @@ export const styles = StyleSheet.create({
   headerArrow: {
     marginTop: 15,
     fontSize: 20,
+    color: 'white',
   },
 
   scrollViewContent: {
@@ -23,29 +24,33 @@ export const styles = StyleSheet.create({
   },
 
   textWorkout: {
+    color: 'white',
     marginTop: 5,
     fontSize: 20,
   },
 
   coachVideo: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
 
   textCoach: {
     fontSize: 15,
+    color: 'white',
   },
 
   imageContent: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 10,
+    marginBottom: 10,
   },
 
   imageContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 
   imageCoach: {
@@ -57,24 +62,25 @@ export const styles = StyleSheet.create({
   imageArrow: {
     fontSize: 14,
     marginLeft: 10,
-    color: "grey",
+    color: 'grey',
   },
 
   switchButton: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   imageText: {
     marginLeft: 5,
     fontSize: 10,
+    color: 'white',
   },
 
   volumeContainer: {
     marginTop: 20,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-start",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
   },
 
   slider: {
@@ -84,15 +90,15 @@ export const styles = StyleSheet.create({
 
   itemContainer: {
     width: ITEM_WIDTH,
-    height: "100%",
-    justifyContent: "center",
-    alignItems: "center",
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 10,
     marginRight: 20,
   },
   item: {
-    width: "80%",
+    width: '80%',
     aspectRatio: 1,
-    backgroundColor: "white",
+    backgroundColor: 'white',
   },
 });
