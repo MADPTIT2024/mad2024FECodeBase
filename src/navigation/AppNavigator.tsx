@@ -19,6 +19,9 @@ import { CalendarDaysIcon as CalendarActive } from 'react-native-heroicons/solid
 import { UserCircleIcon as PersonalUnactive } from 'react-native-heroicons/outline';
 import { UserCircleIcon as PersonalActive } from 'react-native-heroicons/solid';
 
+import { Square2StackIcon as Square2StackIconActive } from 'react-native-heroicons/solid';
+import { Square2StackIcon as Square2StackIconUnactive } from 'react-native-heroicons/outline';
+
 import { BookOpenIcon as DiscoverUnactive } from 'react-native-heroicons/outline';
 import { BookOpenIcon as DiscoverActive } from 'react-native-heroicons/solid';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -28,6 +31,7 @@ import Reminder from '@/screens/Reminder';
 import Profile from '@/screens/Profile';
 import Favorites from '@/screens/Favorites';
 import Language from '@/screens/Language';
+import { CustomStackNavigator } from './CustomStackNavigator';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -145,6 +149,12 @@ export function AppNavigator() {
             ) : (
               <PersonalUnactive color="white" size={20} />
             );
+          } else if (route.name === 'Custom') {
+            iconSource = focused ? (
+              <Square2StackIconActive color="white" fill="blue" size={20} />
+            ) : (
+              <Square2StackIconUnactive color="white" size={20} />
+            );
           }
 
           return iconSource;
@@ -175,6 +185,11 @@ export function AppNavigator() {
       <Tab.Screen
         name="Discovery"
         component={StackScreenDiscover}
+        options={{ headerShown: false }}
+      />
+      <Tab.Screen
+        name="Custom"
+        component={CustomStackNavigator}
         options={{ headerShown: false }}
       />
       <Tab.Screen
