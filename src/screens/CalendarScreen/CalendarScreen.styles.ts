@@ -45,4 +45,32 @@ export const styles = StyleSheet.create({
     marginVertical: 10,
     backgroundColor: Colors.primary,
   },
+  dataTabContainer: {
+    flex: 1,
+    marginTop: 10, // Thêm khoảng cách từ DataTab đến headerNav
+    backgroundColor: Colors.background, // Màu nền cho DataTab
+  },
+  chartTitle: {
+    color: 'white',
+    fontSize: 12,
+    marginLeft: 20,
+    marginBottom: 10,
+  },
+  bmiContainer: {
+    position: 'absolute',
+    marginTop: 300,
+  },
+  chartContainer: {
+    width: '98%',
+    alignSelf: 'center',
+    marginBottom: 10,
+  },
+  monthLabel: {
+    textAlign: 'center',
+    fontSize: 14,
+    color: Colors.text,
+  },
+  chartStyle: {
+    marginHorizontal: 10, // Để biểu đồ nằm giữa và không bị cắt lề trái và lề phải
+  },
 });

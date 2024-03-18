@@ -6,12 +6,11 @@ const ITEM_WIDTH = windowWidth * 0.8;
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginLeft: 15,
-    marginRight: 15,
-    marginTop: 15,
   },
 
-  header: {},
+  margin: {
+    margin: 15,
+  },
 
   headerArrow: {
     marginTop: 15,

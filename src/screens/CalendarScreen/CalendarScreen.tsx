@@ -12,6 +12,8 @@ import { useState } from 'react';
 import FontSize from '@/constants/FontSize';
 import HistoryCard from '@/components/HistoryCard/HistoryCard';
 import { histories } from '@/data';
+import { BarChart, LineChart } from 'react-native-chart-kit';
+import LinearGradient from 'react-native-linear-gradient';
 
 export function CalendarScreen() {
   const [activeTab, setActiveTab] = useState(0);
@@ -87,14 +89,99 @@ export function CalendarScreen() {
 
   // TODO: Data Graph Tab
   const DataTab = () => {
-    return <Text style={{ color: Colors.text }}>Data</Text>;
+    const data = {
+      labels: ['1', '2', '3', '4', '5', '6', '7', ''],
+      datasets: [
+        {
+          data: [100, 150, 180, 120, 190, 170, 200, 0],
+          color: (opacity = 1) => `rgba(0, 122, 255, ${opacity})`,
+        },
+      ],
+    };
+
+    return (
+      <View style={styles.dataTabContainer}>
+        <Text style={styles.chartTitle}>
+          Calories burned, estimated (Kacal)
+        </Text>
+
+        <BarChart
+          data={data}
+          width={Dimensions.get('window').width}
+          height={200}
+          chartConfig={{
+            backgroundColor: Colors.primary,
+            backgroundGradientFrom: Colors.primary,
+            backgroundGradientTo: Colors.primary,
+            decimalPlaces: 0,
+            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+            style: {
+              borderRadius: 16,
+              marginRight: 5,
+            },
+          }}
+          yAxisInterval={50}
+          fromZero
+          withHorizontalLabels={true}
+          showBarTops={false}
+        />
+      </View>
+    );
+  };
+
+  const BMIChart = () => {
+    // Dữ liệu trung bình BMI
+    const averageBMI = 22; // Giả sử trung bình BMI là 22
+
+    return (
+      <View style={styles.bmiContainer}>
+        <View style={styles.chartContainer}>
+          <Text style={styles.chartTitle}>BMI</Text>
+          <LineChart
+            data={{
+              labels: ['0', '40'], // Đơn vị trục hoành
+              datasets: [
+                {
+                  data: [averageBMI, averageBMI], // Dữ liệu trung bình BMI cho mỗi điểm trên đoạn thẳng
+                },
+              ],
+            }}
+            width={Dimensions.get('window').width - 20} // Độ rộng của biểu đồ
+            height={10} // Độ cao của biểu đồ
+            chartConfig={{
+              backgroundColor: Colors.primary,
+              backgroundGradientFrom: Colors.primary,
+              backgroundGradientTo: Colors.primary,
+              decimalPlaces: 0,
+              color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+              labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+              style: {
+                borderRadius: 16,
+              },
+            }}
+            bezier // Biểu đồ là đường cong mượt
+            yAxisSuffix=" BMI" // Hậu tố của nhãn trục Y
+            fromZero // Bắt đầu trục Y từ 0
+            withHorizontalLines={true} // Hiển thị các đường kẻ ngang
+            withVerticalLines={false} // Ẩn các đường kẻ dọc
+            style={styles.chartStyle}
+          />
+        </View>
+      </View>
+    );
   };
 
   const renderSelectedTab = () => {
     if (activeTab === 0) {
       return <CalendarTab />;
     } else {
-      return <DataTab />;
+      return (
+        <View>
+          <DataTab />
+          <BMIChart />
+        </View>
+      );
     }
   };
 
