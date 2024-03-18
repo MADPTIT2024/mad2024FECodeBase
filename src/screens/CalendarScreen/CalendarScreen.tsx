@@ -1,10 +1,14 @@
 import { View, Text, TouchableOpacity, Dimensions } from 'react-native';
+import { Calendar, LocaleConfig } from 'react-native-calendars';
 import { styles } from './CalendarScreen.styles';
 import Colors from '@/constants/Colors';
 import { useState } from 'react';
+import FontSize from '@/constants/FontSize';
+import HistoryCard from '@/components/HistoryCard/HistoryCard';
 
 export function CalendarScreen() {
   const [activeTab, setActiveTab] = useState(0);
+  const [selected, setSelected] = useState('');
 
   const TABS = [
     {
@@ -23,7 +27,62 @@ export function CalendarScreen() {
 
   // Calendar Tab
   const CalendarTab = () => {
-    return <Text style={{ color: Colors.text }}>Calendar</Text>;
+    return (
+      <View>
+        <Calendar
+          onDayPress={(day) => {
+            setSelected(day.dateString);
+          }}
+          markedDates={{
+            [selected]: {
+              selected: true,
+              selectedColor: 'blue',
+              disableTouchEvent: true,
+            },
+          }}
+          theme={{
+            calendarBackground: Colors.primary,
+            textSectionTitleColor: Colors.text,
+            selectedDayBackgroundColor: Colors.primary,
+            selectedDayTextColor: Colors.text,
+            todayTextColor: Colors.accent,
+            dayTextColor: Colors.text,
+            textDisabledColor: Colors.text,
+            dotColor: Colors.primary,
+            selectedDotColor: Colors.text,
+            arrowColor: Colors.text,
+            monthTextColor: Colors.text,
+            textDayFontFamily: 'monospace',
+            textMonthFontFamily: 'monospace',
+            textDayHeaderFontFamily: 'monospace',
+            textDayFontSize: 16,
+            textMonthFontSize: 16,
+            textDayHeaderFontSize: 16,
+          }}
+          style={styles.calendarStyle}
+        />
+        <View style={styles.historyContainer}>
+          <Text
+            style={{
+              color: Colors.text,
+              fontSize: FontSize.lg,
+              fontWeight: 'bold',
+            }}
+          >
+            History
+          </Text>
+          <HistoryCard
+            history={{
+              date: '2021-06-01',
+              workout: 'Workout 1',
+              duration: '1 hour',
+              rating: 5,
+            }}
+            onPress={() => {}}
+          />
+        </View>
+      </View>
+    );
   };
 
   // Data Graph Tab

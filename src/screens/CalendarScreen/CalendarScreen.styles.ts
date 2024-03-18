@@ -4,9 +4,6 @@ import { Dimensions, StyleSheet } from 'react-native';
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 
-console.log(screenWidth, screenHeight);
-
-
 export const styles = StyleSheet.create({
   container: {
     display: 'flex',
@@ -34,5 +31,18 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: screenHeight - 20,
-  }
+  },
+  calendarStyle: {
+    width: screenWidth * 0.9,
+    borderRadius: 10,
+  },
+  historyContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: screenWidth * 0.9,
+    marginVertical: 10,
+    color: Colors.primary,
+  },
 });

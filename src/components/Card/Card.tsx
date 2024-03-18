@@ -1,6 +1,5 @@
 import {
   Animated,
-  Pressable,
   StyleProp,
   Text,
   View,
@@ -39,21 +38,6 @@ export function Card({ title, desc, customeStyle }: CardProps) {
           </View>
         </View>
       </TouchableOpacity>
-      {/* <Pressable onPress={debugPress} onPressIn={fadeIn} onPressOut={fadeOut}>
-        <Animated.View style={styles.cardContainer}>
-          <View style={styles.headerContainer}>
-            <View>
-              <Text>{title}</Text>
-            </View>
-            <View>
-              <Text>Image</Text>
-            </View>
-          </View>
-          <View style={styles.contentContainer}>
-            <Text>{desc}</Text>
-          </View>
-        </Animated.View>
-      </Pressable> */}
     </View>
   );
 }
