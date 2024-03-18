@@ -12,17 +12,6 @@ import { HeartIcon } from 'react-native-heroicons/solid';
 export function Personal() {
   const navigation = useNavigation();
 
-  const myData = [
-    'My Profile',
-    'My favorite',
-    'My Profile',
-    'My favorite',
-    'My Profile',
-    'My favorite',
-    'My Profile',
-    'My favorite',
-  ];
-
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -95,14 +84,6 @@ export function Personal() {
               </View>
               <Text style={styles.toolbarArrow}>&gt;</Text>
             </TouchableOpacity>
-          </View>
-
-          <View style={styles.textContent}>
-            {myData.map((item, index) => (
-              <Text style={styles.textStyle} key={index}>
-                {item}
-              </Text>
-            ))}
           </View>
         </View>
       </ScrollView>
