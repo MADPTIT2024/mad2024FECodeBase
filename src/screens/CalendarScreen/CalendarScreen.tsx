@@ -101,14 +101,14 @@ export function CalendarScreen() {
 
     return (
       <View style={styles.dataTabContainer}>
-        <Text style={styles.chartTitle}>
-          Calories burned, estimated (Kacal)
-        </Text>
+        <Text style={styles.chartTitle}>Calories burned, estimated (Kcal)</Text>
 
         <BarChart
           data={data}
           width={Dimensions.get('window').width}
           height={200}
+          yAxisLabel=""
+          yAxisSuffix=""
           chartConfig={{
             backgroundColor: Colors.primary,
             backgroundGradientFrom: Colors.primary,
