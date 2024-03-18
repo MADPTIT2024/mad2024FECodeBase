@@ -11,6 +11,7 @@ import {
   Poppins_700Bold,
 } from '@expo-google-fonts/poppins';
 import { AppLoading } from '@/screens/AppLoading/AppLoading';
+import Colors from './constants/Colors';
 
 const styles = StyleSheet.create({
   container: {

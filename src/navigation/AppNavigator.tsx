@@ -1,4 +1,4 @@
-import { Home, Calendar, Discover, Personal } from '@/screens';
+import { Home, CalendarScreen, Discover, Personal } from '@/screens';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -120,7 +120,7 @@ export function AppNavigator() {
       />
       <Tab.Screen
         name="Calendar"
-        component={Calendar}
+        component={CalendarScreen}
         options={{ headerShown: false }}
       />
       <Tab.Screen
