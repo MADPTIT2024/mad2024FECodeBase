@@ -1,6 +1,13 @@
-import { Animated, Pressable, StyleProp, Text, View, ViewStyle } from 'react-native';
+import {
+  Animated,
+  Pressable,
+  StyleProp,
+  Text,
+  View,
+  ViewStyle,
+  TouchableOpacity,
+} from 'react-native';
 import { styles } from './Card.styles';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 interface CardProps {
   title: string;
