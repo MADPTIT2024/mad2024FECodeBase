@@ -1981,6 +1981,11 @@
     prompts "^2.4.2"
     semver "^7.5.2"
 
+"@react-native-community/slider@^4.5.0":
+  version "4.5.0"
+  resolved "https://registry.npmjs.org/@react-native-community/slider/-/slider-4.5.0.tgz"
+  integrity sha512-pyUvNTvu5IfCI5abzqRfO/dd3A009RC66RXZE6t0gyOwI/j0QDlq9VZRv3rjkpuIvNTnsYj+m5BHlh0DkSYUyA==
+
 "@react-native/assets-registry@~0.73.1", "@react-native/assets-registry@0.73.1":
   version "0.73.1"
   resolved "https://registry.npmjs.org/@react-native/assets-registry/-/assets-registry-0.73.1.tgz"
@@ -5575,6 +5580,11 @@ react-native-config@^1.5.1:
   version "1.5.1"
   resolved "https://registry.npmjs.org/react-native-config/-/react-native-config-1.5.1.tgz"
   integrity sha512-g1xNgt1tV95FCX+iWz6YJonxXkQX0GdD3fB8xQtR1GUBEqweB9zMROW77gi2TygmYmUkBI7LU4pES+zcTyK4HA==
+
+react-native-custom-switch@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.npmjs.org/react-native-custom-switch/-/react-native-custom-switch-1.0.7.tgz"
+  integrity sha512-K4QDvh20F9KVQFmTr/PAta8JN2WofO7Ks4ZIq2U3EHKlRXMoMP0AplrV4oR5oRclaw9ltWecivrK/xWX85HC8A==
 
 react-native-gesture-handler@^2.14.1:
   version "2.14.1"
