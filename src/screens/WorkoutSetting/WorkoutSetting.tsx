@@ -78,7 +78,7 @@ export function WorkoutSetting() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
+      <View style={styles.margin}>
         <Text
           style={styles.headerArrow}
           onPress={() => navigation.navigate('Personal')}
@@ -91,75 +91,103 @@ export function WorkoutSetting() {
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
       >
-        <Text style={styles.textWorkout}>Workout Settings</Text>
-        <View style={styles.coachVideo}>
-          <Text style={styles.textCoach}>Coach Video</Text>
-          <View style={styles.imageContainer}>
-            <Image
-              style={styles.imageCoach}
-              source={require('../../assets/workout1.webp')}
-            />
-            <Text style={styles.imageArrow}>&gt;</Text>
+        <View
+          style={{
+            backgroundColor: 'rgba(192, 192, 192,0.07)',
+            borderRadius: 10,
+          }}
+        >
+          <View style={styles.margin}>
+            <Text style={styles.textWorkout}>Workout Settings</Text>
+            <View style={styles.coachVideo}>
+              <Text style={styles.textCoach}>Coach Video</Text>
+              <View style={styles.imageContainer}>
+                <Image
+                  style={styles.imageCoach}
+                  source={require('../../assets/workout1.webp')}
+                />
+                <Text style={styles.imageArrow}>&gt;</Text>
+              </View>
+            </View>
           </View>
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate('Music')}>
-          <View style={styles.imageContent}>
-            <Text style={styles.textCoach}>Music</Text>
+        <TouchableOpacity
+          style={{
+            backgroundColor: 'rgba(192, 192, 192,0.07)',
+            borderRadius: 10,
+            marginTop: 10,
+          }}
+          onPress={() => navigation.navigate('Music')}
+        >
+          <View style={styles.margin}>
+            <View style={styles.imageContent}>
+              <Text style={styles.textCoach}>Music</Text>
 
-            <View style={styles.imageContainer}>
-              <Image
-                style={styles.imageCoach}
-                source={require('../../assets/workout1.webp')}
+              <View style={styles.imageContainer}>
+                <Image
+                  style={styles.imageCoach}
+                  source={require('../../assets/workout1.webp')}
+                />
+                <Text style={styles.imageText}>Peaceful Time</Text>
+                <Text style={styles.imageArrow}>&gt;</Text>
+              </View>
+            </View>
+            <View style={styles.volumeContainer}>
+              <FontAwesome5 name="volume-off" size={16} color="gray" />
+              <Slider
+                style={styles.slider}
+                minimumValue={0}
+                maximumValue={1}
+                value={volumeMusic}
+                onValueChange={setVolumeMusic}
+                minimumTrackTintColor="#007bff"
+                maximumTrackTintColor="#000000"
+                thumbTintColor="#007bff"
               />
-              <Text style={styles.imageText}>Peaceful Time</Text>
-              <Text style={styles.imageArrow}>&gt;</Text>
+              <FontAwesome5 name="volume-up" size={16} color="gray" />
             </View>
           </View>
         </TouchableOpacity>
 
-        <View style={styles.volumeContainer}>
-          <FontAwesome5 name="volume-off" size={16} color="gray" />
-          <Slider
-            style={styles.slider}
-            minimumValue={0}
-            maximumValue={1}
-            value={volumeMusic}
-            onValueChange={setVolumeMusic}
-            minimumTrackTintColor="#007bff"
-            maximumTrackTintColor="#000000"
-            thumbTintColor="#007bff"
-          />
-          <FontAwesome5 name="volume-up" size={16} color="gray" />
-        </View>
+        <TouchableOpacity
+          style={{
+            backgroundColor: 'rgba(192, 192, 192,0.07)',
+            borderRadius: 10,
+            marginTop: 10,
+          }}
+          onPress={() => navigation.navigate('Music')}
+        >
+          <View style={styles.margin}>
+            <View style={styles.imageContent}>
+              <Text style={styles.textCoach}>Voice Guide</Text>
 
-        <View style={styles.imageContent}>
-          <Text style={styles.textCoach}>Voice Guide</Text>
+              <View>
+                <Switch
+                  trackColor={{ false: '#767577', true: '#0066FF' }}
+                  thumbColor={isEnabled ? '#0066FF' : '#f4f3f4'}
+                  ios_backgroundColor="#3e3e3e"
+                  onValueChange={toggleSwitch}
+                  value={isEnabled}
+                />
+              </View>
+            </View>
 
-          <View>
-            <Switch
-              trackColor={{ false: '#767577', true: '#0066FF' }}
-              thumbColor={isEnabled ? '#0066FF' : '#f4f3f4'}
-              ios_backgroundColor="#3e3e3e"
-              onValueChange={toggleSwitch}
-              value={isEnabled}
-            />
+            <View style={styles.volumeContainer}>
+              <FontAwesome5 name="volume-off" size={16} color="gray" />
+              <Slider
+                style={styles.slider}
+                minimumValue={0}
+                maximumValue={1}
+                value={volumeVoice}
+                onValueChange={setVolumeVoice}
+                minimumTrackTintColor="#007bff"
+                maximumTrackTintColor="#000000"
+                thumbTintColor="#007bff"
+              />
+              <FontAwesome5 name="volume-up" size={16} color="gray" />
+            </View>
           </View>
-        </View>
-
-        <View style={styles.volumeContainer}>
-          <FontAwesome5 name="volume-off" size={16} color="gray" />
-          <Slider
-            style={styles.slider}
-            minimumValue={0}
-            maximumValue={1}
-            value={volumeVoice}
-            onValueChange={setVolumeVoice}
-            minimumTrackTintColor="#007bff"
-            maximumTrackTintColor="#000000"
-            thumbTintColor="#007bff"
-          />
-          <FontAwesome5 name="volume-up" size={16} color="gray" />
-        </View>
+        </TouchableOpacity>
 
         <View style={styles.imageContent}>
           <Text style={styles.textCoach}>Coach Voice</Text>
@@ -180,34 +208,46 @@ export function WorkoutSetting() {
           bounces={false}
         />
 
-        <View style={styles.imageContent}>
-          <Text style={styles.textCoach}>Sound Effect</Text>
+        <TouchableOpacity
+          style={{
+            backgroundColor: 'rgba(192, 192, 192,0.07)',
+            borderRadius: 10,
+            marginTop: 10,
+          }}
+          onPress={() => navigation.navigate('Music')}
+        >
+          <View style={styles.margin}>
+            <View style={styles.imageContent}>
+              <Text style={styles.textCoach}>Sound Effect</Text>
 
-          <View>
-            <Switch
-              trackColor={{ false: '#767577', true: '#0066FF' }}
-              thumbColor={isEnabled1 ? '#0066FF' : '#f4f3f4'}
-              ios_backgroundColor="#3e3e3e"
-              onValueChange={toggleSwitch1}
-              value={isEnabled1}
-            />
+              <View>
+                <Switch
+                  trackColor={{ false: '#767577', true: '#0066FF' }}
+                  thumbColor={isEnabled1 ? '#0066FF' : '#f4f3f4'}
+                  ios_backgroundColor="#3e3e3e"
+                  onValueChange={toggleSwitch1}
+                  value={isEnabled1}
+                />
+              </View>
+            </View>
+
+            <View style={styles.volumeContainer}>
+              <FontAwesome5 name="volume-off" size={16} color="gray" />
+              <Slider
+                style={styles.slider}
+                minimumValue={0}
+                maximumValue={1}
+                value={volumeSound}
+                onValueChange={setVolumeSound}
+                minimumTrackTintColor="#007bff"
+                maximumTrackTintColor="#000000"
+                thumbTintColor="#007bff"
+              />
+              <FontAwesome5 name="volume-up" size={16} color="gray" />
+            </View>
           </View>
-        </View>
+        </TouchableOpacity>
 
-        <View style={styles.volumeContainer}>
-          <FontAwesome5 name="volume-off" size={16} color="gray" />
-          <Slider
-            style={styles.slider}
-            minimumValue={0}
-            maximumValue={1}
-            value={volumeSound}
-            onValueChange={setVolumeSound}
-            minimumTrackTintColor="#007bff"
-            maximumTrackTintColor="#000000"
-            thumbTintColor="#007bff"
-          />
-          <FontAwesome5 name="volume-up" size={16} color="gray" />
-        </View>
         <Text>Reminder</Text>
         <Text>Reminder</Text>
         <Text>Reminder</Text>
