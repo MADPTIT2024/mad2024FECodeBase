@@ -1,11 +1,11 @@
 import {
   Home,
-  Calendar,
   Discover,
   Personal,
   WorkoutSetting,
   GeneralSetting,
   Music,
+  CalendarScreen,
 } from '@/screens';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
