@@ -1,6 +1,11 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import { styles } from './GeneralSetting.styles';
 import { useNavigation } from '@react-navigation/native';
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from 'react-native-heroicons/solid';
+import IconButton from '@/components/IconButton/IconButton';
 
 export function GeneralSetting() {
   const navigation = useNavigation();
@@ -8,14 +13,12 @@ export function GeneralSetting() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text
-          style={styles.headerArrow}
-          onPress={() => navigation.navigate('Personal')}
-        >
-          &lt;
-        </Text>
-        <Text style={styles.headerText}>General Settings</Text>
-        <Text> </Text>
+        <IconButton
+          onPress={() => navigation.navigate('Personality')}
+          name="chevron-back"
+        />
+        <Text style={styles.textHeader}>General Settings</Text>
+        <Text />
       </View>
 
       <TouchableOpacity
@@ -25,7 +28,7 @@ export function GeneralSetting() {
         <View style={styles.toolbarItemContent}>
           <Text style={styles.toolbarText}>Reminder</Text>
         </View>
-        <Text style={styles.toolbarArrow}>&gt;</Text>
+        <ChevronRightIcon color={'white'} size={19}></ChevronRightIcon>
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -35,7 +38,7 @@ export function GeneralSetting() {
         <View style={styles.toolbarItemContent}>
           <Text style={styles.toolbarText}>Restone purchase</Text>
         </View>
-        <Text style={styles.toolbarArrow}>&gt;</Text>
+        <ChevronRightIcon color={'white'} size={19}></ChevronRightIcon>
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -45,7 +48,7 @@ export function GeneralSetting() {
         <View style={styles.toolbarItemContent}>
           <Text style={styles.toolbarText}>Privacy policy</Text>
         </View>
-        <Text style={styles.toolbarArrow}>&gt;</Text>
+        <ChevronRightIcon color={'white'} size={19}></ChevronRightIcon>
       </TouchableOpacity>
     </View>
   );

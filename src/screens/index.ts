@@ -4,5 +4,4 @@ export { Personal } from '@/screens/Personal/Personal';
 export { Home } from '@/screens/Home/Home';
 export { WorkoutSetting } from '@/screens/WorkoutSetting/WorkoutSetting';
 export { GeneralSetting } from '@/screens/GeneralSetting/GeneralSetting';
-export { Music } from '@/screens/Music/Music';
 export { CalendarScreen } from '@/screens/CalendarScreen/CalendarScreen';

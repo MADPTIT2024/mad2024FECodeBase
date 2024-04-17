@@ -2,7 +2,7 @@ import { RootStackParamList } from '@/common/types';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
-import { CheckCircleIcon } from 'react-native-heroicons/solid';
+import { CheckCircleIcon, ChevronLeftIcon } from 'react-native-heroicons/solid';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Language'>;
 const Language: React.FC<Props> = ({ navigation: { goBack } }) => {
@@ -10,9 +10,7 @@ const Language: React.FC<Props> = ({ navigation: { goBack } }) => {
     <View style={{ flex: 1 }}>
       <View style={styles.header}>
         <View style={styles.backButtonContainer}>
-          <Text style={styles.title} onPress={() => goBack()}>
-            &lt;
-          </Text>
+          <ChevronLeftIcon color={'white'} size={25} onPress={() => goBack()} />
         </View>
         <Text style={styles.title}>Language</Text>
         <View style={styles.placeholder} />
@@ -55,8 +53,6 @@ const styles = StyleSheet.create({
     alignContent: 'space-between',
   },
   title: {
-    fontSize: 18,
-    fontWeight: 'bold',
     color: 'white',
   },
   placeholder: {

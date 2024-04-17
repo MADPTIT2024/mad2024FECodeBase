@@ -4,6 +4,7 @@ import Screen from '@/components/Screen/Screen';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
+import { ChevronLeftIcon } from 'react-native-heroicons/solid';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Favorites'>;
 const Favorites: React.FC<Props> = ({ navigation: { goBack } }) => {
@@ -18,13 +19,9 @@ const Favorites: React.FC<Props> = ({ navigation: { goBack } }) => {
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.header}>
-        <View style={styles.backButtonContainer}>
-          <Text style={styles.title} onPress={() => goBack()}>
-            &lt;
-          </Text>
-        </View>
-        <Text style={styles.title}>My</Text>
-        <View style={styles.placeholder} />
+        <ChevronLeftIcon color={'white'} size={20} onPress={() => goBack()} />
+        <Text style={styles.textHeader}>Favorites</Text>
+        <View />
       </View>
 
       {/* Dưới thanh header */}
@@ -64,22 +61,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
-    height: 60, // Đặt chiều cao của phần header
+    height: 70,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
   },
-  backButtonContainer: {
-    width: 100, // Đặt chiều rộng của container nút quay lại
-    alignContent: 'space-between',
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
+
+  textHeader: {
     color: 'white',
   },
-  placeholder: {
-    width: 100, // Đặt chiều rộng của container để giữ vị trí cho tiêu đề
-  },
+
   bottomMenu: {
     flexDirection: 'row',
     justifyContent: 'space-around',

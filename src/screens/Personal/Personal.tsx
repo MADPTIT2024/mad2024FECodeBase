@@ -80,7 +80,7 @@ export function Personal() {
             >
               <View style={styles.toolbarItemContent}>
                 <Icon name="cog-outline" size={40} color="orange" />
-                <Text style={styles.toolbarText}>LanguageOptions</Text>
+                <Text style={styles.toolbarText}>Language Options</Text>
               </View>
               <Text style={styles.toolbarArrow}>&gt;</Text>
             </TouchableOpacity>

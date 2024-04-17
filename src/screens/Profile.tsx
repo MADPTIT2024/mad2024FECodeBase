@@ -4,20 +4,16 @@ import Screen from '@/components/Screen/Screen';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
-import { PencilIcon } from 'react-native-heroicons/solid';
+import { PencilIcon, ChevronLeftIcon } from 'react-native-heroicons/solid';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Profile'>;
 const Profile: React.FC<Props> = ({ navigation: { goBack } }) => {
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.header}>
-        <View style={styles.backButtonContainer}>
-          <Text style={styles.title} onPress={() => goBack()}>
-            &lt;
-          </Text>
-        </View>
+        <ChevronLeftIcon color={'white'} size={20} onPress={() => goBack()} />
         <Text style={styles.title}>Profile</Text>
-        <View style={styles.placeholder} />
+        <View />
       </View>
 
       <TouchableOpacity>
@@ -61,18 +57,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
   },
-  backButtonContainer: {
-    width: 100, // Đặt chiều rộng của container nút quay lại
-    alignContent: 'space-between',
-  },
+
   title: {
-    fontSize: 18,
-    fontWeight: 'bold',
     color: 'white',
   },
-  placeholder: {
-    width: 100, // Đặt chiều rộng của container để giữ vị trí cho tiêu đề
-  },
+
   content: {
     flex: 1,
     alignItems: 'center',

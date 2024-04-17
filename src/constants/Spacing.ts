@@ -1,6 +1,7 @@
 const sm: number = 5;
 const base: number = 10;
 const lg: number = 20;
+const xlg: number = 25;
 const xl: number = 30;
 const xxl: number = 40;
 export default {
@@ -10,6 +11,8 @@ export default {
     sm: 10,
     // base = 15
     base: 15,
+    // xlg = 20
+    xlg: 20,
     // lg = 30
     lg: 30,
     // xl = 50
@@ -24,6 +27,8 @@ export default {
     base,
     // lg = 20
     lg,
+    // xlg = 25
+    xlg,
     // xl = 30
     xl,
     // xxl = 40

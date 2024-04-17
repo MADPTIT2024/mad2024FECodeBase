@@ -21,12 +21,11 @@ export type RootStackParamList = {
   Personal: undefined;
   WorkoutSetting: undefined;
   GeneralSetting: undefined;
-  Music: undefined;
   Reminder: undefined;
   Profile: undefined;
   Favorites: undefined;
   Language: undefined;
-  Personality:undefined
+  Personality: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

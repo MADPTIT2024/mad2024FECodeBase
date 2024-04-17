@@ -1,11 +1,27 @@
 import { StyleSheet, Dimensions } from 'react-native';
+import Spacing from '@/constants/Spacing';
+import Colors from '@/constants/Colors';
 
-const windowWidth = Dimensions.get('window').width;
-const ITEM_WIDTH = windowWidth * 0.8;
+const { height, width } = Dimensions.get('window');
+const ITEM_WIDTH = width * 0.8;
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: Spacing.padding.base,
+    marginTop: Spacing.margin.xlg,
+    height: height * 0.1,
+    backgroundColor: Colors.primary,
+  },
+
+  textHeader: {
+    color: 'white',
   },
 
   margin: {
@@ -32,6 +48,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginTop: 10,
   },
 
   textCoach: {

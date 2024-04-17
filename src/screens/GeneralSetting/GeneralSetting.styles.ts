@@ -1,4 +1,9 @@
 import { StyleSheet } from 'react-native';
+import Spacing from '@/constants/Spacing';
+import { Dimensions } from 'react-native';
+import Colors from '@/constants/Colors';
+
+const { height, width } = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
   container: {
@@ -8,13 +13,15 @@ export const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-around',
-    marginTop: 20,
-    marginBottom: 20,
-    marginLeft: -10,
+    justifyContent: 'space-between',
+    paddingHorizontal: Spacing.padding.base,
+    marginTop: Spacing.margin.xlg,
+    height: height * 0.1,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
   },
 
-  headerText: {
+  textHeader: {
     color: 'white',
   },
 
@@ -28,9 +35,9 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     height: 50,
-    backgroundColor: 'grey',
+    backgroundColor: Colors.primary,
     paddingHorizontal: 10,
-    width: '100%', // Chiếm toàn bộ chiều ngang của màn hình
+    width: '100%',
     marginTop: 20,
   },
   toolbarItemContent: {

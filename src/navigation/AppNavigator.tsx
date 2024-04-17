@@ -4,7 +4,6 @@ import {
   Personal,
   WorkoutSetting,
   GeneralSetting,
-  Music,
   CalendarScreen,
 } from '@/screens';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -81,11 +80,6 @@ function StackScreenPersonal() {
       <Stack.Screen
         name="WorkoutSetting"
         component={WorkoutSetting}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Music"
-        component={Music}
         options={{ headerShown: false }}
       />
       <Stack.Screen
