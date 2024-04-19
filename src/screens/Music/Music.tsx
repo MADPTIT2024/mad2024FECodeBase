@@ -8,57 +8,120 @@ import {
   ScrollView,
   Modal,
   TouchableOpacity,
+  ImageSourcePropType,
 } from 'react-native';
 import { musiclist } from '@/data';
 import MusicList from '@/components/MusicList/MusicList';
-import TrackPlayer from 'react-native-track-player';
+import { LogBox } from 'react-native';
+import { Audio } from 'expo-av';
+
+LogBox.ignoreLogs(['new NativeEventEmitter']);
+LogBox.ignoreAllLogs();
 
 const { width, height } = Dimensions.get('window');
 const modalHeight = height * 0.85;
 
 interface MusicSelectData {
   id: number;
+  name: string;
+  image: ImageSourcePropType;
   music: string;
 }
 
 interface MusicProps {
   visible: boolean;
   onClose: () => void;
+  volumeMusic: number;
+  music: (data: any) => void;
 }
 
-const Music: React.FC<MusicProps> = ({ visible, onClose }) => {
+const Music: React.FC<MusicProps> = ({
+  visible,
+  onClose,
+  volumeMusic,
+  music,
+}) => {
   const [isEnabled, setIsEnabled] = useState(true);
   const [showImages, setShowImages] = useState(true);
   const [isCloseButton, setIsCloseButton] = useState(false);
-  // const [sound, setSound] = useState<Audio.Sound | undefined>(undefined);
+  const [sound, setSound] = useState<Audio.Sound | undefined>(undefined);
   const [selectedMusic, setSelectedMusic] = useState<number | null>(null);
   const [selectedMusicIdWhenDisabled, setSelectedMusicIdWhenDisabled] =
     useState<number | null>(null);
+  const [dataSelect, setDataSelect] = useState<MusicSelectData | null>(null);
 
   const toggleSwitch = async () => {
     setIsEnabled((previousState) => !previousState);
     setShowImages((previousState) => !previousState);
-    // if (!isEnabled && sound) {
-    //   sound.stopAsync();
-    //   sound.unloadAsync();
-    //   setSelectedMusicIdWhenDisabled(selectedMusic);
-    // } else if (isEnabled && !sound) {
-    //   await playSound(
-    //     require('@/assets/music/Unstoppable-Remix-Tiktok-Sia.mp3'),
-    //   );
-    // }
+    if (!isEnabled && sound) {
+      sound.stopAsync();
+      sound.unloadAsync();
+      setSound(undefined);
+      setSelectedMusicIdWhenDisabled(selectedMusic);
+    } else if (isEnabled && sound) {
+      await sound.playAsync(); // Phát lại âm nhạc nếu toggle switch được bật
+    }
   };
 
-  const handleSelect = async (data: MusicSelectData) => {
-    setSelectedMusic(data.id);
+  useEffect(() => {
+    const handleToggleSwitch = async () => {
+      if (!isEnabled && sound) {
+        await sound.stopAsync();
+        await sound.unloadAsync();
+        setSound(undefined);
+        setSelectedMusicIdWhenDisabled(selectedMusic);
+      } else if (isEnabled && dataSelect) {
+        await handleSelect(dataSelect);
+      }
+    };
 
-    // if (data) {
-    //   await playSong(data.music);
-    // }
+    handleToggleSwitch();
+  }, [isEnabled]);
+
+  const handleSelect = async (data: MusicSelectData) => {
+    music(data);
+    setSelectedMusic(data.id);
+    setDataSelect(data);
+    if (isEnabled && data) {
+      await playSong(data.music);
+    }
   };
 
   const closeButton = () => {
     setIsCloseButton(true);
+  };
+
+  const playSong = async (song: any) => {
+    try {
+      if (sound) {
+        await sound.stopAsync();
+        await sound.unloadAsync();
+        setSound(undefined);
+      }
+
+      console.log('Loading Sound');
+      const { sound: newSound } = await Audio.Sound.createAsync(
+        require('@/assets/music/Unstoppable-Remix-Tiktok-Sia.mp3'),
+        {
+          shouldPlay: false,
+          volume: volumeMusic,
+        },
+      );
+      setSound(newSound);
+
+      console.log('Playing Sound');
+      await newSound.playAsync();
+
+      // Nếu bạn muốn lặp lại bài hát khi kết thúc, bạn có thể sử dụng sự kiện 'setOnPlaybackStatusUpdate'
+      // newSound.setOnPlaybackStatusUpdate(async (status) => {
+      //   if (status.didJustFinish) {
+      //     console.log('Song finished, replaying...');
+      //     await newSound.replayAsync();
+      //   }
+      // });
+    } catch (error) {
+      console.error('Lỗi khi phát nhạc:', error);
+    }
   };
 
   useEffect(() => {
@@ -67,66 +130,24 @@ const Music: React.FC<MusicProps> = ({ visible, onClose }) => {
     }
   }, [selectedMusicIdWhenDisabled]);
 
-  // useEffect(() => {
-  //   if (
-  //     visible &&
-  //     showImages &&
-  //     musiclist.length > 0 &&
-  //     selectedMusic === null
-  //   ) {
-  //     handleSelect(musiclist[0]);
-  //   }
+  useEffect(() => {
+    if (
+      visible &&
+      showImages &&
+      musiclist.length > 0 &&
+      selectedMusic === null
+    ) {
+      handleSelect(musiclist[0]);
+    }
 
-  //   if (isCloseButton && sound) {
-  //     sound.stopAsync();
-  //     sound.unloadAsync();
-  //     setSound(undefined);
-  //     setIsCloseButton(false);
-  //     setSelectedMusic(null);
-  //   }
-  // }, [visible, isCloseButton, sound]);
-
-  // useEffect(() => {
-  //   if (!isEnabled && sound) {
-  //     sound.stopAsync();
-  //     sound.unloadAsync();
-  //   } else if (isEnabled && sound) {
-  //     (async () => {
-  //       await sound.unloadAsync();
-  //       await sound.loadAsync(
-  //         require('@/assets/music/Unstoppable-Remix-Tiktok-Sia.mp3'),
-  //       );
-  //       await sound.playAsync();
-  //     })();
-  //   }
-  // }, [sound, isEnabled]);
-
-  // const playSound = async (music: string) => {
-  //   if (sound) {
-  //     await sound.stopAsync();
-  //     await sound.unloadAsync();
-  //     setSound(undefined);
-  //   }
-
-  //   const { sound: newSound } = await Audio.Sound.createAsync(
-  //     require('@/assets/music/Unstoppable-Remix-Tiktok-Sia.mp3'),
-  //   );
-  //   setSound(newSound);
-
-  //   await newSound.playAsync();
-  // };
-
-  // const playSong = async (song: any) => {
-  //   // Phát bài hát được chọn
-  //   await TrackPlayer.setupPlayer();
-  //   await TrackPlayer.add({
-  //     id: song.id,
-  //     url: require('@/assets/music/Unstoppable-Remix-Tiktok-Sia.mp3'), // Đường dẫn tới file nhạc
-  //     title: song.title,
-  //     artist: song.artist,
-  //   });
-  //   await TrackPlayer.play();
-  // };
+    if (isCloseButton && sound) {
+      sound.stopAsync();
+      sound.unloadAsync();
+      setSound(undefined);
+      setIsCloseButton(false);
+      setSelectedMusic(null);
+    }
+  }, [visible, isCloseButton, sound]);
 
   return (
     <Modal

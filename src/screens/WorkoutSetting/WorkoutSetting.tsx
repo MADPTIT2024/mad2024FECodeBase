@@ -1,5 +1,5 @@
 import { styles } from './WorkoutSetting.styles';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   Animated,
   ScrollView,
   TouchableWithoutFeedback,
+  ImageSourcePropType,
 } from 'react-native';
 import Slider from '@react-native-community/slider';
 // @ts-ignore
@@ -18,6 +19,13 @@ import { coachvoices } from '@/data';
 import Music from '../Music/Music';
 import IconButton from '@/components/IconButton/IconButton';
 import Colors from '@/constants/Colors';
+
+interface MusicSelectData {
+  id: number;
+  name: string;
+  image: ImageSourcePropType;
+  music: string;
+}
 
 export function WorkoutSetting() {
   const navigation = useNavigation();
@@ -35,6 +43,8 @@ export function WorkoutSetting() {
   const [sliderDisabled1, setSliderDisabled1] = useState(false);
 
   const [modalVisible, setModalVisible] = useState(false);
+  0;
+  const [dataSelect, setDataSelect] = useState<MusicSelectData | null>(null);
 
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);
@@ -83,6 +93,15 @@ export function WorkoutSetting() {
 
   const closeModal = () => {
     setModalVisible(false);
+  };
+
+  useEffect(() => {
+    setDataSelect(dataSelect);
+  }, [dataSelect]);
+
+  const handleMusic = (data: any) => {
+    console.log('check data:', data);
+    setDataSelect(data);
   };
 
   return (
@@ -138,11 +157,36 @@ export function WorkoutSetting() {
                 <Text style={styles.textCoach}>Music</Text>
 
                 <View style={styles.imageContainer}>
-                  <Image
-                    style={styles.imageCoach}
-                    source={require('../../assets/images/voices/workout1.webp')}
-                  />
-                  <Text style={styles.imageText}>Peaceful Time</Text>
+                  {!dataSelect ? (
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <Image
+                        style={styles.imageCoach}
+                        source={require('../../assets/images/voices/workout1.webp')}
+                      />
+                      <Text style={styles.imageText}>Peaceful Time</Text>
+                    </View>
+                  ) : (
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <Image
+                        style={styles.imageCoach}
+                        source={dataSelect.image}
+                      />
+                      <Text style={styles.imageText}>{dataSelect.name}</Text>
+                    </View>
+                  )}
+
                   <Text style={styles.imageArrow}>&gt;</Text>
                 </View>
               </View>
@@ -166,6 +210,8 @@ export function WorkoutSetting() {
           <TouchableWithoutFeedback onPress={closeModal}>
             <Music
               visible={modalVisible}
+              volumeMusic={volumeMusic}
+              music={handleMusic}
               onClose={() => setModalVisible(false)}
             />
           </TouchableWithoutFeedback>

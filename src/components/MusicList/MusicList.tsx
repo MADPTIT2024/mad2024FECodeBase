@@ -6,6 +6,7 @@ import {
   Image,
   StyleSheet,
   Dimensions,
+  ImageSourcePropType,
 } from 'react-native';
 
 import {
@@ -19,6 +20,8 @@ const { width, height } = Dimensions.get('window');
 
 interface MusicSelectData {
   id: number;
+  name: string;
+  image: ImageSourcePropType;
   music: string;
 }
 
@@ -31,9 +34,14 @@ interface Props {
 const MusicList: React.FC<Props> = ({ musiclist, onSelect, isSelected }) => {
   return (
     <TouchableOpacity
-      style={styles.MusicListItem}
+      style={styles.musicListItem}
       onPress={() => {
-        onSelect({ id: musiclist.id, music: musiclist.music });
+        onSelect({
+          id: musiclist.id,
+          name: musiclist.name,
+          image: musiclist.image,
+          music: musiclist.music,
+        });
       }}
     >
       <View style={styles.iconImage}>
@@ -64,12 +72,14 @@ const MusicList: React.FC<Props> = ({ musiclist, onSelect, isSelected }) => {
 export default MusicList;
 
 const styles = StyleSheet.create({
-  MusicListItem: {
+  musicListItem: {
     flexDirection: 'row',
     width: width * 0.8,
     alignItems: 'center',
     paddingBottom: 15,
     paddingTop: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
   },
   iconImage: {
     flexDirection: 'row',
