@@ -14,6 +14,9 @@ import HistoryCard from '@/components/HistoryCard/HistoryCard';
 import { histories } from '@/data';
 import { BarChart, LineChart } from 'react-native-chart-kit';
 import LinearGradient from 'react-native-linear-gradient';
+import { ChatBubbleBottomCenterIcon } from 'react-native-heroicons/solid';
+
+const { height, width } = Dimensions.get('window');
 
 export function CalendarScreen() {
   const [activeTab, setActiveTab] = useState(0);
@@ -135,39 +138,113 @@ export function CalendarScreen() {
     const averageBMI = 22; // Giả sử trung bình BMI là 22
 
     return (
-      <View style={styles.bmiContainer}>
-        <View style={styles.chartContainer}>
-          <Text style={styles.chartTitle}>BMI</Text>
-          <LineChart
-            data={{
-              labels: ['0', '40'], // Đơn vị trục hoành
-              datasets: [
-                {
-                  data: [averageBMI, averageBMI], // Dữ liệu trung bình BMI cho mỗi điểm trên đoạn thẳng
-                },
-              ],
-            }}
-            width={Dimensions.get('window').width - 20} // Độ rộng của biểu đồ
-            height={10} // Độ cao của biểu đồ
-            chartConfig={{
-              backgroundColor: Colors.primary,
-              backgroundGradientFrom: Colors.primary,
-              backgroundGradientTo: Colors.primary,
-              decimalPlaces: 0,
-              color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-              labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-              style: {
-                borderRadius: 16,
-              },
-            }}
-            bezier // Biểu đồ là đường cong mượt
-            yAxisSuffix=" BMI" // Hậu tố của nhãn trục Y
-            fromZero // Bắt đầu trục Y từ 0
-            withHorizontalLines={true} // Hiển thị các đường kẻ ngang
-            withVerticalLines={false} // Ẩn các đường kẻ dọc
-            style={styles.chartStyle}
-          />
-        </View>
+      <View>
+        <TouchableOpacity
+          style={{
+            height: height * 0.3,
+            width: width * 0.95,
+            paddingHorizontal: 10,
+            backgroundColor: Colors.primary,
+            borderRadius: 10,
+            marginBottom: 20,
+            flexDirection: 'column',
+            justifyContent: 'space-around',
+            alignContent: 'center',
+          }}
+        >
+          <Text style={{ marginLeft: 10, fontSize: 18 }}>BMI</Text>
+          <View style={{ flexDirection: 'column' }}>
+            <View
+              style={{ width: 50, backgroundColor: '#fff', borderRadius: 5 }}
+            >
+              <Text
+                style={{
+                  textAlign: 'center',
+                  color: '#000',
+                  fontSize: 16,
+                }}
+              >
+                {averageBMI}
+              </Text>
+            </View>
+
+            <TouchableOpacity
+              style={{ marginLeft: 10, height: 30, flexDirection: 'row' }}
+            >
+              <View style={{ width: width * 0.82 * 0.08 }}>
+                <View
+                  style={{
+                    height: 15,
+                    backgroundColor: 'blue',
+                    borderRadius: 10,
+                    marginRight: 2,
+                  }}
+                ></View>
+                <Text>15</Text>
+              </View>
+              <View style={{ width: width * 0.82 * 0.12 }}>
+                <View
+                  style={{
+                    height: 15,
+                    backgroundColor: 'blue',
+                    borderRadius: 10,
+                    marginRight: 2,
+                  }}
+                ></View>
+                <Text>16</Text>
+              </View>
+              <View style={{ width: width * 0.82 * 0.26 }}>
+                <View
+                  style={{
+                    height: 15,
+                    backgroundColor: 'blue',
+                    borderRadius: 10,
+                    marginRight: 2,
+                  }}
+                ></View>
+                <Text>18.5</Text>
+              </View>
+              <View style={{ width: width * 0.82 * 0.2 }}>
+                <View
+                  style={{
+                    height: 15,
+                    backgroundColor: 'blue',
+                    borderRadius: 10,
+                    marginRight: 2,
+                  }}
+                ></View>
+                <Text>25</Text>
+              </View>
+              <View style={{ width: width * 0.82 * 0.2 }}>
+                <View
+                  style={{
+                    height: 15,
+                    backgroundColor: 'blue',
+                    borderRadius: 10,
+                    marginRight: 2,
+                  }}
+                ></View>
+                <Text>30</Text>
+              </View>
+              <View style={{ width: width * 0.82 * 0.2 }}>
+                <View
+                  style={{
+                    height: 15,
+                    backgroundColor: 'blue',
+                    borderRadius: 10,
+                    marginRight: 2,
+                  }}
+                ></View>
+                <Text>35</Text>
+              </View>
+              <Text style={{ marginTop: 15, marginLeft: -18 }}>40</Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* 15 16 18.5 25 30 35 40 */}
+
+          <Text style={{ marginLeft: 10 }}>ABC</Text>
+        </TouchableOpacity>
       </View>
     );
   };
@@ -177,7 +254,12 @@ export function CalendarScreen() {
       return <CalendarTab />;
     } else {
       return (
-        <View>
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
           <DataTab />
           <BMIChart />
         </View>

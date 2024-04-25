@@ -44,25 +44,25 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
-    height: 60, // Đặt chiều cao của phần header
+    height: 60,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
   },
   backButtonContainer: {
-    width: 100, // Đặt chiều rộng của container nút quay lại
+    width: 100,
     alignContent: 'space-between',
   },
   title: {
     color: 'white',
   },
   placeholder: {
-    width: 100, // Đặt chiều rộng của container để giữ vị trí cho tiêu đề
+    width: 100,
   },
   content: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 20, // Đặt margin bottom cho khoảng cách giữa nút và dưới cùng của màn hình
+    marginBottom: 20,
   },
   textCoach: {
     fontSize: 12,

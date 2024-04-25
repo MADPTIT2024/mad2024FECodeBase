@@ -50,6 +50,15 @@ export function GeneralSetting() {
         </View>
         <ChevronRightIcon color={'white'} size={19}></ChevronRightIcon>
       </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.toolbarItem}
+        onPress={() => navigation.navigate('Login')}
+      >
+        <View style={styles.toolbarItemContent}>
+          <Text style={styles.toolbarText}>Login</Text>
+        </View>
+        <ChevronRightIcon color={'white'} size={19}></ChevronRightIcon>
+      </TouchableOpacity>
     </View>
   );
 }

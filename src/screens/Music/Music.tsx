@@ -11,9 +11,11 @@ import {
   ImageSourcePropType,
 } from 'react-native';
 import { musiclist } from '@/data';
-import MusicList from '@/components/MusicList/MusicList';
+import MusicList from '@/components/Music/MusicList';
 import { LogBox } from 'react-native';
 import { Audio } from 'expo-av';
+import Colors from '@/constants/Colors';
+// import FormMusic from '@/components/Music/FormMusic';
 
 LogBox.ignoreLogs(['new NativeEventEmitter']);
 LogBox.ignoreAllLogs();
@@ -49,7 +51,7 @@ const Music: React.FC<MusicProps> = ({
   const [selectedMusicIdWhenDisabled, setSelectedMusicIdWhenDisabled] =
     useState<number | null>(null);
   const [dataSelect, setDataSelect] = useState<MusicSelectData | null>(null);
-
+  const [addMusic, setAddMusic] = useState(false);
   const toggleSwitch = async () => {
     setIsEnabled((previousState) => !previousState);
     setShowImages((previousState) => !previousState);
@@ -59,7 +61,7 @@ const Music: React.FC<MusicProps> = ({
       setSound(undefined);
       setSelectedMusicIdWhenDisabled(selectedMusic);
     } else if (isEnabled && sound) {
-      await sound.playAsync(); // Phát lại âm nhạc nếu toggle switch được bật
+      await sound.playAsync();
     }
   };
 
@@ -90,6 +92,12 @@ const Music: React.FC<MusicProps> = ({
   const closeButton = () => {
     setIsCloseButton(true);
   };
+
+  const addButton = () => {
+    setAddMusic(true);
+  };
+
+  const handleUpdateMusic = (data: MusicSelectData) => {};
 
   const playSong = async (song: any) => {
     try {
@@ -196,14 +204,31 @@ const Music: React.FC<MusicProps> = ({
           )}
 
           <TouchableOpacity
-            onPress={() => {
-              onClose();
-              closeButton();
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              width: width * 0.8,
             }}
-            style={styles.doneButton}
           >
-            <Text style={styles.doneButtonText}>Done</Text>
+            <TouchableOpacity
+              onPress={() => {
+                onClose();
+                closeButton();
+              }}
+              style={styles.doneButton}
+            >
+              <Text style={styles.doneButtonText}>Done</Text>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => addButton()}
+                style={styles.doneButton}
+              >
+                <Text style={styles.doneButtonText}>+ Add</Text>
+              </TouchableOpacity>
+            </TouchableOpacity>
           </TouchableOpacity>
+          {/* {addMusic && <FormMusic updateMusic={handleUpdateMusic}></FormMusic>} */}
         </View>
       </View>
     </Modal>
@@ -218,7 +243,7 @@ const styles = StyleSheet.create({
   },
 
   modalContent: {
-    backgroundColor: 'rgba(192, 192, 192,0.07)',
+    backgroundColor: Colors.primary,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     paddingHorizontal: 20,
@@ -249,20 +274,19 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    width: width, // Chiếm 80% chiều rộng màn hình
-    height: 80, // Chiều cao 20px
+    width: width,
+    height: 80,
   },
 
   doneButton: {
     backgroundColor: 'rgba(34, 34, 237, 0.88)',
-    width: width * 0.8,
+    width: width * 0.3,
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',
-    alignSelf: 'center', // Đặt alignSelf thành 'center' để căn giữa theo trục ngang
-    position: 'absolute',
+    alignSelf: 'center',
     bottom: 20,
   },
 

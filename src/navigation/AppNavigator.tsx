@@ -5,6 +5,7 @@ import {
   WorkoutSetting,
   GeneralSetting,
   CalendarScreen,
+  Login,
 } from '@/screens';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -107,6 +108,11 @@ function StackScreenPersonal() {
         component={Language}
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 }
@@ -158,7 +164,7 @@ export function AppNavigator() {
           // );
         },
         tabBarStyle: {
-          backgroundColor: 'black', // Background color of the tab bar
+          backgroundColor: 'black',
           elevation: 0,
           shadowOffset: {
             width: 0,
@@ -166,7 +172,7 @@ export function AppNavigator() {
           },
           borderTopWidth: 0,
         },
-        tabBarActiveTintColor: 'white', // Color of the active tab icon
+        tabBarActiveTintColor: 'white',
       })}
       //
     >

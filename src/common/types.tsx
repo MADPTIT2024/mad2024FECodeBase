@@ -26,6 +26,7 @@ export type RootStackParamList = {
   Favorites: undefined;
   Language: undefined;
   Personality: undefined;
+  Login: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
