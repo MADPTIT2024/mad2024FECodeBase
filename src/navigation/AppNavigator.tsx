@@ -32,6 +32,7 @@ import Profile from '@/screens/Profile';
 import Favorites from '@/screens/Favorites';
 import Language from '@/screens/Language';
 import { CustomStackNavigator } from './CustomStackNavigator';
+import DoExercise from '@/screens/DoExercise/DoExercise';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -49,6 +50,12 @@ function StackScreenHome() {
         component={PlanOverviewScreen}
         options={{ headerShown: false }}
       />
+      {/* <Stack.Screen
+        name="DoExercise"
+        component={DoExercise}
+        options={{ headerShown: false }}
+      /> */}
+      
     </Stack.Navigator>
   );
 }

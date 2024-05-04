@@ -8,7 +8,7 @@ import { Plan, Workout } from '@/data';
 
 declare global {
   namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList {}
+    interface RootParamList extends RootStackParamList { }
   }
 }
 
@@ -27,6 +27,7 @@ export type RootStackParamList = {
   Language: undefined;
   Personality: undefined;
   Login: undefined;
+  DoExercise: undefined
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
