@@ -1,3 +1,4 @@
+export const NETWORK: string = '192.168.234.206';
 export default [
   {
     id: '0',
@@ -16,7 +17,7 @@ export default [
       {
         id: '11',
         image:
-          'https://177d01fbswx3jjl1t20gdr8j-wpengine.netdna-ssl.com/wp-content/uploads/2019/06/Incline-Push-Up.gif',
+          'https://cdn.prod.openfit.com/uploads/2020/03/10162714/wide-arm-push-up.gif',
         name: 'INCLINE PUSH-UPS',
         sets: 10,
       },

@@ -4,8 +4,10 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
-    flex: 1,
+    backgroundColor: 'black',
     // marginTop: 50,
+    // flexGrow: 1,
+    // flex: 1,
     // justifyContent: 'center',
     // alignItems: 'center',
   },
@@ -22,7 +24,6 @@ export const styles = StyleSheet.create({
     marginLeft: 10,
     alignItems: 'center',
     flex: 1,
-    marginTop: 20,
     // backgroundColor: '#EEEEEE',
   },
 
@@ -132,57 +133,12 @@ export const styles = StyleSheet.create({
 
   exerciseComponent: {
     flexDirection: 'row',
-    marginLeft: 20,
-    // justifyContent: 'space-around',
-    gap: 30,
+    justifyContent: 'space-around',
     alignItems: 'center',
     marginBottom: 10,
   },
 
   exerciseInfo: {
     flexDirection: 'row',
-    gap: 20,
-  },
-
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 22,
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-  buttonOpen: {
-    backgroundColor: '#F194FF',
-  },
-  buttonClose: {
-    backgroundColor: '#2196F3',
-  },
-  textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: 'center',
   },
 });
