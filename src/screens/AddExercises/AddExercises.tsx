@@ -22,11 +22,9 @@ export function AddExercises() {
   const route = useRoute();
   const navigation = useNavigation();
   const FitnessData = fitness;
-  console.log(FitnessData.length);
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedExercise, setSelectedExercise] = useState(null);
 
-  // Function to open modal with exercise info
   const openModalWithExercise = (exercise: any) => {
     setSelectedExercise(exercise);
     setModalVisible(true);
@@ -49,8 +47,8 @@ export function AddExercises() {
           <Text style={styles.headerText}>Add exercises</Text>
         </View>
 
-        <View style={{ marginTop: 30 }}>
-          {FitnessData[2].excersises.map((item, index) => (
+        <View style={{ marginTop: 30, gap: 20 }}>
+          {FitnessData[0].excersises.map((item, index) => (
             <Pressable
               key={index}
               style={styles.exerciseComponent}
@@ -91,7 +89,6 @@ export function AddExercises() {
             transparent={true}
             visible={modalVisible}
             onRequestClose={() => {
-              Alert.alert('Modal has been closed.');
               setModalVisible(!modalVisible);
             }}
           >

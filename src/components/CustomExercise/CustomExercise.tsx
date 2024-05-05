@@ -12,7 +12,7 @@ const CustomExercise: React.FC<CustomExerciseProps> = ({
   exercise,
   modalVisible,
 }) => {
-  console.log(exercise);
+  // console.log(exercise);
 
   const closeModal = () => {
     setModalVisible(false);
@@ -26,6 +26,9 @@ const CustomExercise: React.FC<CustomExerciseProps> = ({
             style={{
               flex: 4,
               resizeMode: 'stretch',
+              borderRadius: 10,
+              borderColor: '#948979',
+              borderWidth: 30,
             }}
             source={{ uri: exercise.image }}
           />
@@ -66,6 +69,8 @@ const styles = StyleSheet.create({
     marginTop: 60,
     flexDirection: 'column',
     backgroundColor: 'white',
+    borderTopRightRadius: 30,
+    borderTopLeftRadius: 30,
   },
   wrapper: {
     flex: 1,

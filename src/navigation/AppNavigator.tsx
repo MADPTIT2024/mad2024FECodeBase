@@ -32,6 +32,7 @@ import Profile from '@/screens/Profile';
 import Favorites from '@/screens/Favorites';
 import Language from '@/screens/Language';
 import { CustomStackNavigator } from './CustomStackNavigator';
+import Story from '@/screens/Story';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -155,6 +156,12 @@ export function AppNavigator() {
             ) : (
               <Square2StackIconUnactive color="white" size={20} />
             );
+          } else if (route.name === 'Story') {
+            iconSource = focused ? (
+              <Square2StackIconActive color="white" fill="blue" size={20} />
+            ) : (
+              <Square2StackIconUnactive color="white" size={20} />
+            );
           }
 
           return iconSource;
@@ -179,6 +186,12 @@ export function AppNavigator() {
       <Tab.Screen
         name="Training"
         component={StackScreenHome}
+        options={{ headerShown: false }}
+      />
+
+      <Tab.Screen
+        name="Story"
+        component={Story}
         options={{ headerShown: false }}
       />
 

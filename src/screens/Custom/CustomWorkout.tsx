@@ -8,7 +8,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import fitness from '../../data/fitness';
@@ -18,9 +18,32 @@ import { CheckIcon as CheckIconSolid } from 'react-native-heroicons/solid';
 import { PlusIcon as PlusIconSolid } from 'react-native-heroicons/solid';
 import { XMarkIcon as XMarkIconSolid } from 'react-native-heroicons/solid';
 import Screen from '@/components/Screen/Screen';
+import axios from 'axios';
+import { NETWORK } from '../../data/fitness';
 
 export function CustomWorkout({ navigation }: { navigation: any }) {
-  const FitnessData = fitness;
+  // const FitnessData = fitness;
+  console.log(NETWORK);
+  const [customWorkout, setCustomWorkout] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(
+          `http://${NETWORK}:8080/api/exercise-collection`,
+        );
+        setCustomWorkout(res.data);
+        console.log(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const handleCustomWorkoutPress = (item: any) => {
+    navigation.navigate('DoWorkout', { item: item });
+  };
 
   return (
     <Screen style={{ flex: 1 }}>
@@ -46,7 +69,7 @@ export function CustomWorkout({ navigation }: { navigation: any }) {
               Customize your own training plans based on your preference
             </Text>
           </View>
-          {FitnessData.length === 0 ? (
+          {customWorkout.length === 0 ? (
             <View style={styles.addExercises}>
               <TouchableOpacity
                 onPress={() => navigation.navigate('AddExercise')}
@@ -60,41 +83,50 @@ export function CustomWorkout({ navigation }: { navigation: any }) {
           ) : (
             <View style={[styles.addExercise]}>
               <View style={styles.customUserWorkout}>
-                {FitnessData.map((item, index) => (
-                  <View key={index} style={styles.customUserWorkoutComponent}>
-                    <View style={styles.customUserWorkoutInfo}>
-                      <View style={styles.customUserWorkoutLeftIcon}>
-                        <ClockIconSolid
-                          color="#F8EDFF"
-                          fill="#525CEB"
-                          size={32}
-                        />
-                      </View>
-                      <View style={{ marginLeft: 10 }}>
-                        <Text
-                          style={{
-                            fontSize: 17,
-                            fontWeight: 'bold',
-                            width: 170,
-                            color: 'white',
-                          }}
-                        >
-                          {item.name}
-                        </Text>
+                {customWorkout.map((item, index) => (
+                  <TouchableOpacity
+                    key={item.id}
+                    onPress={() => handleCustomWorkoutPress(item)}
+                  >
+                    <View key={index} style={styles.customUserWorkoutComponent}>
+                      <View style={styles.customUserWorkoutInfo}>
+                        <View style={styles.customUserWorkoutLeftIcon}>
+                          <ClockIconSolid
+                            color="#F8EDFF"
+                            fill="#525CEB"
+                            size={32}
+                          />
+                        </View>
+                        <View style={{ marginLeft: 10 }}>
+                          <Text
+                            style={{
+                              fontSize: 17,
+                              fontWeight: 'bold',
+                              width: 170,
+                              color: 'white',
+                            }}
+                          >
+                            {item?.name}
+                          </Text>
 
-                        <Text
-                          style={{
-                            marginTop: 4,
-                            fontSize: 13,
-                            color: '#e9a98e',
-                          }}
-                        >
-                          {item.excersises.length} exercises
-                        </Text>
+                          <Text
+                            style={{
+                              marginTop: 4,
+                              fontSize: 13,
+                              color: '#e9a98e',
+                            }}
+                          >
+                            {item?.exerciseCollectionDetails.length} exercises
+                          </Text>
+                        </View>
                       </View>
+                      <XMarkIconSolid
+                        color="#F8EDFF"
+                        fill="#F8EDFF"
+                        size={22}
+                      />
                     </View>
-                    <XMarkIconSolid color="#F8EDFF" fill="#F8EDFF" size={22} />
-                  </View>
+                  </TouchableOpacity>
                 ))}
               </View>
               <TouchableOpacity
