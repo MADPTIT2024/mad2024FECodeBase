@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { ColorSchemeName, useColorScheme } from "react-native";
 import { DefaultTheme } from "@react-navigation/native";
 import Colors from "@/constants/Colors";
+import MainStackNavigator from "./MainStackNavigator";
 
 export function RootNavigator() {
   let scheme: NonNullable<ColorSchemeName> = useColorScheme() || "light";
@@ -17,7 +18,7 @@ export function RootNavigator() {
   
   return (
     <NavigationContainer theme={theme}>
-      <AppNavigator />
+      <MainStackNavigator />
     </NavigationContainer>
   );
 }

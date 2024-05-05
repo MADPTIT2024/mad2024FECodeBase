@@ -23,6 +23,7 @@ import FontSize from '@/constants/FontSize';
 import AppText from '@/components/AppText/AppText';
 import IconButton from '@/components/IconButton/IconButton';
 import Spacing from '@/constants/Spacing';
+import { useNavigation } from '@react-navigation/native';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'PlanOverview'>;
 
@@ -31,6 +32,7 @@ const PlanOverviewScreen: React.FC<Props> = ({
   navigation: { goBack },
 }) => {
   const workout = route.params.workout;
+  const navigate = useNavigation();
   return (
     <Screen>
       <ScrollView
@@ -311,7 +313,9 @@ const PlanOverviewScreen: React.FC<Props> = ({
         }}
         colors={[`rgba(0,0,0,0)`, 'black']}
       >
-        <Button>Start Workout</Button>
+        <Button onPress={() =>
+                navigate.navigate('DoExercise')
+              }>Start Workout</Button>
       </LinearGradient>
     </Screen>
   );
