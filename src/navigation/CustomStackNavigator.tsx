@@ -5,6 +5,8 @@ import { AddExercises } from '@/screens/AddExercises/AddExercises';
 import { CustomWorkout } from '@/screens/Custom/CustomWorkout';
 import { DoWorkout } from '@/screens/DoWorkout/DoWorkout';
 import { StartWorkout } from '@/screens/StartWorkout/StartWorkout';
+import { RestScreen } from '@/screens/RestScreen/RestScreen';
+import CompletionScreen from '@/screens/CompleteScreen/CompletionScreen ';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +25,8 @@ export const CustomStackNavigator = () => {
       <Stack.Screen name="AddExercise" component={AddExercises} />
       <Stack.Screen name="DoWorkout" component={DoWorkout} />
       <Stack.Screen name="StartWorkout" component={StartWorkout} />
+      <Stack.Screen name="RestScreen" component={RestScreen} />
+      <Stack.Screen name="CompletionScreen" component={CompletionScreen} />
     </Stack.Navigator>
   );
 };

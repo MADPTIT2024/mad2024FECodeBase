@@ -2,23 +2,29 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Image, Button } from 'react-native';
 import Screen from '@/components/Screen/Screen';
 
-export function ExerciseElement({ exercise, timer, onFinish, onNext }) {
+interface ExerciseElementProps {
+  exercise: {
+    exercise: {
+      name: string;
+      animation: string;
+    };
+  };
+  timer: number;
+  onFinish: () => void;
+  onNext: () => void;
+}
+
+export function ExerciseElement({
+  exercise,
+  timer,
+  onFinish,
+  onNext,
+}: ExerciseElementProps) {
   const [countdown, setCountdown] = useState(timer);
   const [isCounting, setIsCounting] = useState(true);
-  // console.log(timer);
-
-  // useEffect(() => {
-  //   console.log('first');
-  //   console.log(idx);
-  //   console.log(timer);
-  //   setCountdown(timer);
-  //   setIsCounting(true);
-  // }, [idx, timer]);
-
-  console.log(countdown);
 
   useEffect(() => {
-    let interval;
+    let interval: NodeJS.Timeout;
     if (isCounting) {
       interval = setInterval(() => {
         setCountdown((prevCountdown) => {

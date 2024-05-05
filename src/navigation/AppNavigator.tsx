@@ -194,12 +194,6 @@ export function AppNavigator() {
       />
 
       <Tab.Screen
-        name="Story"
-        component={Story}
-        options={{ headerShown: false }}
-      />
-
-      <Tab.Screen
         name="Discovery"
         component={StackScreenDiscover}
         options={{ headerShown: false }}
