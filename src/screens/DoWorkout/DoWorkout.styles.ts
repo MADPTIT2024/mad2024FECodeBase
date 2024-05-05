@@ -132,13 +132,64 @@ export const styles = StyleSheet.create({
   },
 
   exerciseComponent: {
+    flex: 1,
+    width: '100%',
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 10,
   },
 
   exerciseInfo: {
     flexDirection: 'row',
+  },
+
+  itemName: {
+    color: '#B5C18E',
+    fontSize: 19,
+    fontWeight: '800',
+  },
+
+  customHeader: {
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 20,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  customElement: {
+    flex: 1,
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  modalBackground: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContainer: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+    width: '80%',
+  },
+  modalText: {
+    fontSize: 18,
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  modalButtonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  modalButton: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'black',
   },
 });

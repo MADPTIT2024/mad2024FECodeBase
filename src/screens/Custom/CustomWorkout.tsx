@@ -30,7 +30,7 @@ export function CustomWorkout({ navigation }: { navigation: any }) {
     const fetchData = async () => {
       try {
         const res = await axios.get(
-          `http://${NETWORK}:8080/api/exercise-collection`,
+          `http://${NETWORK}:8080/api/custom_collections/by-user/2`,
         );
         setCustomWorkout(res.data);
         console.log(res.data);
@@ -116,7 +116,7 @@ export function CustomWorkout({ navigation }: { navigation: any }) {
                               color: '#e9a98e',
                             }}
                           >
-                            {item?.exerciseCollectionDetails.length} exercises
+                            {item?.customeCollectionDetails.length} exercises
                           </Text>
                         </View>
                       </View>

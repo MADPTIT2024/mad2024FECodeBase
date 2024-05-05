@@ -64,8 +64,8 @@ export function StartWorkout({ navigation }: Props) {
           <RestScreen onSkip={handleSkipRest} onNext={handleNext} />
         ) : (
           <ExerciseElement
-            exercise={item.exerciseCollectionDetails[currentExerciseIndex]}
-            timer={item.exerciseCollectionDetails[currentExerciseIndex].timer}
+            exercise={item.customeCollectionDetails[currentExerciseIndex]}
+            timer={item.customeCollectionDetails[currentExerciseIndex].timer} ////////////////////////////////////
             onFinish={handleFinishExercise}
             onNext={handleNextExercise}
           />
