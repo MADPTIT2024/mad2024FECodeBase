@@ -37,13 +37,23 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
   },
   historyContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: screenWidth * 0.9,
-    marginVertical: 10,
-    backgroundColor: Colors.primary,
+    width: '90%',
+    marginTop: 20,
+    padding: 10,
+    backgroundColor: 'gray', // Set background color of history container
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  historyHeaderText: {
+    fontSize:30,
+    fontWeight: 'bold',
+    color: Colors.text, // Set text color
+    marginBottom: 10,
+    textAlign: 'center', // Align text to center
   },
   dataTabContainer: {
     flex: 1,
@@ -99,14 +109,15 @@ export const styles = StyleSheet.create({
     borderColor: 'black',
     padding: 10,
     textAlign: 'center', // Căn giữa văn bản
-    color:'white',
-    fontSize:15,
+    color: 'white',
+    fontSize: 15,
   },
   columnCell: {
-    padding: 10, // Khoảng cách nội dung trong ô
     fontWeight: 'bold',
-    fontSize:40,
-    color:'white'
+    fontSize: 15,
+    color: 'white',
+    textAlign: 'center', // Căn giữa văn bản
+    flexWrap: 'nowrap', // Cho phép văn bản xuống dòng khi cần thiết
   },
 
   borderRight: {

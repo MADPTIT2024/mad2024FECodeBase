@@ -43,8 +43,7 @@ export function DoWorkout({ navigation }: Props) {
   };
 
   const handleDeleteExercise = (exerciseItem: any) => {
-    console.log('first');
-    setSelectedExercise(exerciseItem); // Lưu thông tin của exercise vào state selectedExercise
+    setSelectedExercise(exerciseItem);
     setShowModal(true);
   };
 

@@ -15,7 +15,8 @@ import MusicList from '@/components/Music/MusicList';
 import { LogBox } from 'react-native';
 import { Audio } from 'expo-av';
 import Colors from '@/constants/Colors';
-// import FormMusic from '@/components/Music/FormMusic';
+import axios from 'axios';
+import { NETWORK } from '@/data/music';
 
 LogBox.ignoreLogs(['new NativeEventEmitter']);
 LogBox.ignoreAllLogs();
@@ -30,11 +31,20 @@ interface MusicSelectData {
   music: string;
 }
 
+interface Music {
+  id: number;
+  name: string;
+  urlImage: string;
+  urlMusic: string;
+  time: string;
+}
+
 interface MusicProps {
   visible: boolean;
   onClose: () => void;
   volumeMusic: number;
   music: (data: any) => void;
+  numberMusic: Music | null;
 }
 
 const Music: React.FC<MusicProps> = ({
@@ -42,6 +52,7 @@ const Music: React.FC<MusicProps> = ({
   onClose,
   volumeMusic,
   music,
+  numberMusic,
 }) => {
   const [isEnabled, setIsEnabled] = useState(true);
   const [showImages, setShowImages] = useState(true);
@@ -50,8 +61,9 @@ const Music: React.FC<MusicProps> = ({
   const [selectedMusic, setSelectedMusic] = useState<number | null>(null);
   const [selectedMusicIdWhenDisabled, setSelectedMusicIdWhenDisabled] =
     useState<number | null>(null);
-  const [dataSelect, setDataSelect] = useState<MusicSelectData | null>(null);
+  const [dataSelect, setDataSelect] = useState<any | null>(null);
   const [addMusic, setAddMusic] = useState(false);
+
   const toggleSwitch = async () => {
     setIsEnabled((previousState) => !previousState);
     setShowImages((previousState) => !previousState);
@@ -59,6 +71,10 @@ const Music: React.FC<MusicProps> = ({
       sound.stopAsync();
       sound.unloadAsync();
       setSound(undefined);
+      console.log(
+        'check selectedMusicIdWhenDisabled',
+        selectedMusicIdWhenDisabled,
+      );
       setSelectedMusicIdWhenDisabled(selectedMusic);
     } else if (isEnabled && sound) {
       await sound.playAsync();
@@ -80,12 +96,16 @@ const Music: React.FC<MusicProps> = ({
     handleToggleSwitch();
   }, [isEnabled]);
 
-  const handleSelect = async (data: MusicSelectData) => {
+  const handleSelect = async (data: Music) => {
     music(data);
     setSelectedMusic(data.id);
     setDataSelect(data);
+    if (sound) {
+      await sound.stopAsync();
+      setSound(undefined);
+    }
     if (isEnabled && data) {
-      await playSong(data.music);
+      await playSong(data);
     }
   };
 
@@ -97,19 +117,39 @@ const Music: React.FC<MusicProps> = ({
     setAddMusic(true);
   };
 
+  const [musicList, setMusicList] = useState<Music[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`http://${NETWORK}:8080/api/musics`);
+        setMusicList(res.data);
+        console.log(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
   const handleUpdateMusic = (data: MusicSelectData) => {};
 
-  const playSong = async (song: any) => {
+  const convertTimeStringToMillis = (timeString: string): number => {
+    const [minutes, seconds] = timeString.split(':').map(Number);
+    return (minutes * 60 + seconds) * 1000; // Chuyển đổi thành milliseconds
+  };
+
+  const playSong = async (song: Music) => {
     try {
       if (sound) {
         await sound.stopAsync();
         await sound.unloadAsync();
         setSound(undefined);
       }
-
+      console.log('song', song.urlMusic);
       console.log('Loading Sound');
       const { sound: newSound } = await Audio.Sound.createAsync(
-        require('@/assets/music/Unstoppable-Remix-Tiktok-Sia.mp3'),
+        { uri: song.urlMusic },
         {
           shouldPlay: false,
           volume: volumeMusic,
@@ -120,13 +160,18 @@ const Music: React.FC<MusicProps> = ({
       console.log('Playing Sound');
       await newSound.playAsync();
 
-      // Nếu bạn muốn lặp lại bài hát khi kết thúc, bạn có thể sử dụng sự kiện 'setOnPlaybackStatusUpdate'
-      // newSound.setOnPlaybackStatusUpdate(async (status) => {
-      //   if (status.didJustFinish) {
-      //     console.log('Song finished, replaying...');
-      //     await newSound.replayAsync();
-      //   }
-      // });
+      const songDuration = convertTimeStringToMillis(song.time);
+      let currentTime = 0;
+
+      const interval = setInterval(() => {
+        currentTime += 1000;
+        if (currentTime >= songDuration) {
+          console.log('Song finished, replaying...');
+          clearInterval(interval);
+          newSound.replayAsync();
+          currentTime = 0;
+        }
+      }, 1000);
     } catch (error) {
       console.error('Lỗi khi phát nhạc:', error);
     }
@@ -143,9 +188,10 @@ const Music: React.FC<MusicProps> = ({
       visible &&
       showImages &&
       musiclist.length > 0 &&
+      numberMusic !== null &&
       selectedMusic === null
     ) {
-      handleSelect(musiclist[0]);
+      handleSelect(numberMusic);
     }
 
     if (isCloseButton && sound) {
@@ -191,22 +237,22 @@ const Music: React.FC<MusicProps> = ({
               showsVerticalScrollIndicator={false}
               showsHorizontalScrollIndicator={false}
             >
-              {musiclist.map((music) => (
-                <View key={music.id}>
-                  <MusicList
-                    musiclist={music}
-                    onSelect={handleSelect}
-                    isSelected={selectedMusic === music.id}
-                  />
-                </View>
-              ))}
+              {musicList.length !== 0 &&
+                musicList.map((item, index) => (
+                  <View key={item.id}>
+                    <MusicList
+                      music={item}
+                      onSelect={handleSelect}
+                      isSelected={selectedMusic === item.id}
+                    />
+                  </View>
+                ))}
             </ScrollView>
           )}
 
           <TouchableOpacity
             style={{
               flexDirection: 'row',
-              justifyContent: 'space-between',
               width: width * 0.8,
             }}
           >
@@ -219,14 +265,14 @@ const Music: React.FC<MusicProps> = ({
             >
               <Text style={styles.doneButtonText}>Done</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+            {/* <TouchableOpacity>
               <TouchableOpacity
                 onPress={() => addButton()}
                 style={styles.doneButton}
               >
                 <Text style={styles.doneButtonText}>+ Add</Text>
               </TouchableOpacity>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </TouchableOpacity>
           {/* {addMusic && <FormMusic updateMusic={handleUpdateMusic}></FormMusic>} */}
         </View>
@@ -255,6 +301,7 @@ const styles = StyleSheet.create({
   music: {
     flex: 1,
     width: width,
+    top: 20,
   },
 
   textMusic: {
@@ -280,14 +327,15 @@ const styles = StyleSheet.create({
 
   doneButton: {
     backgroundColor: 'rgba(34, 34, 237, 0.88)',
-    width: width * 0.3,
+    height: 50,
+    width: width * 0.8,
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',
-    bottom: 20,
+    marginBottom: 40,
   },
 
   doneButtonText: {

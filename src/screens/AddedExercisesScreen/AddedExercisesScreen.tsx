@@ -1,25 +1,67 @@
-import React from 'react';
-import Screen from '@/components/Screen/Screen';
+import React, { useState } from 'react';
 import {
-  StyleSheet,
   Text,
   View,
-  SafeAreaView,
   Image,
   Pressable,
   ScrollView,
-  Alert,
+  TextInput,
   Modal,
-  FlatList,
+  Button,
 } from 'react-native';
-import { styles } from './AddedExercisesScreen.style';
 import { Ionicons } from '@expo/vector-icons';
-import { PlusCircleIcon as PlusCircleIconOutline } from 'react-native-heroicons/outline';
 import { useNavigation } from '@react-navigation/native';
+import { TrashIcon } from 'react-native-heroicons/outline';
+import Screen from '@/components/Screen/Screen';
+import { styles } from './AddedExercisesScreen.style';
+import { useExerciseContext } from '../../context/ExerciseContext';
+import axios from 'axios';
+import { NETWORK } from '../../data/fitness';
 
-const AddedExercisesScreen = ({ route }) => {
-  const { addedExercises } = route.params;
+const AddedExercisesScreen = () => {
+  const { addedExercises, setAddedExercises } = useExerciseContext();
   const navigation = useNavigation();
+  const [showModal, setShowModal] = useState(false);
+  const [exerciseName, setExerciseName] = useState('');
+
+  const handleDeleteExercise = (index) => {
+    const updatedList = [...addedExercises];
+    updatedList.splice(index, 1);
+    setAddedExercises(updatedList);
+  };
+
+  const handleSave = () => {
+    setShowModal(true);
+  };
+
+  const handleModalSave = async () => {
+    const formattedExercises = addedExercises.map(({ id }) => ({
+      exercise: { id },
+    }));
+    const user = { id: 2 };
+    const data = {
+      customeCollectionDetails: formattedExercises,
+      user,
+      name: exerciseName,
+    };
+    console.log(data);
+    try {
+      const res = axios.post(`http://${NETWORK}:8080/api/custom_collections`, {
+        customeCollectionDetails: formattedExercises,
+        user,
+        name: exerciseName,
+      });
+      console.log(res.data);
+      navigation.navigate('CustomWorkout');
+    } catch (error) {
+      console.log(error);
+    }
+    setShowModal(false);
+  };
+
+  const handleCancel = () => {
+    setShowModal(false);
+  };
 
   return (
     <Screen style={{ flex: 1 }}>
@@ -28,31 +70,29 @@ const AddedExercisesScreen = ({ route }) => {
         style={{ backgroundColor: 'black' }}
       >
         <View style={styles.discoverHeader}>
-          <Ionicons
-            onPress={() => navigation.goBack()}
-            name="arrow-back-outline"
-            size={28}
-            color="white"
-          />
-
-          <Text style={styles.headerText}>Add exercises</Text>
+          <View style={{ display: 'flex', flexDirection: 'row', gap: 10 }}>
+            <Ionicons
+              onPress={() => navigation.goBack()}
+              name="arrow-back-outline"
+              size={28}
+              color="white"
+            />
+            <Text style={styles.headerText}>Added Exercises</Text>
+          </View>
+          <Pressable onPress={handleSave} style={{ padding: 10 }}>
+            <Text style={{ color: 'white', fontSize: 18 }}>Save</Text>
+          </Pressable>
         </View>
 
         <Text>List of Added Exercises:</Text>
         <View style={{ marginTop: 30, gap: 20 }}>
-          {addedExercises?.map((item, index) => (
-            <Pressable
-              key={index}
-              style={styles.exerciseComponent}
-              // onPress={() => openModalWithExercise(item)}
-            >
-              {/* <PlusCircleIconOutline color="#F8EDFF" size={25} /> */}
+          {addedExercises.map((item, index) => (
+            <Pressable key={index} style={styles.exerciseComponent}>
               <View style={styles.exerciseInfo}>
                 <Image
                   style={{ width: 70, height: 70 }}
                   source={{ uri: item?.animation }}
                 />
-
                 <View style={{ marginLeft: 10 }}>
                   <Text
                     style={{
@@ -64,7 +104,6 @@ const AddedExercisesScreen = ({ route }) => {
                   >
                     {item.name}
                   </Text>
-
                   <Text
                     style={{ marginTop: 4, fontSize: 13, color: '#e9a98e' }}
                   >
@@ -72,10 +111,40 @@ const AddedExercisesScreen = ({ route }) => {
                   </Text>
                 </View>
               </View>
+              <TrashIcon
+                color="#F8EDFF"
+                fill="#525CEB"
+                size={32}
+                onPress={() => handleDeleteExercise(index)}
+              />
             </Pressable>
           ))}
         </View>
       </ScrollView>
+
+      {/* Modal */}
+      <Modal
+        visible={showModal}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => setShowModal(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Enter exercise name:</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Exercise name"
+              value={exerciseName}
+              onChangeText={(text) => setExerciseName(text)}
+            />
+            <View style={styles.modalButtons}>
+              <Button title="Save" onPress={handleModalSave} />
+              <Button title="Cancel" onPress={handleCancel} />
+            </View>
+          </View>
+        </View>
+      </Modal>
     </Screen>
   );
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 type CustomExerciseProps = {
   setModalVisible: (visible: boolean) => void;
@@ -14,6 +15,8 @@ const CustomExercise: React.FC<CustomExerciseProps> = ({
   modalVisible,
   addToAddedExercises,
 }) => {
+  const navigation = useNavigation();
+
   const closeModal = () => {
     setModalVisible(false);
   };
@@ -21,6 +24,7 @@ const CustomExercise: React.FC<CustomExerciseProps> = ({
   const addToAdded = () => {
     addToAddedExercises(exercise);
     setModalVisible(false);
+    navigation.navigate('AddedExercisesScreen');
   };
 
   return (

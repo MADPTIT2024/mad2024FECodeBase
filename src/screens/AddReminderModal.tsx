@@ -154,6 +154,7 @@ const AddReminderModal: React.FC<AddReminderModalProps> = ({
           mode="time"
           onConfirm={handleConfirm}
           onCancel={handleCancel}
+          textColor="#000000"
         />
       </View>
     );

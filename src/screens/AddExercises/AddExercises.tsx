@@ -1,5 +1,3 @@
-// AddExercises.tsx
-
 import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
@@ -21,6 +19,7 @@ import CustomExercise from '@/components/CustomExercise/CustomExercise';
 import Screen from '@/components/Screen/Screen';
 import axios from 'axios';
 import { NETWORK } from '../../data/fitness';
+import { useExerciseContext } from '../../context/ExerciseContext';
 
 export function AddExercises() {
   const route = useRoute();
@@ -29,7 +28,7 @@ export function AddExercises() {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedExercise, setSelectedExercise] = useState(null);
   const [exercises, setExercises] = useState([]);
-  const [addedExercises, setAddedExercises] = useState([]);
+  const { setAddedExercises } = useExerciseContext(); // Use setAddedExercises from context
 
   const openModalWithExercise = (exercise: any) => {
     setSelectedExercise(exercise);
@@ -41,19 +40,13 @@ export function AddExercises() {
       try {
         const res = await axios.get(`http://${NETWORK}:8080/api/exercises`);
         setExercises(res.data);
-        console.log(res.data);
+        // console.log(res.data);
       } catch (error) {
         console.log(error);
       }
     };
     fetchData();
   }, []);
-
-  useEffect(() => {
-    if (addedExercises.length > 0) {
-      navigation.navigate('AddedExercisesScreen', { addedExercises });
-    }
-  }, [addedExercises]);
 
   return (
     <Screen style={{ flex: 1 }}>

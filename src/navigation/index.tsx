@@ -4,7 +4,8 @@ import { ColorSchemeName, useColorScheme } from 'react-native';
 import { DefaultTheme } from '@react-navigation/native';
 import Colors from '@/constants/Colors';
 import { Login } from '@/screens';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function RootNavigator() {
   let scheme: NonNullable<ColorSchemeName> = useColorScheme() || 'light';
@@ -18,17 +19,33 @@ export function RootNavigator() {
   };
 
   const [loginRoot, setLoginRoot] = useState(false);
+  const [userID, setUserID] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchUserID = async () => {
+      const storedUserID = await AsyncStorage.getItem('userID');
+      setUserID(storedUserID);
+    };
+
+    fetchUserID();
+  }, []);
+
+  useEffect(() => {
+    if (userID) {
+      setLoginRoot(true);
+    } else {
+      setLoginRoot(false);
+    }
+  }, [userID]);
 
   function handleLoginRoot(loggedIn: boolean) {
-    // Nhận giá trị `true` từ component con và thực hiện các thao tác cần thiết ở đây
     console.log('User logged in:', loggedIn);
     setLoginRoot(loggedIn);
   }
 
   return (
     <NavigationContainer theme={theme}>
-      {!loginRoot && <Login loginRoot={handleLoginRoot} />}
-      {loginRoot && <AppNavigator />}
+      {loginRoot ? <AppNavigator /> : <Login loginRoot={handleLoginRoot} />}
     </NavigationContainer>
   );
 }

@@ -2,12 +2,21 @@ import { RootStackParamList } from '@/common/types';
 import Button from '@/components/Button/Button';
 import Screen from '@/components/Screen/Screen';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
 import React, { useState } from 'react';
 import { ChevronLeftIcon } from 'react-native-heroicons/solid';
+import IconButton from '@/components/IconButton/IconButton';
+import Spacing from '@/constants/Spacing';
 
+const { height, width } = Dimensions.get('window');
 type Props = NativeStackScreenProps<RootStackParamList, 'Favorites'>;
-const Favorites: React.FC<Props> = ({ navigation: { goBack } }) => {
+const Favorites: React.FC<Props> = ({ navigation }) => {
   const [activeItem, setActiveItem] = useState<string>('Item1'); // State lưu trạng thái của item được chọn
 
   // Hàm xử lý khi nhấn vào item
@@ -19,9 +28,12 @@ const Favorites: React.FC<Props> = ({ navigation: { goBack } }) => {
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.header}>
-        <ChevronLeftIcon color={'white'} size={20} onPress={() => goBack()} />
+        <IconButton
+          onPress={() => navigation.navigate('Personality')}
+          name="chevron-back"
+        />
         <Text style={styles.textHeader}>Favorites</Text>
-        <View />
+        <Text />
       </View>
 
       {/* Dưới thanh header */}
@@ -60,8 +72,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    height: 70,
+    paddingHorizontal: Spacing.padding.base,
+    marginTop: Spacing.margin.xlg,
+    height: height * 0.1,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
   },
