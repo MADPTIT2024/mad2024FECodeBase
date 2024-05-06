@@ -54,6 +54,6 @@ export const styles = StyleSheet.create({
   },
   toolbarText: {
     marginLeft: 5,
-    color: 'black',
+    color: 'white',
   },
 });

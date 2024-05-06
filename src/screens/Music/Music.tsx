@@ -15,7 +15,8 @@ import MusicList from '@/components/Music/MusicList';
 import { LogBox } from 'react-native';
 import { Audio } from 'expo-av';
 import Colors from '@/constants/Colors';
-// import FormMusic from '@/components/Music/FormMusic';
+import axios from 'axios';
+import { NETWORK } from '@/data/music';
 
 LogBox.ignoreLogs(['new NativeEventEmitter']);
 LogBox.ignoreAllLogs();
@@ -28,6 +29,14 @@ interface MusicSelectData {
   name: string;
   image: ImageSourcePropType;
   music: string;
+}
+
+interface Music {
+  id: number;
+  name: string;
+  urlImage: string;
+  urlMusic: string;
+  time: string;
 }
 
 interface MusicProps {
@@ -50,8 +59,9 @@ const Music: React.FC<MusicProps> = ({
   const [selectedMusic, setSelectedMusic] = useState<number | null>(null);
   const [selectedMusicIdWhenDisabled, setSelectedMusicIdWhenDisabled] =
     useState<number | null>(null);
-  const [dataSelect, setDataSelect] = useState<MusicSelectData | null>(null);
+  const [dataSelect, setDataSelect] = useState<any | null>(null);
   const [addMusic, setAddMusic] = useState(false);
+
   const toggleSwitch = async () => {
     setIsEnabled((previousState) => !previousState);
     setShowImages((previousState) => !previousState);
@@ -59,6 +69,10 @@ const Music: React.FC<MusicProps> = ({
       sound.stopAsync();
       sound.unloadAsync();
       setSound(undefined);
+      console.log(
+        'check selectedMusicIdWhenDisabled',
+        selectedMusicIdWhenDisabled,
+      );
       setSelectedMusicIdWhenDisabled(selectedMusic);
     } else if (isEnabled && sound) {
       await sound.playAsync();
@@ -80,12 +94,12 @@ const Music: React.FC<MusicProps> = ({
     handleToggleSwitch();
   }, [isEnabled]);
 
-  const handleSelect = async (data: MusicSelectData) => {
+  const handleSelect = async (data: Music) => {
     music(data);
     setSelectedMusic(data.id);
     setDataSelect(data);
     if (isEnabled && data) {
-      await playSong(data.music);
+      await playSong(data);
     }
   };
 
@@ -97,19 +111,34 @@ const Music: React.FC<MusicProps> = ({
     setAddMusic(true);
   };
 
+  const [musicList, setMusicList] = useState<Music[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`http://${NETWORK}:8080/api/musics`);
+        setMusicList(res.data);
+        console.log(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
   const handleUpdateMusic = (data: MusicSelectData) => {};
 
-  const playSong = async (song: any) => {
+  const playSong = async (song: Music) => {
     try {
       if (sound) {
         await sound.stopAsync();
         await sound.unloadAsync();
         setSound(undefined);
       }
-
+      console.log('song', song.urlMusic);
       console.log('Loading Sound');
       const { sound: newSound } = await Audio.Sound.createAsync(
-        require('@/assets/music/Unstoppable-Remix-Tiktok-Sia.mp3'),
+        { uri: song.urlMusic },
         {
           shouldPlay: false,
           volume: volumeMusic,
@@ -145,7 +174,7 @@ const Music: React.FC<MusicProps> = ({
       musiclist.length > 0 &&
       selectedMusic === null
     ) {
-      handleSelect(musiclist[0]);
+      handleSelect(musicList[0]);
     }
 
     if (isCloseButton && sound) {
@@ -191,15 +220,16 @@ const Music: React.FC<MusicProps> = ({
               showsVerticalScrollIndicator={false}
               showsHorizontalScrollIndicator={false}
             >
-              {musiclist.map((music) => (
-                <View key={music.id}>
-                  <MusicList
-                    musiclist={music}
-                    onSelect={handleSelect}
-                    isSelected={selectedMusic === music.id}
-                  />
-                </View>
-              ))}
+              {musicList.length !== 0 &&
+                musicList.map((item, index) => (
+                  <View key={item.id}>
+                    <MusicList
+                      music={item}
+                      onSelect={handleSelect}
+                      isSelected={selectedMusic === item.id}
+                    />
+                  </View>
+                ))}
             </ScrollView>
           )}
 
