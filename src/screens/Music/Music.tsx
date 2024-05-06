@@ -253,7 +253,6 @@ const Music: React.FC<MusicProps> = ({
           <TouchableOpacity
             style={{
               flexDirection: 'row',
-              justifyContent: 'space-between',
               width: width * 0.8,
             }}
           >
@@ -266,14 +265,14 @@ const Music: React.FC<MusicProps> = ({
             >
               <Text style={styles.doneButtonText}>Done</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+            {/* <TouchableOpacity>
               <TouchableOpacity
                 onPress={() => addButton()}
                 style={styles.doneButton}
               >
                 <Text style={styles.doneButtonText}>+ Add</Text>
               </TouchableOpacity>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </TouchableOpacity>
           {/* {addMusic && <FormMusic updateMusic={handleUpdateMusic}></FormMusic>} */}
         </View>
@@ -302,6 +301,7 @@ const styles = StyleSheet.create({
   music: {
     flex: 1,
     width: width,
+    top: 20,
   },
 
   textMusic: {
@@ -327,14 +327,15 @@ const styles = StyleSheet.create({
 
   doneButton: {
     backgroundColor: 'rgba(34, 34, 237, 0.88)',
-    width: width * 0.3,
+    height: 50,
+    width: width * 0.8,
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',
-    bottom: 20,
+    marginBottom: 40,
   },
 
   doneButtonText: {

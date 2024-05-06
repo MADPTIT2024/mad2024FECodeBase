@@ -121,7 +121,7 @@ const Reminder: React.FC<Props> = ({ navigation }) => {
                 marginTop: 10,
                 flexDirection: 'row',
                 backgroundColor: Colors.primary,
-                height: height * 0.15,
+                height: height * 0.13,
               }}
             >
               <TouchableOpacity style={{ width: tempWidth }}>
@@ -137,7 +137,7 @@ const Reminder: React.FC<Props> = ({ navigation }) => {
                   <TouchableOpacity onPress={() => editReminderTime(index)}>
                     <Text
                       style={{
-                        color: switchStates[index] ? Colors.primary : '#ccc',
+                        color: switchStates[index] ? '#ccc' : 'grey',
                         marginLeft: 5,
                         fontSize: 30,
                       }}
@@ -167,6 +167,7 @@ const Reminder: React.FC<Props> = ({ navigation }) => {
                       height: 1,
                       backgroundColor: 'white',
                       width: width * 0.95,
+                      marginTop: 5,
                     }}
                   ></View>
                 </View>
@@ -182,7 +183,7 @@ const Reminder: React.FC<Props> = ({ navigation }) => {
                 >
                   <Text
                     style={{
-                      color: switchStates[index] ? Colors.primary : '#ccc',
+                      color: switchStates[index] ? '#ccc' : 'grey',
                     }}
                   >
                     Repeat remind me
@@ -190,7 +191,7 @@ const Reminder: React.FC<Props> = ({ navigation }) => {
                   <TouchableOpacity onPress={() => editReminderDay(index)}>
                     <Text
                       style={{
-                        color: switchStates[index] ? Colors.primary : '#ccc',
+                        color: switchStates[index] ? '#ccc' : 'grey',
                       }}
                     >
                       {reminder.days.length === 7
@@ -290,7 +291,7 @@ const styles = StyleSheet.create({
 
   formDelete: {
     backgroundColor: 'red',
-    height: height * 0.15,
+    height: height * 0.13,
     width: width * 0.25,
     alignItems: 'center',
     justifyContent: 'center',
