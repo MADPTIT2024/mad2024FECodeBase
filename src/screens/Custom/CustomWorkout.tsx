@@ -25,6 +25,7 @@ import { XMarkIcon as XMarkIconSolid } from 'react-native-heroicons/solid';
 import Screen from '@/components/Screen/Screen';
 import axios from 'axios';
 import { NETWORK } from '../../data/fitness';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function CustomWorkout({ navigation }: { navigation: any }) {
   // const FitnessData = fitness;
@@ -35,8 +36,10 @@ export function CustomWorkout({ navigation }: { navigation: any }) {
 
   const fetchData = async () => {
     try {
+      const userID = await AsyncStorage.getItem('userID');
+      console.log(`user id: ${userID}`);
       const res = await axios.get(
-        `http://${NETWORK}:8080/api/custom_collections/by-user/2`,
+        `http://${NETWORK}:8080/api/custom_collections/by-user/${userID}`,
       );
       setCustomWorkout(res.data);
 

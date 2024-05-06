@@ -1,1 +1,1 @@
-export const NETWORK: string = '192.168.23.6';
+export const NETWORK: string = '192.168.75.105';

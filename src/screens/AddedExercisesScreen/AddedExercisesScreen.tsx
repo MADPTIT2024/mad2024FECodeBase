@@ -17,6 +17,7 @@ import { styles } from './AddedExercisesScreen.style';
 import { useExerciseContext } from '../../context/ExerciseContext';
 import axios from 'axios';
 import { NETWORK } from '../../data/fitness';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const AddedExercisesScreen = () => {
   const { addedExercises, setAddedExercises } = useExerciseContext();
@@ -35,10 +36,11 @@ const AddedExercisesScreen = () => {
   };
 
   const handleModalSave = async () => {
+    const userID = await AsyncStorage.getItem('userID');
     const formattedExercises = addedExercises.map(({ id }) => ({
       exercise: { id },
     }));
-    const user = { id: 2 };
+    const user = { id: userID };
     const data = {
       customeCollectionDetails: formattedExercises,
       user,
