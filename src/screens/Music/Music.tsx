@@ -44,6 +44,7 @@ interface MusicProps {
   onClose: () => void;
   volumeMusic: number;
   music: (data: any) => void;
+  numberMusic: Music | null;
 }
 
 const Music: React.FC<MusicProps> = ({
@@ -51,6 +52,7 @@ const Music: React.FC<MusicProps> = ({
   onClose,
   volumeMusic,
   music,
+  numberMusic,
 }) => {
   const [isEnabled, setIsEnabled] = useState(true);
   const [showImages, setShowImages] = useState(true);
@@ -98,6 +100,10 @@ const Music: React.FC<MusicProps> = ({
     music(data);
     setSelectedMusic(data.id);
     setDataSelect(data);
+    if (sound) {
+      await sound.stopAsync();
+      setSound(undefined);
+    }
     if (isEnabled && data) {
       await playSong(data);
     }
@@ -128,6 +134,11 @@ const Music: React.FC<MusicProps> = ({
 
   const handleUpdateMusic = (data: MusicSelectData) => {};
 
+  const convertTimeStringToMillis = (timeString: string): number => {
+    const [minutes, seconds] = timeString.split(':').map(Number);
+    return (minutes * 60 + seconds) * 1000; // Chuyển đổi thành milliseconds
+  };
+
   const playSong = async (song: Music) => {
     try {
       if (sound) {
@@ -149,13 +160,18 @@ const Music: React.FC<MusicProps> = ({
       console.log('Playing Sound');
       await newSound.playAsync();
 
-      // Nếu bạn muốn lặp lại bài hát khi kết thúc, bạn có thể sử dụng sự kiện 'setOnPlaybackStatusUpdate'
-      // newSound.setOnPlaybackStatusUpdate(async (status) => {
-      //   if (status.didJustFinish) {
-      //     console.log('Song finished, replaying...');
-      //     await newSound.replayAsync();
-      //   }
-      // });
+      const songDuration = convertTimeStringToMillis(song.time);
+      let currentTime = 0;
+
+      const interval = setInterval(() => {
+        currentTime += 1000;
+        if (currentTime >= songDuration) {
+          console.log('Song finished, replaying...');
+          clearInterval(interval);
+          newSound.replayAsync();
+          currentTime = 0;
+        }
+      }, 1000);
     } catch (error) {
       console.error('Lỗi khi phát nhạc:', error);
     }
@@ -172,9 +188,10 @@ const Music: React.FC<MusicProps> = ({
       visible &&
       showImages &&
       musiclist.length > 0 &&
+      numberMusic !== null &&
       selectedMusic === null
     ) {
-      handleSelect(musicList[0]);
+      handleSelect(numberMusic);
     }
 
     if (isCloseButton && sound) {

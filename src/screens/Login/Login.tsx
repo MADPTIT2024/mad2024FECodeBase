@@ -112,9 +112,10 @@ export function Login({ loginRoot }: LoginProps) {
 
       // Lấy giá trị từ AsyncStorage
       const userID = await AsyncStorage.getItem('userID');
-
       console.log('User ID:', userID);
-      loginRoot(true);
+
+      await AsyncStorage.setItem('musicID', '1');
+      const musicID = loginRoot(true);
       console.log('Đăng nhập thành công:');
       Alert.alert('Success', 'Login successful');
     } catch (error) {

@@ -23,13 +23,6 @@ import axios from 'axios';
 import { NETWORK } from '@/data/music';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// interface MusicSelectData {
-//   id: number;
-//   name: string;
-//   image: ImageSourcePropType;
-//   music: string;
-// }
-
 export function WorkoutSetting() {
   const navigation = useNavigation();
 
@@ -125,7 +118,7 @@ export function WorkoutSetting() {
     setDataSelect(data);
   };
 
-  const selectedMusic =
+  var numberMusic: Music | null =
     dataSelect || (musicList.length > 0 ? musicList[0] : null);
 
   return (
@@ -190,9 +183,9 @@ export function WorkoutSetting() {
                   >
                     <Image
                       style={styles.imageCoach}
-                      source={{ uri: selectedMusic?.urlImage }}
+                      source={{ uri: numberMusic?.urlImage }}
                     />
-                    <Text style={styles.imageText}>{selectedMusic?.name}</Text>
+                    <Text style={styles.imageText}>{numberMusic?.name}</Text>
                   </View>
 
                   <Text style={styles.imageArrow}>&gt;</Text>
@@ -220,6 +213,7 @@ export function WorkoutSetting() {
               visible={modalVisible}
               volumeMusic={volumeMusic}
               music={handleMusic}
+              numberMusic={numberMusic}
               onClose={() => setModalVisible(false)}
             />
           </TouchableWithoutFeedback>
