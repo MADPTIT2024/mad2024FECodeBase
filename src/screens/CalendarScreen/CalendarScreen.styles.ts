@@ -99,14 +99,15 @@ export const styles = StyleSheet.create({
     borderColor: 'black',
     padding: 10,
     textAlign: 'center', // Căn giữa văn bản
-    color:'white',
-    fontSize:15,
+    color: 'white',
+    fontSize: 15,
   },
   columnCell: {
-    padding: 10, // Khoảng cách nội dung trong ô
     fontWeight: 'bold',
-    fontSize:40,
-    color:'white'
+    fontSize: 15,
+    color: 'white',
+    textAlign: 'center', // Căn giữa văn bản
+    flexWrap: 'nowrap', // Cho phép văn bản xuống dòng khi cần thiết
   },
 
   borderRight: {
