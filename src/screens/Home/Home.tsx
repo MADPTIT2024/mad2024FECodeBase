@@ -20,10 +20,34 @@ import CategoryList from '@/components/CategoryList/CategoryList';
 import SectionHeader from '@/components/SectionHeader/SectionHeader';
 import Workout from '@/components/Workout/Workout';
 import Rating from 'react-native-easy-rating';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { useCallback, useEffect, useState } from 'react';
+import axios from 'axios';
+import { NETWORK } from '@/data/fitness';
 
 export function Home() {
   const navigation = useNavigation();
+  const [workoutList, setWorkoutList] = useState([]);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`http://${NETWORK}:8080/api/exercises`);
+      setWorkoutList(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchData();
+    }, []),
+  );
 
   return (
     <Screen>
@@ -106,8 +130,6 @@ export function Home() {
 
         <CategoryList /> */}
 
-
-
         <SectionHeader title="Featured Workouts" />
         <ScrollView
           horizontal
@@ -116,18 +138,18 @@ export function Home() {
           pagingEnabled
           snapToInterval={270 + Spacing.margin.lg}
         >
-          {workouts.map((workout) => (
+          {workoutList.map((workout) => (
             <Workout
               onPress={() =>
                 navigation.navigate('PlanOverview', { workout: workout })
               }
               workout={workout}
-              key={workout.id}
+              key={workout}
             />
           ))}
         </ScrollView>
         <SectionHeader title="Trending Plans" />
-        {workouts.map((plan) => (
+        {workoutList.map((plan) => (
           <TouchableOpacity
             style={{
               padding: Spacing.padding.sm,
@@ -142,7 +164,7 @@ export function Home() {
             key={plan.id}
           >
             <Image
-              source={plan.image}
+              source={{ uri: plan.animation }}
               style={{
                 width: 100,
                 height: 100,

@@ -137,12 +137,12 @@ export function AppNavigator() {
             ) : (
               <HomeUnactive color="white" size={20} />
             );
-          } else if (route.name === 'Discovery') {
-            iconSource = focused ? (
-              <DiscoverActive color="white" fill="blue" size={20} />
-            ) : (
-              <DiscoverUnactive color="white" size={20} />
-            );
+            // } else if (route.name === 'Discovery') {
+            //   iconSource = focused ? (
+            //     <DiscoverActive color="white" fill="blue" size={20} />
+            //   ) : (
+            //     <DiscoverUnactive color="white" size={20} />
+            //   );
           } else if (route.name === 'Calendar') {
             iconSource = focused ? (
               <CalendarActive color="white" fill="blue" size={20} />
@@ -194,11 +194,11 @@ export function AppNavigator() {
         options={{ headerShown: false }}
       />
 
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Discovery"
         component={StackScreenDiscover}
         options={{ headerShown: false }}
-      />
+      /> */}
       <Tab.Screen
         name="Custom"
         component={CustomStackNavigator}
