@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { styles } from './RestScreen.style';
 
 type RestScreenProps = {
   onSkip: () => void;
@@ -17,7 +18,7 @@ export function RestScreen({ onSkip, onNext }: RestScreenProps) {
         setCountdown((prevCountdown) => {
           if (prevCountdown === 0) {
             clearInterval(interval);
-            onNext(); // Gọi hàm onNext khi countdown đếm ngược về 0
+            onNext();
             return 10;
           }
           return prevCountdown - 1;
@@ -37,15 +38,25 @@ export function RestScreen({ onSkip, onNext }: RestScreenProps) {
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Rest Screen</Text>
-      <Text style={{ color: 'white' }}>Time left: {countdown} seconds</Text>
-      <Button
-        title={isCounting ? 'Pause' : 'Resume'}
-        onPress={handleToggleCounting}
-      />
-      <Button title="Skip Rest" onPress={onSkip} />
-      <Button title="Extend Rest (+20s)" onPress={handleExtendRest} />
+    <View style={styles.container}>
+      <Text style={styles.restText}>REST</Text>
+      <Text style={styles.timeLeft}>
+        00: {countdown < 10 ? 0 : ''}
+        {countdown}
+      </Text>
+      <View style={styles.buttons}>
+        {/* <TouchableOpacity style={styles.button} onPress={handleToggleCounting}>
+          <Text style={styles.buttonText}>
+            {isCounting ? 'Pause' : 'Resume'}
+          </Text>
+        </TouchableOpacity> */}
+        <TouchableOpacity style={styles.button} onPress={handleExtendRest}>
+          <Text style={styles.buttonText}>+20s</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={onSkip}>
+          <Text style={styles.buttonText}>Skip Rest</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }

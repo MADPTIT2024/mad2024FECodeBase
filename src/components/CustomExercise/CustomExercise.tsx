@@ -1,21 +1,30 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 type CustomExerciseProps = {
   setModalVisible: (visible: boolean) => void;
   exercise: any;
   modalVisible: boolean;
+  addToAddedExercises: (exercise: any) => void;
 };
 
 const CustomExercise: React.FC<CustomExerciseProps> = ({
   setModalVisible,
   exercise,
   modalVisible,
+  addToAddedExercises,
 }) => {
-  // console.log(exercise);
+  const navigation = useNavigation();
 
   const closeModal = () => {
     setModalVisible(false);
+  };
+
+  const addToAdded = () => {
+    addToAddedExercises(exercise);
+    setModalVisible(false);
+    navigation.navigate('AddedExercisesScreen');
   };
 
   return (
@@ -28,22 +37,14 @@ const CustomExercise: React.FC<CustomExerciseProps> = ({
               resizeMode: 'stretch',
               borderRadius: 10,
               borderColor: '#948979',
-              borderWidth: 30,
+              borderWidth: 5,
             }}
-            source={{ uri: exercise.image }}
+            source={{ uri: exercise.animation }}
           />
           <View style={styles.exerciseContainer}>
             <View style={styles.exerciseInfo}>
               <Text style={styles.exerciseText}>{exercise.name}</Text>
-              <Text style={styles.exerciseDesc}>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa,
-                excepturi temporibus porro corrupti, non est sequi repellat
-                illum nihil rerum quae obcaecati deleniti dolorem numquam. Alias
-                facilis autem expedita laborum? Sit maxime temporibus hic
-                nesciunt accusantium minus aut illum, sunt voluptate, harum
-                facere natus odit commodi dicta nihil soluta, explicabo porro
-                velit autem delectus expedita?
-              </Text>
+              <Text style={styles.exerciseDesc}>{exercise.detail}</Text>
             </View>
             <View style={styles.exerciseButtons}>
               <Pressable
@@ -52,9 +53,12 @@ const CustomExercise: React.FC<CustomExerciseProps> = ({
               >
                 <Text style={{ fontWeight: '900' }}>CANCEL</Text>
               </Pressable>
-              <View style={[styles.exerciseButton, styles.exerciseButtonAdd]}>
+              <Pressable
+                onPress={addToAdded}
+                style={[styles.exerciseButton, styles.exerciseButtonAdd]}
+              >
                 <Text style={{ fontWeight: '900', color: 'white' }}>ADD</Text>
-              </View>
+              </Pressable>
             </View>
           </View>
         </View>

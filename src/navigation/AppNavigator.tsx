@@ -32,6 +32,7 @@ import Profile from '@/screens/Profile';
 import Favorites from '@/screens/Favorites';
 import Language from '@/screens/Language';
 import { CustomStackNavigator } from './CustomStackNavigator';
+import AddStackNavigator from './AddStackNavigator';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator<RootStackParamList>();

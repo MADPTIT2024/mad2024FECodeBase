@@ -3,12 +3,9 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: 'column',
-    backgroundColor: 'black',
+    flex: 1,
     // marginTop: 50,
-    // flexGrow: 1,
-    // flex: 1,
     // justifyContent: 'center',
     // alignItems: 'center',
   },
@@ -23,9 +20,11 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 20,
     marginLeft: 10,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flex: 1,
     marginTop: 20,
-    // alignItems: 'center',
-    // flex: 1,
+    marginRight: 30,
     // backgroundColor: '#EEEEEE',
   },
 
@@ -135,12 +134,84 @@ export const styles = StyleSheet.create({
 
   exerciseComponent: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    marginLeft: 20,
+    justifyContent: 'space-between',
+    gap: 30,
     alignItems: 'center',
     marginBottom: 10,
+    marginRight: 30,
   },
 
   exerciseInfo: {
     flexDirection: 'row',
+    gap: 20,
+  },
+
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: '#F194FF',
+  },
+  buttonClose: {
+    backgroundColor: '#2196F3',
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+  },
+  modalTitle: {
+    fontSize: 20,
+    marginBottom: 10,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: 'gray',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10,
+  },
+  modalButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
 });

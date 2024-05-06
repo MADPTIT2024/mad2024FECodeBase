@@ -1,8 +1,4 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { RootNavigator } from './navigation';
+import React from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useFonts } from 'expo-font';
 import {
@@ -12,14 +8,11 @@ import {
 } from '@expo-google-fonts/poppins';
 import { AppLoading } from '@/screens/AppLoading/AppLoading';
 import Colors from './constants/Colors';
+import { ExerciseProvider } from './context/ExerciseContext';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+import { RootNavigator } from './navigation';
 
-export default function App() {
+const App = () => {
   let [fontLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_700Bold,
@@ -30,9 +23,13 @@ export default function App() {
     return <AppLoading />;
   } else {
     return (
-      <GestureHandlerRootView style={styles.container}>
-        <RootNavigator />
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <ExerciseProvider>
+          <RootNavigator />
+        </ExerciseProvider>
       </GestureHandlerRootView>
     );
   }
-}
+};
+
+export default App;
