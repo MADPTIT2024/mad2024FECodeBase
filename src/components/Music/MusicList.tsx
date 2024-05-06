@@ -15,6 +15,7 @@ import {
   CheckCircleIcon,
 } from 'react-native-heroicons/solid';
 import { MusicList as MusicListType } from '@/data';
+import Music from '@/screens/Music/Music';
 
 const { width, height } = Dimensions.get('window');
 
@@ -23,39 +24,41 @@ interface MusicSelectData {
   name: string;
   image: ImageSourcePropType;
   music: string;
+  time: string;
 }
 
 interface Props {
-  musiclist: MusicListType;
-  onSelect: (data: MusicSelectData) => void;
+  music: any;
+  onSelect: (data: Music) => void;
   isSelected: boolean;
 }
 
-const MusicList: React.FC<Props> = ({ musiclist, onSelect, isSelected }) => {
+const MusicList: React.FC<Props> = ({ music, onSelect, isSelected }) => {
   return (
     <TouchableOpacity
       style={styles.musicListItem}
       onPress={() => {
         onSelect({
-          id: musiclist.id,
-          name: musiclist.name,
-          image: musiclist.image,
-          music: musiclist.music,
+          id: music.id,
+          name: music.name,
+          urlImage: music.urlImage,
+          urlMusic: music.urlMusic,
+          time: music.time,
         });
       }}
     >
       <View style={styles.iconImage}>
         <Bars3Icon color={'white'} style={styles.iconMenu} />
         <Image
-          source={musiclist.image}
+          source={{ uri: music.urlImage }}
           style={[styles.image, isSelected && styles.selectedImage]}
         />
       </View>
       <View style={styles.music}>
         <View style={styles.item}>
-          <Text style={styles.text}>{musiclist.name}</Text>
+          <Text style={styles.text}>{music.name}</Text>
           <Text style={[styles.text, isSelected && styles.selectedText]}>
-            {musiclist.time}
+            {music.time}
           </Text>
         </View>
 

@@ -2,18 +2,30 @@ import { RootStackParamList } from '@/common/types';
 import Button from '@/components/Button/Button';
 import Screen from '@/components/Screen/Screen';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
 import React from 'react';
 import { PencilIcon, ChevronLeftIcon } from 'react-native-heroicons/solid';
+import Spacing from '@/constants/Spacing';
+import IconButton from '@/components/IconButton/IconButton';
 
+const { height, width } = Dimensions.get('window');
 type Props = NativeStackScreenProps<RootStackParamList, 'Profile'>;
-const Profile: React.FC<Props> = ({ navigation: { goBack } }) => {
+const Profile: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.header}>
-        <ChevronLeftIcon color={'white'} size={20} onPress={() => goBack()} />
-        <Text style={styles.title}>Profile</Text>
-        <View />
+        <IconButton
+          onPress={() => navigation.navigate('Personality')}
+          name="chevron-back"
+        />
+        <Text style={styles.textHeader}>Profile</Text>
+        <Text />
       </View>
 
       <TouchableOpacity>
@@ -52,13 +64,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    height: 60, // Đặt chiều cao của phần header
+    paddingHorizontal: Spacing.padding.base,
+    marginTop: Spacing.margin.xlg,
+    height: height * 0.1,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
   },
 
-  title: {
+  textHeader: {
     color: 'white',
   },
 

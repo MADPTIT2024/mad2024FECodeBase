@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
   tabContent: {
     display: 'flex',
     alignItems: 'center',
-    height: "100%",
+    height: '100%',
     marginVertical: 20,
   },
   calendarStyle: {
@@ -72,5 +72,45 @@ export const styles = StyleSheet.create({
   },
   chartStyle: {
     marginHorizontal: 10, // Để biểu đồ nằm giữa và không bị cắt lề trái và lề phải
+  },
+  scrollView: {
+    marginTop: 50, // Để biểu đồ nằm giữa và không bị cắt lề trái và lề phải
+  },
+  panelContainer: {
+    marginTop: 50,
+    backgroundColor: 'deepskyblue',
+    paddingTop: 20,
+    paddingBottom: 20,
+    paddingLeft: 40,
+    paddingRight: 40,
+    borderRadius: 20,
+  },
+  tableRow: {
+    flexDirection: 'row',
+  },
+  tableCell: {
+    padding: 10, // Khoảng cách nội dung trong ô
+    alignItems: 'center',
+    textAlign: 'center',
+    flex: 1,
+  },
+  columnHeader: {
+    flex: 1,
+    borderColor: 'black',
+    padding: 10,
+    textAlign: 'center', // Căn giữa văn bản
+    color: 'white',
+    fontSize: 15,
+  },
+  columnCell: {
+    fontWeight: 'bold',
+    fontSize: 15,
+    color: 'white',
+    textAlign: 'center', // Căn giữa văn bản
+    flexWrap: 'nowrap', // Cho phép văn bản xuống dòng khi cần thiết
+  },
+
+  borderRight: {
+    borderRightWidth: 1, // Thêm đường kẻ ngăn cách bên phải
   },
 });

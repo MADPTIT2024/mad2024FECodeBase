@@ -19,13 +19,16 @@ import { coachvoices } from '@/data';
 import Music from '../Music/Music';
 import IconButton from '@/components/IconButton/IconButton';
 import Colors from '@/constants/Colors';
+import axios from 'axios';
+import { NETWORK } from '@/data/music';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-interface MusicSelectData {
-  id: number;
-  name: string;
-  image: ImageSourcePropType;
-  music: string;
-}
+// interface MusicSelectData {
+//   id: number;
+//   name: string;
+//   image: ImageSourcePropType;
+//   music: string;
+// }
 
 export function WorkoutSetting() {
   const navigation = useNavigation();
@@ -44,7 +47,7 @@ export function WorkoutSetting() {
 
   const [modalVisible, setModalVisible] = useState(false);
   0;
-  const [dataSelect, setDataSelect] = useState<MusicSelectData | null>(null);
+  const [dataSelect, setDataSelect] = useState<Music | null>(null);
 
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);
@@ -71,6 +74,21 @@ export function WorkoutSetting() {
       setSliderDisabled1(false); // Enable slider
     }
   };
+
+  const [musicList, setMusicList] = useState<Music[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`http://${NETWORK}:8080/api/musics`);
+        setMusicList(res.data);
+        console.log(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const textOpacity = useRef(new Animated.Value(1)).current;
 
@@ -99,10 +117,16 @@ export function WorkoutSetting() {
     setDataSelect(dataSelect);
   }, [dataSelect]);
 
-  const handleMusic = (data: any) => {
-    console.log('check data:', data);
+  const handleMusic = async (data: any) => {
+    // Lấy giá trị từ AsyncStorage
+    const userID = await AsyncStorage.getItem('userID');
+
+    console.log('User ID:', userID);
     setDataSelect(data);
   };
+
+  const selectedMusic =
+    dataSelect || (musicList.length > 0 ? musicList[0] : null);
 
   return (
     <View style={styles.container}>
@@ -157,35 +181,19 @@ export function WorkoutSetting() {
                 <Text style={styles.textCoach}>Music</Text>
 
                 <View style={styles.imageContainer}>
-                  {!dataSelect ? (
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                      }}
-                    >
-                      <Image
-                        style={styles.imageCoach}
-                        source={require('../../assets/images/voices/workout1.webp')}
-                      />
-                      <Text style={styles.imageText}>Peaceful Time</Text>
-                    </View>
-                  ) : (
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                      }}
-                    >
-                      <Image
-                        style={styles.imageCoach}
-                        source={dataSelect.image}
-                      />
-                      <Text style={styles.imageText}>{dataSelect.name}</Text>
-                    </View>
-                  )}
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <Image
+                      style={styles.imageCoach}
+                      source={{ uri: selectedMusic?.urlImage }}
+                    />
+                    <Text style={styles.imageText}>{selectedMusic?.name}</Text>
+                  </View>
 
                   <Text style={styles.imageArrow}>&gt;</Text>
                 </View>

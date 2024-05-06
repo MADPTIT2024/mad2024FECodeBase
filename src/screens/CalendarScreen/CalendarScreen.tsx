@@ -1,40 +1,111 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Dimensions,
-  ScrollView,
-} from 'react-native';
+import { View, Text, Dimensions } from 'react-native';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
 import { styles } from './CalendarScreen.styles';
 import Colors from '@/constants/Colors';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FontSize from '@/constants/FontSize';
 import HistoryCard from '@/components/HistoryCard/HistoryCard';
 import { histories } from '@/data';
-import { BarChart, LineChart } from 'react-native-chart-kit';
-import LinearGradient from 'react-native-linear-gradient';
-import { ChatBubbleBottomCenterIcon } from 'react-native-heroicons/solid';
 
-const { height, width } = Dimensions.get('window');
+import { ScrollView } from 'react-native-gesture-handler';
+import { useFocusEffect } from '@react-navigation/native';
+import axios from 'axios';
+import { NETWORK } from '@/data/fitness';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function CalendarScreen() {
-  const [activeTab, setActiveTab] = useState(0);
   const [selected, setSelected] = useState('');
+  const [records, setRecords] = useState(0); // Khởi tạo records với giá trị ban đầu là 0
+  const [kcals, setKcals] = useState(0); // Khởi tạo records với giá trị ban đầu là 0
+  const [minutes, setMinutes] = useState(0); // Khởi tạo records với giá trị ban đầu là 0
 
-  const TABS = [
-    {
-      title: 'Calendar',
-      color: activeTab === 0 ? 'blue' : Colors.primary,
-    },
-    {
-      title: 'Data',
-      color: activeTab === 1 ? 'blue' : Colors.primary,
-    },
-  ];
+  const [userId, setUserId] = useState(1);
 
-  const handleTabPress = (index: number) => {
-    setActiveTab(index);
+  useFocusEffect(
+    React.useCallback(() => {
+      // fetchId();
+      fetchRecords(userId);
+      fetchKcals(userId);
+      fetchMinutes(userId);
+    }, [])
+  );
+  
+  const fetchId = async () => {
+    try {
+      console.log(`Start Fetch Id`);
+  
+      const storedId = await AsyncStorage.getItem('userId');
+      if (storedId) {
+        setUserId(parseInt(storedId, 10));
+      } else {
+        console.error('User id not found in AsyncStorage');
+      }
+    } catch (error) {
+      console.error('Error fetching id from AsyncStorage:', error);
+    }
+  };
+
+  // Hàm để gọi API và cập nhật giá trị records
+  const fetchRecords = async (userId: number) => {
+    try {
+      console.log(`Start Fetch`)
+
+      const response = await axios.get(`http://${NETWORK}:8080/api/logs/count/${userId}`);
+
+      setRecords(response.data);
+
+    } catch (error) {
+      console.error('Error fetching logs:', error);
+    }
+  };
+
+  const fetchKcals = async (userId: number) => {
+    try {
+      console.log(`Start Fetch`)
+
+      const response = await axios.get(`http://${NETWORK}:8080/api/logs/calories/${userId}`);
+
+      setKcals(response.data);
+
+    } catch (error) {
+      console.error('Error fetching logs:', error);
+    }
+  };
+
+  const fetchMinutes = async (userId: number) => {
+    try {
+      console.log(`Start Fetch`)
+
+      const response = await axios.get(`http://${NETWORK}:8080/api/logs/minutes/${userId}`);
+
+      setMinutes(response.data);
+
+    } catch (error) {
+      console.error('Error fetching logs:', error);
+    }
+  };
+
+  const OverallTab = () => {
+    return (
+      <View style={styles.panelContainer}>
+        <View style={styles.tableRow}>
+          <Text style={styles.columnHeader}>Records</Text>
+          <Text style={[styles.columnHeader]}>Kcal</Text>
+          <Text style={styles.columnHeader}>Time(mins)</Text>
+        </View>
+        <View style={styles.tableRow}>
+          <View style={[styles.tableCell, styles.borderRight]}>
+            <Text style={styles.columnCell}>{records}</Text>
+          </View>
+          <View style={[styles.tableCell, styles.borderRight]}>
+            <Text style={styles.columnCell}>{kcals}</Text>
+          </View>
+          <View style={styles.tableCell}>
+            <Text style={styles.columnCell}>{minutes}</Text>
+          </View>
+        </View>
+      </View>
+    );
   };
 
   // Calendar Tab
@@ -63,9 +134,9 @@ export function CalendarScreen() {
             selectedDotColor: Colors.text,
             arrowColor: Colors.text,
             monthTextColor: Colors.text,
-            textDayFontFamily: 'monospace',
-            textMonthFontFamily: 'monospace',
-            textDayHeaderFontFamily: 'monospace',
+            // textDayFontFamily: 'monospace',
+            // textMonthFontFamily: 'monospace',
+            // textDayHeaderFontFamily: 'monospace',
             textDayFontSize: 16,
             textMonthFontSize: 16,
             textDayHeaderFontSize: 16,
@@ -90,202 +161,13 @@ export function CalendarScreen() {
     );
   };
 
-  // TODO: Data Graph Tab
-  const DataTab = () => {
-    const data = {
-      labels: ['1', '2', '3', '4', '5', '6', '7', ''],
-      datasets: [
-        {
-          data: [100, 150, 180, 120, 190, 170, 200, 0],
-          color: (opacity = 1) => `rgba(0, 122, 255, ${opacity})`,
-        },
-      ],
-    };
-
-    return (
-      <View style={styles.dataTabContainer}>
-        <Text style={styles.chartTitle}>Calories burned, estimated (Kcal)</Text>
-
-        <BarChart
-          data={data}
-          width={Dimensions.get('window').width}
-          height={200}
-          yAxisLabel=""
-          yAxisSuffix=""
-          chartConfig={{
-            backgroundColor: Colors.primary,
-            backgroundGradientFrom: Colors.primary,
-            backgroundGradientTo: Colors.primary,
-            decimalPlaces: 0,
-            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-            style: {
-              borderRadius: 16,
-              marginRight: 5,
-            },
-          }}
-          yAxisInterval={50}
-          fromZero
-          withHorizontalLabels={true}
-          showBarTops={false}
-        />
-      </View>
-    );
-  };
-
-  const BMIChart = () => {
-    // Dữ liệu trung bình BMI
-    const averageBMI = 22; // Giả sử trung bình BMI là 22
-
-    return (
-      <View>
-        <TouchableOpacity
-          style={{
-            height: height * 0.3,
-            width: width * 0.95,
-            paddingHorizontal: 10,
-            backgroundColor: Colors.primary,
-            borderRadius: 10,
-            marginBottom: 20,
-            flexDirection: 'column',
-            justifyContent: 'space-around',
-            alignContent: 'center',
-          }}
-        >
-          <Text style={{ marginLeft: 10, fontSize: 18 }}>BMI</Text>
-          <View style={{ flexDirection: 'column' }}>
-            <View
-              style={{ width: 50, backgroundColor: '#fff', borderRadius: 5 }}
-            >
-              <Text
-                style={{
-                  textAlign: 'center',
-                  color: '#000',
-                  fontSize: 16,
-                }}
-              >
-                {averageBMI}
-              </Text>
-            </View>
-
-            <TouchableOpacity
-              style={{ marginLeft: 10, height: 30, flexDirection: 'row' }}
-            >
-              <View style={{ width: width * 0.82 * 0.08 }}>
-                <View
-                  style={{
-                    height: 15,
-                    backgroundColor: 'blue',
-                    borderRadius: 10,
-                    marginRight: 2,
-                  }}
-                ></View>
-                <Text>15</Text>
-              </View>
-              <View style={{ width: width * 0.82 * 0.12 }}>
-                <View
-                  style={{
-                    height: 15,
-                    backgroundColor: 'blue',
-                    borderRadius: 10,
-                    marginRight: 2,
-                  }}
-                ></View>
-                <Text>16</Text>
-              </View>
-              <View style={{ width: width * 0.82 * 0.26 }}>
-                <View
-                  style={{
-                    height: 15,
-                    backgroundColor: 'blue',
-                    borderRadius: 10,
-                    marginRight: 2,
-                  }}
-                ></View>
-                <Text>18.5</Text>
-              </View>
-              <View style={{ width: width * 0.82 * 0.2 }}>
-                <View
-                  style={{
-                    height: 15,
-                    backgroundColor: 'blue',
-                    borderRadius: 10,
-                    marginRight: 2,
-                  }}
-                ></View>
-                <Text>25</Text>
-              </View>
-              <View style={{ width: width * 0.82 * 0.2 }}>
-                <View
-                  style={{
-                    height: 15,
-                    backgroundColor: 'blue',
-                    borderRadius: 10,
-                    marginRight: 2,
-                  }}
-                ></View>
-                <Text>30</Text>
-              </View>
-              <View style={{ width: width * 0.82 * 0.2 }}>
-                <View
-                  style={{
-                    height: 15,
-                    backgroundColor: 'blue',
-                    borderRadius: 10,
-                    marginRight: 2,
-                  }}
-                ></View>
-                <Text>35</Text>
-              </View>
-              <Text style={{ marginTop: 15, marginLeft: -18 }}>40</Text>
-            </TouchableOpacity>
-          </View>
-
-          {/* 15 16 18.5 25 30 35 40 */}
-
-          <Text style={{ marginLeft: 10 }}>ABC</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  };
-
-  const renderSelectedTab = () => {
-    if (activeTab === 0) {
-      return <CalendarTab />;
-    } else {
-      return (
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <DataTab />
-          <BMIChart />
-        </View>
-      );
-    }
-  };
-
   return (
-    <View style={styles.container}>
-      <View>
-        <View style={styles.headerNav}>
-          {TABS.map((tab, index) => (
-            <TouchableOpacity
-              key={index}
-              style={[styles.button, { backgroundColor: tab.color }]}
-              onPress={() => handleTabPress(index)}
-            >
-              <View style={styles.buttonText}>
-                <Text style={styles.text}>{tab.title}</Text>
-              </View>
-            </TouchableOpacity>
-          ))}
+    <View>
+      <ScrollView style={styles.scrollView}>
+        <OverallTab></OverallTab>
+        <View style={styles.tabContent}>
+          <CalendarTab></CalendarTab>
         </View>
-      </View>
-      <ScrollView>
-        <View style={styles.tabContent}>{renderSelectedTab()}</View>
       </ScrollView>
     </View>
   );
