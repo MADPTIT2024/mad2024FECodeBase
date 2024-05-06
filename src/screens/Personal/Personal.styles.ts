@@ -1,3 +1,5 @@
+import Colors from '@/constants/Colors';
+import Spacing from '@/constants/Spacing';
 import { StyleSheet, Dimensions } from 'react-native';
 
 const windowWidth = Dimensions.get('window').width;
@@ -19,7 +21,9 @@ export const styles = StyleSheet.create({
     flexGrow: 1,
     alignItems: 'center',
   },
-  content: {
+  content: {},
+  contentHeader: {
+    flexDirection: 'column',
     alignItems: 'center',
   },
   scrViewText: {
@@ -38,7 +42,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     height: 50,
-    backgroundColor: 'rgba(192, 192, 192,0.07)',
+    backgroundColor: Colors.primary,
     paddingHorizontal: 10,
     width: '100%', // Chiếm toàn bộ chiều ngang của màn hình
   },
@@ -67,8 +71,9 @@ export const styles = StyleSheet.create({
   },
 
   textContainer: {
-    left: windowWidth - (4 / 3) * windowWidth,
+    marginLeft: 15,
     marginTop: 30,
+    marginBottom: 10,
   },
   textSettings: {
     fontSize: 16,
