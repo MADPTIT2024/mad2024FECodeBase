@@ -268,6 +268,14 @@ export interface History {
   caloriesBurn: number;
 }
 
+export interface LogHistory {
+  name: string;
+  // image: ImageSourcePropType;
+  date: string;
+  duration: string;
+  caloriesBurn: number;
+}
+
 export const histories: History[] = [
   {
     id: 1,
