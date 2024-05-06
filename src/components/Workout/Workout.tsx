@@ -24,7 +24,7 @@ const Workout: React.FC<Props> = ({ workout, onPress }) => {
       }}
     >
       <Image
-        source={workout.image}
+        source={{ uri: workout.animation }}
         style={{
           width: 270,
           height: 200,
