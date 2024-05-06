@@ -21,7 +21,7 @@ const CompletionScreen: React.FC<CompletionScreenProps> = ({ item }) => {
         </View>
         <Text style={styles.exerciseName}>{item.name || 'Unknown'}</Text>
         <Text style={styles.totalExercise}>
-          {item.exerciseCollectionDetails.length || 3}
+          {item.customeCollectionDetails.length}
         </Text>
         <Text style={styles.totalExerciseLabel}>Exercises</Text>
       </View>

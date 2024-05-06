@@ -17,7 +17,7 @@ export function RestScreen({ onSkip, onNext }: RestScreenProps) {
         setCountdown((prevCountdown) => {
           if (prevCountdown === 0) {
             clearInterval(interval);
-            onNext(); // Gọi hàm onNext khi countdown đếm ngược về 0
+            onNext();
             return 10;
           }
           return prevCountdown - 1;

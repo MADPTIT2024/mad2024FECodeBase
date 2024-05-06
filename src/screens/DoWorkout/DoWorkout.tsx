@@ -33,9 +33,10 @@ type Props = {
 
 export function DoWorkout({ navigation }: Props) {
   const route = useRoute<RouteProp<RouteParams, 'StartWorkout'>>();
-  const { item } = route.params;
+  let { item: initialItem } = route.params;
   const [showModal, setShowModal] = useState(false);
   const [selectedExercise, setSelectedExercise] = useState<any>(null);
+  const [item, setItem] = useState(initialItem);
 
   const handleStartWorkout = () => {
     navigation.navigate('StartWorkout', { item: item });
@@ -49,11 +50,17 @@ export function DoWorkout({ navigation }: Props) {
 
   const confirmDelete = async () => {
     if (!selectedExercise) return;
-    console.log(selectedExercise);
     try {
       await axios.delete(
         `http://${NETWORK}:8080/api/custom_collection_details/${selectedExercise.id}`,
       );
+      const updatedItem = {
+        ...item,
+        customeCollectionDetails: item.customeCollectionDetails.filter(
+          (exercise: any) => exercise.id !== selectedExercise.id,
+        ),
+      };
+      setItem(updatedItem);
     } catch (error) {
       console.log('Error deleting exercise:', error);
     }
@@ -64,7 +71,7 @@ export function DoWorkout({ navigation }: Props) {
     <Screen style={{ flex: 1 }}>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={{ backgroundColor: 'black' }}
+        style={{ backgroundColor: 'black', flex: 1 }}
       >
         <View style={styles.discoverHeader}>
           <Ionicons
@@ -127,7 +134,7 @@ export function DoWorkout({ navigation }: Props) {
                             color: '#e9a98e',
                           }}
                         >
-                          x{exerciseItem.rep || 4}
+                          x{exerciseItem.exercise.rep}
                         </Text>
                       </View>
                     </View>
@@ -143,11 +150,36 @@ export function DoWorkout({ navigation }: Props) {
               ),
             )}
           </View>
-          <Pressable onPress={() => handleStartWorkout()}>
-            <Text style={{ fontWeight: '900', color: 'white' }}>START</Text>
-          </Pressable>
         </View>
       </ScrollView>
+
+      <View
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          // paddingBottom: 20,
+          borderWidth: 10,
+          borderRadius: 30,
+          borderStyle: 'solid',
+          backgroundColor: '#7469B6',
+          marginHorizontal: 40,
+          height: 60,
+        }}
+      >
+        <Pressable onPress={() => handleStartWorkout()}>
+          <Text
+            style={{
+              fontWeight: '900',
+              color: 'white',
+              textAlign: 'center',
+            }}
+          >
+            START
+          </Text>
+        </Pressable>
+      </View>
+
       <Modal
         animationType="slide"
         transparent={true}

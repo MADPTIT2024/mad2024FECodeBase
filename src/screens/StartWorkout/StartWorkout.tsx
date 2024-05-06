@@ -28,7 +28,7 @@ export function StartWorkout({ navigation }: Props) {
   const [isCompleted, setIsCompleted] = useState(false);
 
   const handleFinishExercise = () => {
-    if (currentExerciseIndex < item.exerciseCollectionDetails.length - 1) {
+    if (currentExerciseIndex < item.customeCollectionDetails.length - 1) {
       setIsResting(true);
     } else {
       console.log('Bạn đã hoàn thành tất cả các bài tập');
@@ -37,7 +37,7 @@ export function StartWorkout({ navigation }: Props) {
   };
 
   const handleNextExercise = () => {
-    if (currentExerciseIndex < item.exerciseCollectionDetails.length - 1) {
+    if (currentExerciseIndex < item.customeCollectionDetails.length - 1) {
       setIsResting(true);
     } else {
       console.log('Bạn đã hoàn thành tất cả các bài tập');
@@ -65,7 +65,9 @@ export function StartWorkout({ navigation }: Props) {
         ) : (
           <ExerciseElement
             exercise={item.customeCollectionDetails[currentExerciseIndex]}
-            timer={item.customeCollectionDetails[currentExerciseIndex].timer} ////////////////////////////////////
+            timer={
+              item.customeCollectionDetails[currentExerciseIndex].exercise.timer
+            } ////////////////////////////////////
             onFinish={handleFinishExercise}
             onNext={handleNextExercise}
           />

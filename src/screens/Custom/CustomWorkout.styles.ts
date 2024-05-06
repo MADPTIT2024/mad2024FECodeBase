@@ -15,7 +15,6 @@ export const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'column',
     flex: 1,
-    // backgroundColor: 'pink',
   },
 
   discoverHeader: {
