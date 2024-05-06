@@ -140,4 +140,27 @@ export const styles = StyleSheet.create({
   exerciseInfo: {
     flexDirection: 'row',
   },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+  },
+  modalButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 20,
+  },
+  button: {
+    padding: 10,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: 'white',
+  },
 });

@@ -20,9 +20,11 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 20,
     marginLeft: 10,
+    justifyContent: 'space-between',
     alignItems: 'center',
     flex: 1,
     marginTop: 20,
+    marginRight: 30,
     // backgroundColor: '#EEEEEE',
   },
 
@@ -133,10 +135,11 @@ export const styles = StyleSheet.create({
   exerciseComponent: {
     flexDirection: 'row',
     marginLeft: 20,
-    // justifyContent: 'space-around',
+    justifyContent: 'space-between',
     gap: 30,
     alignItems: 'center',
     marginBottom: 10,
+    marginRight: 30,
   },
 
   exerciseInfo: {
@@ -184,5 +187,31 @@ export const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: 'center',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+  },
+  modalTitle: {
+    fontSize: 20,
+    marginBottom: 10,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: 'gray',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10,
+  },
+  modalButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
 });

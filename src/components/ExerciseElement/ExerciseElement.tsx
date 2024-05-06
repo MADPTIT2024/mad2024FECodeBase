@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, Button } from 'react-native';
+import { View, Text, Image, Button, TouchableOpacity } from 'react-native';
 import Screen from '@/components/Screen/Screen';
+import { styles } from './ExerciseElement.style';
 
 interface ExerciseElementProps {
   exercise: {
@@ -46,18 +47,38 @@ export function ExerciseElement({
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text style={{ color: 'white' }}>{exercise.exercise.name}</Text>
-      <Image
-        source={{ uri: exercise.exercise.animation }}
-        style={{ width: 200, height: 200 }}
-      />
-      <Text style={{ color: 'white' }}>Time left: {countdown} seconds</Text>
-      <Button
-        title={isCounting ? 'Pause' : 'Resume'}
-        onPress={handleToggleCounting}
-      />
-      <Button title="Next Exercise" onPress={onNext} />
+    <View style={styles.container}>
+      <View style={styles.content}>
+        <View style={styles.imageContainer}>
+          <Image
+            source={{
+              uri: exercise.exercise.animation,
+            }}
+            style={styles.image}
+          />
+        </View>
+      </View>
+      <View style={styles.bottom}>
+        <View style={styles.info}>
+          <Text style={styles.infoText}>{exercise.exercise.name}</Text>
+          <Text style={styles.infoTimeLeft}>
+            Time left: {countdown} seconds
+          </Text>
+        </View>
+        <View style={styles.buttons}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={handleToggleCounting}
+          >
+            <Text style={styles.buttonText}>
+              {isCounting ? 'Pause' : 'Resume'}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={onNext}>
+            <Text style={styles.buttonText}>Next Exercise</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 }

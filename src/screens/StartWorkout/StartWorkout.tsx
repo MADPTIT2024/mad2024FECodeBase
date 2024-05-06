@@ -7,8 +7,9 @@ import { NETWORK } from '../../data/fitness';
 import { ExerciseElement } from '@/components/ExerciseElement/ExerciseElement';
 import { RestScreen } from '../RestScreen/RestScreen';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import CompletionScreen from '../CompleteScreen/CompletionScreen ';
+import { Ionicons } from '@expo/vector-icons';
 
 type RouteParams = {
   StartWorkout: {
@@ -57,22 +58,35 @@ export function StartWorkout({ navigation }: Props) {
 
   return (
     <Screen style={{ flex: 1 }}>
-      <View style={{ flex: 1 }}>
-        {isCompleted ? (
-          <CompletionScreen item={item} /> // Hiển thị màn hình hoàn thành khi isCompleted là true
-        ) : isResting ? (
-          <RestScreen onSkip={handleSkipRest} onNext={handleNext} />
-        ) : (
-          <ExerciseElement
-            exercise={item.customeCollectionDetails[currentExerciseIndex]}
-            timer={
-              item.customeCollectionDetails[currentExerciseIndex].exercise.timer
-            } ////////////////////////////////////
-            onFinish={handleFinishExercise}
-            onNext={handleNextExercise}
-          />
-        )}
-      </View>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <View style={styles.wrapper}>
+          <View style={styles.discoverHeader}>
+            <Ionicons
+              onPress={() => navigation.goBack()}
+              name="arrow-back-outline"
+              size={28}
+              color="white"
+            />
+
+            {/* <Text style={styles.headerText}>My training</Text> */}
+          </View>
+          {isCompleted ? (
+            <CompletionScreen item={item} /> // Hiển thị màn hình hoàn thành khi isCompleted là true
+          ) : isResting ? (
+            <RestScreen onSkip={handleSkipRest} onNext={handleNext} />
+          ) : (
+            <ExerciseElement
+              exercise={item.customeCollectionDetails[currentExerciseIndex]}
+              timer={
+                item.customeCollectionDetails[currentExerciseIndex].exercise
+                  .timer
+              } ////////////////////////////////////
+              onFinish={handleFinishExercise}
+              onNext={handleNextExercise}
+            />
+          )}
+        </View>
+      </ScrollView>
     </Screen>
   );
 }

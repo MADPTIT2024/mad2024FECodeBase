@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
+    flex: 1,
     flexDirection: 'column',
     backgroundColor: 'black',
     // marginTop: 50,
@@ -22,8 +23,9 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 20,
     marginLeft: 10,
-    alignItems: 'center',
-    flex: 1,
+    marginTop: 20,
+    // alignItems: 'center',
+    // flex: 1,
     // backgroundColor: '#EEEEEE',
   },
 

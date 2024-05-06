@@ -1,4 +1,4 @@
-export const NETWORK: string = '192.168.234.206';
+export const NETWORK: string = '192.168.75.105';
 export default [
   {
     id: '0',

@@ -1,12 +1,30 @@
+import {
+  useNavigation,
+  NavigationContainerRef,
+} from '@react-navigation/native';
 import React from 'react';
-import { View, Text, Button, Image, StyleSheet, Pressable } from 'react-native';
+import {
+  View,
+  Text,
+  Button,
+  Image,
+  StyleSheet,
+  Pressable,
+  TouchableOpacity,
+} from 'react-native';
 
 interface CompletionScreenProps {
   item: any;
 }
 
 const CompletionScreen: React.FC<CompletionScreenProps> = ({ item }) => {
-  const handlePress = () => {};
+  const navigation = useNavigation<NavigationContainerRef>();
+  const handlePress = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Training' }],
+    });
+  };
   return (
     <View style={styles.container}>
       <View style={styles.content}>
@@ -25,11 +43,11 @@ const CompletionScreen: React.FC<CompletionScreenProps> = ({ item }) => {
         </Text>
         <Text style={styles.totalExerciseLabel}>Exercises</Text>
       </View>
-      <Pressable onPress={handlePress}>
-        <View style={styles.buttonContainer}>
-          <Text>BACK TO HOME</Text>
-        </View>
-      </Pressable>
+      <View style={styles.buttons}>
+        <TouchableOpacity style={styles.button} onPress={handlePress}>
+          <Text style={styles.buttonText}>BACK TO HOME</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -83,8 +101,28 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     borderRadius: 50,
   },
+  buttons: {
+    flexDirection: 'row',
+    borderRadius: 50,
+    borderColor: '#A0DEFF',
+    borderWidth: 1,
+    borderStyle: 'solid',
+    padding: 15,
+    marginBottom: 5,
+    marginHorizontal: 40,
+    // alignItems: 'center',
+    // justifyContent: 'center',
+  },
   button: {
     width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  buttonText: {
+    color: 'white',
+    fontSize: 17,
+    fontWeight: '900',
   },
 });
 

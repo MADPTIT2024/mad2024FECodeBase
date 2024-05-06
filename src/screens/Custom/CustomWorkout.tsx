@@ -7,9 +7,14 @@ import {
   Pressable,
   ScrollView,
   TouchableOpacity,
+  Modal,
 } from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import {
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import fitness from '../../data/fitness';
 import { styles } from './CustomWorkout.styles';
@@ -25,30 +30,53 @@ export function CustomWorkout({ navigation }: { navigation: any }) {
   // const FitnessData = fitness;
   console.log(NETWORK);
   const [customWorkout, setCustomWorkout] = useState([]);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
 
+  const fetchData = async () => {
+    try {
+      const res = await axios.get(
+        `http://${NETWORK}:8080/api/custom_collections/by-user/2`,
+      );
+      setCustomWorkout(res.data);
+
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(
-          `http://${NETWORK}:8080/api/custom_collections/by-user/2`,
-        );
-        setCustomWorkout(res.data);
-        console.log(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     fetchData();
   }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchData();
+    }, []),
+  );
 
   const handleCustomWorkoutPress = (item: any) => {
     navigation.navigate('DoWorkout', { item: item });
   };
 
+  const handleDeleteConfirmation = async () => {
+    console.log('Xóa item với id:', selectedItemId);
+    try {
+      const res = axios.delete(
+        `http://${NETWORK}:8080/api/custom_collections/${selectedItemId}`,
+      );
+      console.log(res.data);
+      fetchData();
+    } catch (error) {
+      console.log(error);
+    }
+
+    setShowDeleteModal(false);
+  };
+
   return (
     <Screen style={{ flex: 1 }}>
-      {/* <SafeAreaView style={styles.container}> */}
-      <View style={{ flex: 1 }}>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View style={styles.wrapper}>
           <View style={styles.discoverHeader}>
             <Ionicons
@@ -124,6 +152,10 @@ export function CustomWorkout({ navigation }: { navigation: any }) {
                         color="#F8EDFF"
                         fill="#F8EDFF"
                         size={22}
+                        onPress={() => {
+                          setSelectedItemId(item.id);
+                          setShowDeleteModal(true);
+                        }}
                       />
                     </View>
                   </TouchableOpacity>
@@ -140,8 +172,35 @@ export function CustomWorkout({ navigation }: { navigation: any }) {
             </View>
           )}
         </View>
-      </View>
-      {/* </SafeAreaView> */}
+      </ScrollView>
+
+      {/* Modal Xác nhận Xóa */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={showDeleteModal}
+        onRequestClose={() => setShowDeleteModal(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text>Bạn có chắc chắn muốn xóa không?</Text>
+            <View style={styles.modalButtons}>
+              <TouchableOpacity
+                onPress={() => setShowDeleteModal(false)}
+                style={[styles.button, { backgroundColor: 'blue' }]}
+              >
+                <Text style={styles.buttonText}>Cancel</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={handleDeleteConfirmation}
+                style={[styles.button, { backgroundColor: 'red' }]}
+              >
+                <Text style={styles.buttonText}>Yes</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </Screen>
   );
 }
