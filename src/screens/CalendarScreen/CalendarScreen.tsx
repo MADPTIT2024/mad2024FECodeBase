@@ -14,8 +14,6 @@ import { NETWORK } from '@/data/fitness';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function CalendarScreen() {
-
-
   const [userId, setUserId] = useState(0);
 
   const [selected, setSelected] = useState('');
@@ -38,12 +36,16 @@ export function CalendarScreen() {
   interface ExerciseCollection {
     id: number;
     name: string;
+    image: string;
     publicity: boolean;
     calories: number;
   }
 
-  const filterLogsBySelectedDate = (logs: Log[], selectedDate: string): Log[] => {
-    return logs.filter(log => {
+  const filterLogsBySelectedDate = (
+    logs: Log[],
+    selectedDate: string,
+  ): Log[] => {
+    return logs.filter((log) => {
       const logDate = new Date(log.atTime);
       const logDateString = logDate.toISOString().split('T')[0];
       return logDateString === selectedDate;
@@ -58,21 +60,23 @@ export function CalendarScreen() {
       const logsForSelectedDate = filterLogsBySelectedDate(logs, selected);
 
       // Tạo historyLogs từ logs đã lọc
-      const historyLogsForSelectedDate: LogHistory[] = logsForSelectedDate.map(log => {
-        return {
-          id: log.id,
-          name: log.userCollectionDetail.exerciseCollection.name,
-          date: log.atTime,
-          duration: log.description, // Giả sử giá trị duration mặc định là 0, bạn có thể cập nhật sau
-          caloriesBurn: log.userCollectionDetail.exerciseCollection.calories // Giả sử giá trị caloriesBurnts mặc định là 0, bạn có thể cập nhật sau
-        };
-      });
+      const historyLogsForSelectedDate: LogHistory[] = logsForSelectedDate.map(
+        (log) => {
+          return {
+            id: log.id,
+            image: log.userCollectionDetail.exerciseCollection.image,
+            name: log.userCollectionDetail.exerciseCollection.name,
+            date: log.atTime,
+            duration: log.description, // Giả sử giá trị duration mặc định là 0, bạn có thể cập nhật sau
+            caloriesBurn: log.userCollectionDetail.exerciseCollection.calories, // Giả sử giá trị caloriesBurnts mặc định là 0, bạn có thể cập nhật sau
+          };
+        },
+      );
 
       // Cập nhật historyLogs với logs đã lọc và chuyển đổi thành historyLogs
       setHistoryLogs(historyLogsForSelectedDate);
     }
   }, [selected, logs]); // useEffect sẽ chạy lại mỗi khi giá trị của selected hoặc logs thay đổi
-
 
   useFocusEffect(
     React.useCallback(() => {
@@ -101,16 +105,17 @@ export function CalendarScreen() {
       };
 
       fetchData(); // Gọi fetchData khi component được mount lại
-    }, []) // useEffect sẽ chỉ chạy một lần khi component mount
+    }, []), // useEffect sẽ chỉ chạy một lần khi component mount
   );
 
   // Hàm để gọi API và cập nhật giá trị records
   const fetchRecords = async (userId: number) => {
     try {
-      const response = await axios.get(`http://${NETWORK}:8080/api/logs/count/${userId}`);
+      const response = await axios.get(
+        `http://${NETWORK}:8080/api/logs/count/${userId}`,
+      );
 
       setRecords(response.data);
-
     } catch (error) {
       console.error('Error fetching logs:', error);
     }
@@ -118,10 +123,11 @@ export function CalendarScreen() {
 
   const fetchKcals = async (userId: number) => {
     try {
-      const response = await axios.get(`http://${NETWORK}:8080/api/logs/calories/${userId}`);
+      const response = await axios.get(
+        `http://${NETWORK}:8080/api/logs/calories/${userId}`,
+      );
 
       setKcals(response.data);
-
     } catch (error) {
       console.error('Error fetching logs:', error);
     }
@@ -129,10 +135,11 @@ export function CalendarScreen() {
 
   const fetchMinutes = async (userId: number) => {
     try {
-      const response = await axios.get(`http://${NETWORK}:8080/api/logs/minutes/${userId}`);
+      const response = await axios.get(
+        `http://${NETWORK}:8080/api/logs/minutes/${userId}`,
+      );
 
       setMinutes(response.data);
-
     } catch (error) {
       console.error('Error fetching logs:', error);
     }
@@ -140,8 +147,10 @@ export function CalendarScreen() {
 
   const fetchAllLogs = async (userId: number) => {
     try {
-      console.log("Fetch: " + userId);
-      const response = await axios.get(`http://${NETWORK}:8080/api/logs/user/${userId}`);
+      console.log('Fetch: ' + userId);
+      const response = await axios.get(
+        `http://${NETWORK}:8080/api/logs/user/${userId}`,
+      );
 
       const fetchedLogs = response.data;
 
@@ -154,7 +163,6 @@ export function CalendarScreen() {
       setLogs(fetchedLogs);
 
       console.log(logs);
-
     } catch (error) {
       console.error('Error fetching logs:', error);
     }
@@ -167,7 +175,9 @@ export function CalendarScreen() {
       // Chuyển đổi logDate từ chuỗi thành đối tượng Date
       const logDate = new Date(log.atTime);
       // Nếu ngày của log trùng với ngày đang xét, trả về true
-      if (logDate.toISOString().split('T')[0] === date.toISOString().split('T')[0]) {
+      if (
+        logDate.toISOString().split('T')[0] === date.toISOString().split('T')[0]
+      ) {
         return true;
       }
     }
@@ -215,22 +225,30 @@ export function CalendarScreen() {
               disableTouchEvent: true,
             },
             // Sử dụng isDateWithLogs để kiểm tra xem ngày nào có logs
-            ...(logs.reduce((markedDates, log) => {
+            ...logs.reduce((markedDates, log) => {
               const logDate = new Date(log.atTime);
               const logDateString = logDate.toISOString().split('T')[0];
               if (isDateWithLogs(logDate)) {
                 // Chỉ đặt màu xanh biển cho các ngày có logs khi chúng không được chọn
                 if (selected !== logDateString) {
-                  markedDates[logDateString] = { marked: true, dotColor: 'green', selectedColor: 'blue' };
+                  markedDates[logDateString] = {
+                    marked: true,
+                    dotColor: 'green',
+                    selectedColor: 'blue',
+                  };
                 } else {
                   // Nếu ngày đó được chọn, đặt màu xanh cho ngày được chọn
-                  markedDates[logDateString] = { marked: true, dotColor: 'green', selected: true, selectedColor: 'blue' };
+                  markedDates[logDateString] = {
+                    marked: true,
+                    dotColor: 'green',
+                    selected: true,
+                    selectedColor: 'blue',
+                  };
                 }
               }
               return markedDates;
-            }, {} as { [key: string]: { marked: boolean; dotColor: string; selected?: boolean; selectedColor?: string } })), // Thêm chữ ký chỉ mục vào đây
+            }, {} as { [key: string]: { marked: boolean; dotColor: string; selected?: boolean; selectedColor?: string } }), // Thêm chữ ký chỉ mục vào đây
           }}
-
           theme={{
             calendarBackground: Colors.primary,
             textSectionTitleColor: Colors.text,

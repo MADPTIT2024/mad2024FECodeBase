@@ -11,10 +11,7 @@ const HistoryCard: React.FC<Props> = ({ history }) => {
   return (
     <TouchableOpacity style={styles.touchableContainer}>
       <View style={styles.container}>
-        <Image
-          source={require('@/assets/images/workouts/photo-1434682966726-19ad3a76e143.jpeg')}
-          style={styles.image}
-        />
+        <Image source={{ uri: history.image }} style={styles.image} />
         <View style={styles.detailsContainer}>
           <Text style={styles.name}>{history.name}</Text>
           <View style={styles.infoContainer}>
