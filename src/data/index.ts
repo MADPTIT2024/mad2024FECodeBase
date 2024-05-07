@@ -270,7 +270,7 @@ export interface History {
 
 export interface LogHistory {
   name: string;
-  // image: ImageSourcePropType;
+  image: string;
   date: string;
   duration: string;
   caloriesBurn: number;
