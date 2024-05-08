@@ -18,7 +18,7 @@ export function RootNavigator() {
     },
   };
 
-  const [loginRoot, setLoginRoot] = useState(false);
+  const [login, setLogin] = useState(false);
   const [userID, setUserID] = useState<string | null>(null);
 
   useEffect(() => {
@@ -32,20 +32,20 @@ export function RootNavigator() {
 
   useEffect(() => {
     if (userID) {
-      setLoginRoot(true);
+      setLogin(true);
     } else {
-      setLoginRoot(false);
+      setLogin(false);
     }
   }, [userID]);
 
   function handleLoginRoot(loggedIn: boolean) {
     console.log('User logged in:', loggedIn);
-    setLoginRoot(loggedIn);
+    setLogin(loggedIn);
   }
 
   return (
     <NavigationContainer theme={theme}>
-      {loginRoot ? <AppNavigator /> : <Login loginRoot={handleLoginRoot} />}
+      {login ? <AppNavigator /> : <Login loginRoot={handleLoginRoot} />}
     </NavigationContainer>
   );
 }

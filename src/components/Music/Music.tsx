@@ -1,3 +1,4 @@
+import MusicList from '@/screens/Music/MusicList';
 import React, { useState, useEffect } from 'react';
 import {
   TouchableOpacity,
@@ -6,7 +7,6 @@ import {
   Image,
   StyleSheet,
   Dimensions,
-  ImageSourcePropType,
 } from 'react-native';
 
 import {
@@ -14,26 +14,26 @@ import {
   PlayCircleIcon,
   CheckCircleIcon,
 } from 'react-native-heroicons/solid';
-import { MusicList as MusicListType } from '@/data';
-import Music from '@/screens/Music/Music';
+// import { Music as MusicListType } from '@/data';
+// import Music from '@/screens/Music/Music';
 
 const { width, height } = Dimensions.get('window');
 
-interface MusicSelectData {
+interface myMusic {
   id: number;
   name: string;
-  image: ImageSourcePropType;
-  music: string;
+  urlImage: string;
+  urlMusic: string;
   time: string;
 }
 
 interface Props {
-  music: any;
-  onSelect: (data: Music) => void;
+  music: myMusic;
+  onSelect: (data: any) => void;
   isSelected: boolean;
 }
 
-const MusicList: React.FC<Props> = ({ music, onSelect, isSelected }) => {
+const Music: React.FC<Props> = ({ music, onSelect, isSelected }) => {
   return (
     <TouchableOpacity
       style={styles.musicListItem}
@@ -72,7 +72,7 @@ const MusicList: React.FC<Props> = ({ music, onSelect, isSelected }) => {
   );
 };
 
-export default MusicList;
+export default Music;
 
 const styles = StyleSheet.create({
   musicListItem: {
