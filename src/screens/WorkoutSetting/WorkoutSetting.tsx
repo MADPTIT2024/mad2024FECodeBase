@@ -16,12 +16,22 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { useNavigation } from '@react-navigation/native';
 import CoachVoice from '@/components/CoachVoice/CoachVoice';
 import { coachvoices } from '@/data';
-import Music from '../Music/Music';
 import IconButton from '@/components/IconButton/IconButton';
 import Colors from '@/constants/Colors';
 import axios from 'axios';
 import { NETWORK } from '@/data/music';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import MusicList from '../Music/MusicList';
+
+interface myMusic {
+  id: number;
+  name: string;
+  urlImage: string;
+  urlMusic: string;
+  time: string;
+}
+
+type MusicLists = myMusic[];
 
 export function WorkoutSetting() {
   const navigation = useNavigation();
@@ -40,7 +50,7 @@ export function WorkoutSetting() {
 
   const [modalVisible, setModalVisible] = useState(false);
   0;
-  const [dataSelect, setDataSelect] = useState<Music | null>(null);
+  const [dataSelect, setDataSelect] = useState<myMusic | null>(null);
 
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);
@@ -68,7 +78,7 @@ export function WorkoutSetting() {
     }
   };
 
-  const [musicList, setMusicList] = useState<Music[]>([]);
+  const [musicList, setMusicList] = useState<MusicLists>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -118,7 +128,7 @@ export function WorkoutSetting() {
     setDataSelect(data);
   };
 
-  var numberMusic: Music | null =
+  var numberMusic: myMusic | null =
     dataSelect || (musicList.length > 0 ? musicList[0] : null);
 
   return (
@@ -209,10 +219,10 @@ export function WorkoutSetting() {
           </TouchableWithoutFeedback>
 
           <TouchableWithoutFeedback onPress={closeModal}>
-            <Music
+            <MusicList
               visible={modalVisible}
               volumeMusic={volumeMusic}
-              music={handleMusic}
+              musics={handleMusic}
               numberMusic={numberMusic}
               onClose={() => setModalVisible(false)}
             />

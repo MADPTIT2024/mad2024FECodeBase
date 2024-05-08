@@ -22,6 +22,7 @@ export function Personal() {
   const handleLogout = async () => {
     // Clear userID from AsyncStorage
     await AsyncStorage.removeItem('userID');
+
     // Navigate to Login screen
     navigation.navigate('Login');
   };
