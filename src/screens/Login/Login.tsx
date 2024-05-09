@@ -21,6 +21,7 @@ import { NETWORK } from '@/data/music';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '@/context/AuthContext';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const { height, width } = Dimensions.get('window');
 
@@ -53,6 +54,7 @@ export function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
   const [usernameRegister, setUsernameRegister] = useState('');
+  const [fullnameRegister, setFullnameRegister] = useState('');
   const [hashed_passwordRegister, setHashed_passwordRegister] = useState('');
   const [showPasswordRegister, setShowPasswordRegister] = useState(false);
   const [enterAgainPassword, setEnterAgainPassword] = useState('');
@@ -67,6 +69,7 @@ export function Login() {
     setLogin(false);
     setRegister(true);
     setUsernameRegister('');
+    setFullnameRegister('');
     setEnterAgainPassword('');
     setHashed_passwordRegister('');
     setAgainShowPassword(false);
@@ -118,7 +121,9 @@ export function Login() {
       navigation.navigate('Home');
       console.log('Đăng nhập thành công:');
       Alert.alert('Success', 'Login successful');
+      await loginRoot(true);
     } catch (error) {
+      console.log('check error', error);
       console.error('Đăng nhập không thành công:');
       Alert.alert('Error', 'Login failed');
     }
@@ -129,7 +134,12 @@ export function Login() {
     console.log('hashed_password: ', hashed_passwordRegister);
     console.log('enterAgainPassword: ', enterAgainPassword);
 
-    if (!usernameRegister || !hashed_passwordRegister || !enterAgainPassword) {
+    if (
+      !usernameRegister ||
+      !fullnameRegister ||
+      !hashed_passwordRegister ||
+      !enterAgainPassword
+    ) {
       Alert.alert('Error', 'Please fill in all fields');
       return;
     }
@@ -149,7 +159,7 @@ export function Login() {
 
     const registerData: RegisterData = {
       username: usernameRegister,
-      full_name: 'User',
+      full_name: fullnameRegister,
       hashed_password: hashed_passwordRegister,
       user_level: 'User',
       weight: 70.5,
@@ -273,7 +283,11 @@ export function Login() {
                     marginTop: 30,
                   }}
                 >
-                  <View style={{ flexDirection: 'column' }}>
+                  <ScrollView
+                    style={{ flexDirection: 'column' }}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
+                  >
                     <View>
                       <Text style={{ marginBottom: 15 }}>Username</Text>
                       <TextInput
@@ -281,6 +295,17 @@ export function Login() {
                         placeholder="Username"
                         onChangeText={(text) => setUsernameRegister(text)}
                         value={usernameRegister}
+                        autoCapitalize="none"
+                      />
+                    </View>
+
+                    <View>
+                      <Text style={{ marginBottom: 15 }}>Fullname</Text>
+                      <TextInput
+                        style={styles.input}
+                        placeholder="Fullname"
+                        onChangeText={(text) => setFullnameRegister(text)}
+                        value={fullnameRegister}
                         autoCapitalize="none"
                       />
                     </View>
@@ -338,7 +363,7 @@ export function Login() {
                         </TouchableOpacity>
                       </View>
                     </View>
-                  </View>
+                  </ScrollView>
                 </View>
                 <View style={[styles.formButtonText, { marginTop: 15 }]}>
                   <View

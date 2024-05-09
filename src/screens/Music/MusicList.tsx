@@ -11,7 +11,7 @@ import {
   ImageSourcePropType,
 } from 'react-native';
 import { musiclist } from '@/data';
-import MusicList from '@/components/Music/MusicList';
+import Music from '@/components/Music/Music';
 import { LogBox } from 'react-native';
 import { Audio } from 'expo-av';
 import Colors from '@/constants/Colors';
@@ -24,14 +24,7 @@ LogBox.ignoreAllLogs();
 const { width, height } = Dimensions.get('window');
 const modalHeight = height * 0.85;
 
-interface MusicSelectData {
-  id: number;
-  name: string;
-  image: ImageSourcePropType;
-  music: string;
-}
-
-interface Music {
+interface myMusic {
   id: number;
   name: string;
   urlImage: string;
@@ -39,20 +32,24 @@ interface Music {
   time: string;
 }
 
+type MusicLists = myMusic[];
+
 interface MusicProps {
   visible: boolean;
   onClose: () => void;
   volumeMusic: number;
-  music: (data: any) => void;
-  numberMusic: Music | null;
+  musics: (data: myMusic) => void;
+  numberMusic: myMusic | null;
+  musicLists: MusicLists;
 }
 
-const Music: React.FC<MusicProps> = ({
+const MusicList: React.FC<MusicProps> = ({
   visible,
   onClose,
   volumeMusic,
-  music,
+  musics,
   numberMusic,
+  musicLists,
 }) => {
   const [isEnabled, setIsEnabled] = useState(true);
   const [showImages, setShowImages] = useState(true);
@@ -96,8 +93,8 @@ const Music: React.FC<MusicProps> = ({
     handleToggleSwitch();
   }, [isEnabled]);
 
-  const handleSelect = async (data: Music) => {
-    music(data);
+  const handleSelect = async (data: myMusic) => {
+    musics(data);
     setSelectedMusic(data.id);
     setDataSelect(data);
     if (sound) {
@@ -117,29 +114,27 @@ const Music: React.FC<MusicProps> = ({
     setAddMusic(true);
   };
 
-  const [musicList, setMusicList] = useState<Music[]>([]);
+  const [musicList, setMusicList] = useState<MusicLists>([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(`http://${NETWORK}:8080/api/musics`);
-        setMusicList(res.data);
-        console.log(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, []);
-
-  const handleUpdateMusic = (data: MusicSelectData) => {};
+  // useEffect(() => {
+  // const fetchData = async () => {
+  //   try {
+  //     const res = await axios.get(`http://${NETWORK}:8080/api/musics`);
+  //     setMusicList(res.data);
+  //     console.log(res.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  // fetchData();
+  // }, []);
 
   const convertTimeStringToMillis = (timeString: string): number => {
     const [minutes, seconds] = timeString.split(':').map(Number);
     return (minutes * 60 + seconds) * 1000; // Chuyển đổi thành milliseconds
   };
 
-  const playSong = async (song: Music) => {
+  const playSong = async (song: myMusic) => {
     try {
       if (sound) {
         await sound.stopAsync();
@@ -201,6 +196,8 @@ const Music: React.FC<MusicProps> = ({
       setIsCloseButton(false);
       setSelectedMusic(null);
     }
+    setMusicList(musicLists);
+    console.log('check musicList', musicList);
   }, [visible, isCloseButton, sound]);
 
   return (
@@ -240,7 +237,7 @@ const Music: React.FC<MusicProps> = ({
               {musicList.length !== 0 &&
                 musicList.map((item, index) => (
                   <View key={item.id}>
-                    <MusicList
+                    <Music
                       music={item}
                       onSelect={handleSelect}
                       isSelected={selectedMusic === item.id}
@@ -344,4 +341,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Music;
+export default MusicList;
