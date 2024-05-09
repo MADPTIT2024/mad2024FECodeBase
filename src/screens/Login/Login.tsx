@@ -60,7 +60,7 @@ export function Login() {
 
   const [login, setLogin] = useState(true);
   const [register, setRegister] = useState(false);
-  const navagation = useNavigation();
+  const navigation = useNavigation();
   const { userID, setUserID } = useAuth();
 
   const handleRegisterUser = () => {
@@ -115,21 +115,7 @@ export function Login() {
       await AsyncStorage.setItem('userID', String(response.data.id));
       const user = await AsyncStorage.getItem('userID');
       setUserID(user);
-      navagation.navigate('Home');
-      // Lấy giá trị từ AsyncStorage
-      // const userID = await AsyncStorage.getItem('userID');
-      // if (userID) {
-      // } else {
-      //   setLoginRoot(false);
-      //   console.log(`login false: login root: ${loginRoot}`);
-      // }
-      console.log('User ID login page:', userID);
-
-      // await AsyncStorage.setItem('musicID', '1');
-      console.log('first');
-      // console.log(loginRoot);
-      // setLoginRoot(true);
-      console.log('second');
+      navigation.navigate('Home');
       console.log('Đăng nhập thành công:');
       Alert.alert('Success', 'Login successful');
     } catch (error) {
@@ -260,7 +246,7 @@ export function Login() {
                   >
                     <View style={styles.formButton}>
                       <Button
-                        color={'white'}
+                        color={'blue'}
                         title="Login"
                         onPress={handleLogin}
                       />
@@ -364,7 +350,7 @@ export function Login() {
                   >
                     <View style={styles.formButton}>
                       <Button
-                        color={'white'}
+                        color={'blue'}
                         title="Register"
                         onPress={handleRegister}
                       />

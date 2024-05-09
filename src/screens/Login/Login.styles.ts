@@ -77,12 +77,13 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   formButtonText: {
+    // backgroundColor: 'blue',
     marginBottom: 20,
     height: height * 0.12,
   },
   formButton: {
     width: width * 0.8,
-    backgroundColor: 'blue',
-    borderRadius: 20,
+    backgroundColor: 'black',
+    borderRadius: 40,
   },
 });

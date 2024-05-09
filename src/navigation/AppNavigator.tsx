@@ -85,7 +85,7 @@ function StackScreenDiscover() {
 
 function StackScreenPersonal() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="Personality">
       <Stack.Screen
         name="Personality"
         component={Personal}
