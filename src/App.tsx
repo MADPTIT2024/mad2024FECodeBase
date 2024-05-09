@@ -11,6 +11,7 @@ import Colors from './constants/Colors';
 import { ExerciseProvider } from './context/ExerciseContext';
 
 import { RootNavigator } from './navigation';
+import { AuthProvider } from './context/AuthContext';
 
 const App = () => {
   let [fontLoaded] = useFonts({
@@ -24,9 +25,11 @@ const App = () => {
   } else {
     return (
       <GestureHandlerRootView style={{ flex: 1 }}>
-        <ExerciseProvider>
-          <RootNavigator />
-        </ExerciseProvider>
+        <AuthProvider>
+          <ExerciseProvider>
+            <RootNavigator />
+          </ExerciseProvider>
+        </AuthProvider>
       </GestureHandlerRootView>
     );
   }

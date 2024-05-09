@@ -19,6 +19,8 @@ import { Platform } from 'react-native';
 import { Float } from 'react-native/Libraries/Types/CodegenTypes';
 import { NETWORK } from '@/data/music';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '@/context/AuthContext';
 import { ScrollView } from 'react-native-gesture-handler';
 
 const { height, width } = Dimensions.get('window');
@@ -46,7 +48,7 @@ interface RegisterData {
   _active: boolean;
 }
 
-export function Login({ loginRoot }: LoginProps) {
+export function Login() {
   const [userName, setUserName] = useState('');
   const [hashed_password, setHashed_password] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -60,6 +62,8 @@ export function Login({ loginRoot }: LoginProps) {
 
   const [login, setLogin] = useState(true);
   const [register, setRegister] = useState(false);
+  const navagation = useNavigation();
+  const { userID, setUserID } = useAuth();
 
   const handleRegisterUser = () => {
     setLogin(false);
@@ -109,14 +113,26 @@ export function Login({ loginRoot }: LoginProps) {
         `http://${NETWORK}:8080/api/users/login`,
         loginData,
       );
-      console.log('check response', response);
+      // console.log('check response', response);
       // Chuyển đổi giá trị thành chuỗi trước khi lưu trữ vào AsyncStorage
       await AsyncStorage.setItem('userID', String(response.data.id));
-
+      const user = await AsyncStorage.getItem('userID');
+      setUserID(user);
+      navagation.navigate('Home');
       // Lấy giá trị từ AsyncStorage
-      const userID = await AsyncStorage.getItem('userID');
-      console.log('User ID:', userID);
+      // const userID = await AsyncStorage.getItem('userID');
+      // if (userID) {
+      // } else {
+      //   setLoginRoot(false);
+      //   console.log(`login false: login root: ${loginRoot}`);
+      // }
+      console.log('User ID login page:', userID);
 
+      // await AsyncStorage.setItem('musicID', '1');
+      console.log('first');
+      // console.log(loginRoot);
+      // setLoginRoot(true);
+      console.log('second');
       console.log('Đăng nhập thành công:');
       Alert.alert('Success', 'Login successful');
       await loginRoot(true);
