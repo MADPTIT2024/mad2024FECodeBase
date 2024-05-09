@@ -6,6 +6,7 @@ import Colors from '@/constants/Colors';
 import { Login } from '@/screens';
 import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useAuth } from '@/context/AuthContext';
 
 export function RootNavigator() {
   let scheme: NonNullable<ColorSchemeName> = useColorScheme() || 'light';
@@ -18,34 +19,42 @@ export function RootNavigator() {
     },
   };
 
-  const [loginRoot, setLoginRoot] = useState(false);
-  const [userID, setUserID] = useState<string | null>(null);
+  // const [loginRoot, setLoginRoot] = useState(false);
+  // const [userID, setUserID] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchUserID = async () => {
-      const storedUserID = await AsyncStorage.getItem('userID');
-      setUserID(storedUserID);
-    };
+  // useEffect(() => {
+  //   const fetchUserID = async () => {
+  //     const storedUserID = await AsyncStorage.getItem('userID');
+  //     console.log(`index ${storedUserID}`);
+  //     if (storedUserID) {
+  //       setUserID(storedUserID);
+  //       setLoginRoot(true);
+  //     } else {
+  //       setLoginRoot(false);
+  //     }
+  //   };
 
-    fetchUserID();
-  }, []);
+  //   fetchUserID();
+  // }, [userID, loginRoot, setLoginRoot]);
 
-  useEffect(() => {
-    if (userID) {
-      setLoginRoot(true);
-    } else {
-      setLoginRoot(false);
-    }
-  }, [userID]);
+  // useEffect(() => {
+  //   if (userID) {
+  //     setLoginRoot(true);
+  //   } else {
+  //     setLoginRoot(false);
+  //   }
+  // }, [userID]);
 
-  function handleLoginRoot(loggedIn: boolean) {
-    console.log('User logged in:', loggedIn);
-    setLoginRoot(loggedIn);
-  }
+  // function handleLoginRoot(loggedIn: boolean) {
+  //   console.log('User logged in:', loggedIn);
+  //   setLoginRoot(loggedIn);
+  // }
+
+  const { userID, setUserID } = useAuth();
 
   return (
     <NavigationContainer theme={theme}>
-      {loginRoot ? <AppNavigator /> : <Login loginRoot={handleLoginRoot} />}
+      {userID ? <AppNavigator /> : <Login />}
     </NavigationContainer>
   );
 }
