@@ -90,6 +90,7 @@ function StackScreenPersonal() {
         name="Personality"
         component={Personal}
         options={{ headerShown: false }}
+        x
       />
       <Stack.Screen
         name="WorkoutSetting"

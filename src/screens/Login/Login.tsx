@@ -62,7 +62,7 @@ export function Login() {
 
   const [login, setLogin] = useState(true);
   const [register, setRegister] = useState(false);
-  const navagation = useNavigation();
+  const navigation = useNavigation();
   const { userID, setUserID } = useAuth();
 
   const handleRegisterUser = () => {
@@ -116,26 +116,11 @@ export function Login() {
       // console.log('check response', response);
       // Chuyển đổi giá trị thành chuỗi trước khi lưu trữ vào AsyncStorage
       await AsyncStorage.setItem('userID', String(response.data.id));
-      const user = await AsyncStorage.getItem('userID');
-      setUserID(user);
-      navagation.navigate('Home');
-      // Lấy giá trị từ AsyncStorage
-      // const userID = await AsyncStorage.getItem('userID');
-      // if (userID) {
-      // } else {
-      //   setLoginRoot(false);
-      //   console.log(`login false: login root: ${loginRoot}`);
-      // }
-      console.log('User ID login page:', userID);
-
-      // await AsyncStorage.setItem('musicID', '1');
-      console.log('first');
-      // console.log(loginRoot);
-      // setLoginRoot(true);
-      console.log('second');
+      // const user = await AsyncStorage.getItem('userID');
+      setUserID(response.data.id);
+      navigation.navigate('Home');
       console.log('Đăng nhập thành công:');
       Alert.alert('Success', 'Login successful');
-      await loginRoot(true);
     } catch (error) {
       console.log('check error', error);
       console.error('Đăng nhập không thành công:');
@@ -270,7 +255,7 @@ export function Login() {
                   >
                     <View style={styles.formButton}>
                       <Button
-                        color={'white'}
+                        color={'blue'}
                         title="Login"
                         onPress={handleLogin}
                       />
@@ -389,7 +374,7 @@ export function Login() {
                   >
                     <View style={styles.formButton}>
                       <Button
-                        color={'white'}
+                        color={'blue'}
                         title="Register"
                         onPress={handleRegister}
                       />

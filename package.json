@@ -38,7 +38,7 @@
     "react-native-config": "^1.5.1",
     "react-native-custom-switch": "^1.0.7",
     "react-native-easy-rating": "^0.2.1",
-    "react-native-gesture-handler": "^2.14.1",
+    "react-native-gesture-handler": "~2.14.0",
     "react-native-heroicons": "^4.0.0",
     "react-native-linear-gradient": "^2.8.3",
     "react-native-modal-datetime-picker": "^17.1.0",
