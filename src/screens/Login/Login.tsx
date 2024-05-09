@@ -116,12 +116,11 @@ export function Login() {
       // console.log('check response', response);
       // Chuyển đổi giá trị thành chuỗi trước khi lưu trữ vào AsyncStorage
       await AsyncStorage.setItem('userID', String(response.data.id));
-      const user = await AsyncStorage.getItem('userID');
-      setUserID(user);
+      // const user = await AsyncStorage.getItem('userID');
+      setUserID(response.data.id);
       navigation.navigate('Home');
       console.log('Đăng nhập thành công:');
       Alert.alert('Success', 'Login successful');
-      await loginRoot(true);
     } catch (error) {
       console.log('check error', error);
       console.error('Đăng nhập không thành công:');
