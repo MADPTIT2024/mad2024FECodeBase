@@ -281,7 +281,11 @@ export function Login({ loginRoot }: LoginProps) {
                     marginTop: 30,
                   }}
                 >
-                  <ScrollView style={{ flexDirection: 'column' }}>
+                  <ScrollView
+                    style={{ flexDirection: 'column' }}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
+                  >
                     <View>
                       <Text style={{ marginBottom: 15 }}>Username</Text>
                       <TextInput
