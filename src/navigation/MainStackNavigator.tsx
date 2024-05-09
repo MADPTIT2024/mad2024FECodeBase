@@ -34,6 +34,7 @@ import Language from '@/screens/Language';
 import { CustomStackNavigator } from './CustomStackNavigator';
 import { AppNavigator } from './AppNavigator';
 import DoExercise from '../screens/DoExercise/DoExercise';
+import { DoDoWorkout } from '@/screens/DoDoWorkout/DoDoWorkout';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -50,14 +51,17 @@ const MainStackNavigator = () => {
         component={PlanOverviewScreen}
         options={{ headerShown: false }}
       /> */}
-       <Stack.Screen
+      <Stack.Screen
         name="DoExercise"
         component={DoExercise}
         options={{ headerShown: false }}
       />
-      
+      <Stack.Screen
+        name="DoDoWorkout"
+        component={DoDoWorkout}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
-}
+};
 export default MainStackNavigator;
-

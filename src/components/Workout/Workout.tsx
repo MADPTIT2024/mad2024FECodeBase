@@ -24,7 +24,11 @@ const Workout: React.FC<Props> = ({ workout, onPress }) => {
       }}
     >
       <Image
-        source={{ uri: workout.animation }}
+        source={{
+          uri:
+            workout.image ||
+            'https://ih1.redbubble.net/image.5348806661.2024/st,large,507x507-pad,600x600,f8f8f8.jpg',
+        }}
         style={{
           width: 270,
           height: 200,

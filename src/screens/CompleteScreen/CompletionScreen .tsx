@@ -19,6 +19,8 @@ interface CompletionScreenProps {
 
 const CompletionScreen: React.FC<CompletionScreenProps> = ({ item }) => {
   const navigation = useNavigation<NavigationContainerRef>();
+  console.log('second');
+  console.log(item);
   const handlePress = () => {
     navigation.reset({
       index: 0,
@@ -39,7 +41,8 @@ const CompletionScreen: React.FC<CompletionScreenProps> = ({ item }) => {
         </View>
         <Text style={styles.exerciseName}>{item.name || 'Unknown'}</Text>
         <Text style={styles.totalExercise}>
-          {item.customeCollectionDetails.length}
+          {item?.customeCollectionDetails?.length ||
+            item?.exerciseCollectionDetails?.length}
         </Text>
         <Text style={styles.totalExerciseLabel}>Exercises</Text>
       </View>

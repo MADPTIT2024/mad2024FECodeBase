@@ -6,6 +6,7 @@ import {
   GeneralSetting,
   CalendarScreen,
   Login,
+  DoDoWorkout,
 } from '@/screens';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -33,6 +34,7 @@ import Favorites from '@/screens/Favorites';
 import Language from '@/screens/Language';
 import { CustomStackNavigator } from './CustomStackNavigator';
 import AddStackNavigator from './AddStackNavigator';
+import { StartStartWorkout } from '@/screens/StartStartWorkout/StartStartWorkout';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -48,6 +50,11 @@ function StackScreenHome() {
       <Stack.Screen
         name="PlanOverview"
         component={PlanOverviewScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="StartStartWorkout"
+        component={StartStartWorkout}
         options={{ headerShown: false }}
       />
       {/* <Stack.Screen

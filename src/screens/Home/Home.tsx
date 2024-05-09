@@ -24,6 +24,7 @@ import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import { NETWORK } from '@/data/fitness';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function Home() {
   const navigation = useNavigation();
@@ -31,9 +32,12 @@ export function Home() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://${NETWORK}:8080/api/exercises`);
-      setWorkoutList(response.data);
+      const userID = await AsyncStorage.getItem('userID');
+      const response = await axios.get(
+        `http://${NETWORK}:8080/api/exercise-collection/user/${userID}`,
+      );
       console.log(response.data);
+      setWorkoutList(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -144,7 +148,7 @@ export function Home() {
                 navigation.navigate('PlanOverview', { workout: workout })
               }
               workout={workout}
-              key={workout}
+              key={workout.id}
             />
           ))}
         </ScrollView>
@@ -164,7 +168,11 @@ export function Home() {
             key={plan.id}
           >
             <Image
-              source={{ uri: plan.animation }}
+              source={{
+                uri:
+                  plan.image ||
+                  'https://ih1.redbubble.net/image.5348806661.2024/st,large,507x507-pad,600x600,f8f8f8.jpg',
+              }}
               style={{
                 width: 100,
                 height: 100,
@@ -210,7 +218,7 @@ export function Home() {
                 }}
               >
                 <Rating
-                  rating={plan.rating}
+                  rating={plan.rating || 5}
                   max={5}
                   iconWidth={20}
                   iconHeight={20}
@@ -220,7 +228,7 @@ export function Home() {
                     marginLeft: Spacing.margin.sm,
                   }}
                 >
-                  {plan.rating}
+                  {plan.rating || 5}
                 </AppText>
               </View>
             </View>
