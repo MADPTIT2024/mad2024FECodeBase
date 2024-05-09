@@ -223,6 +223,7 @@ export function WorkoutSetting() {
               visible={modalVisible}
               volumeMusic={volumeMusic}
               musics={handleMusic}
+              musicLists={musicList}
               numberMusic={numberMusic}
               onClose={() => setModalVisible(false)}
             />

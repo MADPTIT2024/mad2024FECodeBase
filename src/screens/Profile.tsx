@@ -15,6 +15,7 @@ import IconButton from '@/components/IconButton/IconButton';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NETWORK } from '@/data/fitness';
 import axios from 'axios';
+import { EyeIcon, EyeSlashIcon } from 'react-native-heroicons/solid';
 
 interface FullName {
   full_name: string;
@@ -35,6 +36,10 @@ const Profile: React.FC<Props> = ({ navigation }) => {
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+
+  const [showOldPassword, setShowOldPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showAgainPassword, setShowAgainPassword] = useState(false);
 
   const [userId, setUserId] = useState<string | null>(null);
 
@@ -85,26 +90,44 @@ const Profile: React.FC<Props> = ({ navigation }) => {
         Alert.alert('Error', 'Please enter New FullName');
         return;
       }
-      console.log('check newFullName', newFullName);
-      console.log('check userId', userId);
-      const newFullname: FullName = {
-        full_name: newFullName,
-      };
-      if (userId) {
-        try {
-          const res1: any = await axios.put<any, FullName>(
-            `http://${NETWORK}:8080/api/users/${userId}`,
-            newFullname,
-          );
-          console.log(res1.data);
-          setFullName(newFullName);
-        } catch (error) {
-          console.log(error);
-        }
-      }
+
+      // Hiển thị popup xác nhận
+      Alert.alert(
+        'Confirmation',
+        'Are you sure you want to update your full name?',
+        [
+          {
+            text: 'Cancel',
+            style: 'cancel',
+          },
+          {
+            text: 'OK',
+            onPress: async () => {
+              console.log('check newFullName', newFullName);
+              console.log('check userId', userId);
+              const newFullname: FullName = {
+                full_name: newFullName,
+              };
+              if (userId) {
+                try {
+                  const res1: any = await axios.put<any, FullName>(
+                    `http://${NETWORK}:8080/api/users/${userId}`,
+                    newFullname,
+                  );
+                  console.log(res1.data);
+                  setFullName(newFullName);
+                } catch (error) {
+                  console.log(error);
+                }
+              }
+              setIsEditingFullName(false);
+              setIsEditingPassword(false);
+            },
+          },
+        ],
+        { cancelable: false },
+      );
     }
-    setIsEditingFullName(false);
-    setIsEditingPassword(false);
   };
 
   const handleDonePasswordEdit = async () => {
@@ -126,35 +149,59 @@ const Profile: React.FC<Props> = ({ navigation }) => {
         return;
       }
       if (newPassword === oldPassword) {
-        Alert.alert('New Password does coincide with Old Password');
+        Alert.alert(
+          'Error',
+          'New Password must be different from Old Password',
+        );
         return;
       }
       if (newPassword !== confirmPassword) {
-        Alert.alert('Enter Again Password does not coincide with New Password');
+        Alert.alert(
+          'Error',
+          'Enter Again Password does not match New Password',
+        );
         return;
       }
-      console.log('check oldPassword', oldPassword);
-      console.log('check newPassword', newPassword);
-      console.log('check confirmPassword', confirmPassword);
-      console.log('check userId', userId);
-      const updatePassword: Password = {
-        old_Password: oldPassword,
-        new_Password: newPassword,
-      };
-      if (userId) {
-        try {
-          const res2: any = await axios.put<any, Password>(
-            `http://${NETWORK}:8080/api/users/${userId}`,
-            updatePassword,
-          );
-          console.log(res2.data);
-        } catch (error) {
-          console.log(error);
-        }
-      }
+
+      // Hiển thị popup xác nhận
+      Alert.alert(
+        'Confirmation',
+        'Are you sure you want to update your password?',
+        [
+          {
+            text: 'Cancel',
+            style: 'cancel',
+          },
+          {
+            text: 'OK',
+            onPress: async () => {
+              console.log('check oldPassword', oldPassword);
+              console.log('check newPassword', newPassword);
+              console.log('check confirmPassword', confirmPassword);
+              console.log('check userId', userId);
+              const updatePassword: Password = {
+                old_Password: oldPassword,
+                new_Password: newPassword,
+              };
+              if (userId) {
+                try {
+                  const res2: any = await axios.put<any, Password>(
+                    `http://${NETWORK}:8080/api/users/${userId}`,
+                    updatePassword,
+                  );
+                  console.log(res2.data);
+                } catch (error) {
+                  console.log(error);
+                }
+              }
+              setIsEditingFullName(false);
+              setIsEditingPassword(false);
+            },
+          },
+        ],
+        { cancelable: false },
+      );
     }
-    setIsEditingFullName(false);
-    setIsEditingPassword(false);
   };
 
   return (
@@ -187,7 +234,7 @@ const Profile: React.FC<Props> = ({ navigation }) => {
             }}
           >
             <Text>Old FullName</Text>
-            <TextInput style={styles.input} value={fullName} />
+            <TextInput style={styles.input} value={fullName} editable={false} />
             <Text>New FullName</Text>
             <TextInput
               style={styles.input}
@@ -216,27 +263,63 @@ const Profile: React.FC<Props> = ({ navigation }) => {
               height: height * 0.35,
             }}
           >
-            <Text>Old Password</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Enter old password"
-              secureTextEntry
-              onChangeText={setOldPassword}
-            />
-            <Text>New Password</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Enter new password"
-              secureTextEntry
-              onChangeText={setNewPassword}
-            />
-            <Text>Enter Again Password</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Confirm new password"
-              secureTextEntry
-              onChangeText={setConfirmPassword}
-            />
+            <TouchableOpacity>
+              <Text style={styles.textInput}>Old Password</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter old password"
+                secureTextEntry={!showOldPassword}
+                onChangeText={setOldPassword}
+              />
+              <TouchableOpacity
+                style={styles.iconContainer}
+                onPress={() => setShowOldPassword(!showOldPassword)}
+              >
+                {showOldPassword ? (
+                  <EyeIcon size={20} color="grey" />
+                ) : (
+                  <EyeSlashIcon size={20} color="grey" />
+                )}
+              </TouchableOpacity>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Text style={styles.textInput}>New Password</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter new password"
+                secureTextEntry={!showNewPassword}
+                onChangeText={setNewPassword}
+              />
+              <TouchableOpacity
+                style={styles.iconContainer}
+                onPress={() => setShowNewPassword(!showNewPassword)}
+              >
+                {showNewPassword ? (
+                  <EyeIcon size={20} color="grey" />
+                ) : (
+                  <EyeSlashIcon size={20} color="grey" />
+                )}
+              </TouchableOpacity>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Text style={styles.textInput}>Enter Again Password</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Confirm new password"
+                secureTextEntry={!showAgainPassword}
+                onChangeText={setConfirmPassword}
+              />
+              <TouchableOpacity
+                style={styles.iconContainer}
+                onPress={() => setShowAgainPassword(!showAgainPassword)}
+              >
+                {showAgainPassword ? (
+                  <EyeIcon size={20} color="grey" />
+                ) : (
+                  <EyeSlashIcon size={20} color="grey" />
+                )}
+              </TouchableOpacity>
+            </TouchableOpacity>
           </View>
         </View>
       )}
@@ -324,6 +407,16 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingHorizontal: 10,
     borderRadius: 10,
+  },
+  iconContainer: {
+    position: 'absolute',
+    top: 25,
+    bottom: 0,
+    right: 10,
+    justifyContent: 'center',
+  },
+  textInput: {
+    marginBottom: 18,
   },
   buttonContainer: {
     flexDirection: 'row',

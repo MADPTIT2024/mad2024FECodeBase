@@ -40,6 +40,7 @@ interface MusicProps {
   volumeMusic: number;
   musics: (data: myMusic) => void;
   numberMusic: myMusic | null;
+  musicLists: MusicLists;
 }
 
 const MusicList: React.FC<MusicProps> = ({
@@ -48,6 +49,7 @@ const MusicList: React.FC<MusicProps> = ({
   volumeMusic,
   musics,
   numberMusic,
+  musicLists,
 }) => {
   const [isEnabled, setIsEnabled] = useState(true);
   const [showImages, setShowImages] = useState(true);
@@ -114,18 +116,18 @@ const MusicList: React.FC<MusicProps> = ({
 
   const [musicList, setMusicList] = useState<MusicLists>([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(`http://${NETWORK}:8080/api/musics`);
-        setMusicList(res.data);
-        console.log(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  // const fetchData = async () => {
+  //   try {
+  //     const res = await axios.get(`http://${NETWORK}:8080/api/musics`);
+  //     setMusicList(res.data);
+  //     console.log(res.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  // fetchData();
+  // }, []);
 
   const convertTimeStringToMillis = (timeString: string): number => {
     const [minutes, seconds] = timeString.split(':').map(Number);
@@ -194,6 +196,8 @@ const MusicList: React.FC<MusicProps> = ({
       setIsCloseButton(false);
       setSelectedMusic(null);
     }
+    setMusicList(musicLists);
+    console.log('check musicList', musicList);
   }, [visible, isCloseButton, sound]);
 
   return (
