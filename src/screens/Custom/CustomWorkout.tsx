@@ -43,7 +43,7 @@ export function CustomWorkout({ navigation }: { navigation: any }) {
       );
       setCustomWorkout(res.data);
 
-      console.log(res.data);
+      // console.log(res.data);
     } catch (error) {
       console.log(error);
     }
