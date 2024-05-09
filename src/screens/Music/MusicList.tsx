@@ -16,7 +16,7 @@ import { LogBox } from 'react-native';
 import { Audio } from 'expo-av';
 import Colors from '@/constants/Colors';
 import axios from 'axios';
-import { NETWORK } from '@/data/music';
+import { NETWORK } from '@/data/fitness';
 
 LogBox.ignoreLogs(['new NativeEventEmitter']);
 LogBox.ignoreAllLogs();

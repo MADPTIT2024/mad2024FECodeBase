@@ -17,7 +17,7 @@ import { EyeIcon, EyeSlashIcon } from 'react-native-heroicons/solid';
 import axios from 'axios';
 import { Platform } from 'react-native';
 import { Float } from 'react-native/Libraries/Types/CodegenTypes';
-import { NETWORK } from '@/data/music';
+import { NETWORK } from '@/data/fitness';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '@/context/AuthContext';

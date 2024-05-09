@@ -19,7 +19,7 @@ import { coachvoices } from '@/data';
 import IconButton from '@/components/IconButton/IconButton';
 import Colors from '@/constants/Colors';
 import axios from 'axios';
-import { NETWORK } from '@/data/music';
+import { NETWORK } from '@/data/fitness';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import MusicList from '../Music/MusicList';
 
